@@ -59,7 +59,6 @@ HEXDIGIT : '0'..'9' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'a' | 'b' | 'c' | 'd' 
   fileFormat: ('.png' | '.svg' | '.gren');
   exportToFileFunc: 'export(' 'format' fileFormat (', ' | ',') 'fileName' IDENTIFIER')';
 
-  //w trakcie tworzenia, może nawet docelowo się całkowicie wyjebie
 
 
 /* że global atributes??
