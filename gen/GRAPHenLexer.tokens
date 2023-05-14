@@ -40,7 +40,6 @@ T__38=39
 T__39=40
 T__40=41
 T__41=42
-<<<<<<< HEAD
 T__42=43
 WS=44
 POS_NUMBER=45
@@ -63,37 +62,11 @@ COLOR=61
 HEXDIGIT=62
 LINE_TYPE=63
 NODE_SHAPE=64
-=======
-WS=43
-POS_NUMBER=44
-NUMBER=45
-IDENTIFIER=46
-LETTER=47
-NODE_KW=48
-EDGE_KW=49
-VAL_KW=50
-COL_KW=51
-NODE_SPEC=52
-EDGE_CPEC=53
-GRAPH_KW=54
-DIGHRAPH_KW=55
-NODE_ORD=56
-COL_G=57
-GEN=58
-COLOR=59
-HEXDIGIT=60
-LINE_TYPE=61
-NODE_SHAPE=62
->>>>>>> 898ed96869aaef56a49dc6379fd7993789be94b1
 'Node '=1
 '{'=2
 '};'=3
 '}'=4
-<<<<<<< HEAD
-'NodeContents '=5
-=======
-'Num_color '=5
->>>>>>> 898ed96869aaef56a49dc6379fd7993789be94b1
+'nodeContents '=5
 ', '=6
 'fillColor '=7
 ','=8
@@ -103,7 +76,6 @@ NODE_SHAPE=62
 'borderWidth '=12
 'borderLineShape '=13
 'Edge '=14
-<<<<<<< HEAD
 'Num_color '=15
 'lineWidth'=16
 'Color '=17
@@ -144,44 +116,3 @@ NODE_SHAPE=62
 'NodeOrderDown'=58
 'Graphcolor'=59
 'Generate'=60
-=======
-'lineWidth'=15
-'Color '=16
-'lineType'=17
-'Graph '=18
-'}.'=19
-';'=20
-'='=21
-'Digraph '=22
-'.'=23
-'('=24
-'<->'=25
-'<-> '=26
-')'=27
-'->'=28
-'-> '=29
-'NodeOrderDown({'=30
-'})'=31
-'colorEdges()'=32
-'colorNodes()'=33
-'clearEdges()'=34
-'.png'=35
-'.svg'=36
-'.gren'=37
-'export('=38
-'format'=39
-'fileName'=40
-'+'=41
-'-'=42
-'Node'=48
-'Edge'=49
-'Val'=50
-'Color'=51
-'Nodetype'=52
-'Edgetype'=53
-'Graph'=54
-'Digraph'=55
-'NodeOrderDown'=56
-'Graphcolor'=57
-'Generate'=58
->>>>>>> 898ed96869aaef56a49dc6379fd7993789be94b1
