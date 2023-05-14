@@ -119,6 +119,3 @@ public class GNListener extends GRAPHenBaseListener {
             edge.setLineType(lineType);
         }
     }
-
-    //@TODO
-}

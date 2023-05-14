@@ -14,7 +14,6 @@ null
 'borderWidth '
 'borderLineShape '
 'Edge '
-'Num_color '
 'lineWidth'
 'Color '
 'lineType'
@@ -49,6 +48,7 @@ null
 null
 null
 null
+
 'Node'
 'Edge'
 'Val'

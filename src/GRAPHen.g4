@@ -4,7 +4,10 @@ WS : [ \n\t]+ -> skip;
 POS_NUMBER: ('1'..'9')('0'..'9')*;
 NUMBER: ('0'|POS_NUMBER);
 IDENTIFIER: (LETTER|'_')(LETTER|NUMBER)*;
+<<<<<<< HEAD
 TEXT : ~[ \t\r\n]+ ;
+=======
+>>>>>>> 898ed96869aaef56a49dc6379fd7993789be94b1
 LETTER: ('a'..'z' | 'A'..'Z');
 NODE_KW: 'Node';
 EDGE_KW: 'Edge';
@@ -39,14 +42,22 @@ NODE_SHAPE: '()'| '*' | '+' | '<>';
   //wierzchołki
   node_definition : 'Node ' IDENTIFIER '{' node_properties '};';
   node_inline : 'Node ' IDENTIFIER '{' node_properties '}';
+<<<<<<< HEAD
   node_properties : ('nodeContents ' (TEXT))? (', ' 'fillColor ' COLOR)? ((', ' | ',') 'borderColor ' COLOR)?
+=======
+  node_properties : ('Num_color ' (NUMBER|POS_NUMBER))? (', ' 'fillColor ' COLOR)? ((', ' | ',') 'borderColor ' COLOR)?
+>>>>>>> 898ed96869aaef56a49dc6379fd7993789be94b1
                         ((', ' | ',') 'nodeShape ' NODE_SHAPE)? ((', ' | ',') 'nodeSize ' POS_NUMBER)?
                         ((', ' | ',') 'borderWidth ' POS_NUMBER)? ((', ' | ',') 'borderLineShape ' LINE_TYPE)?;
 
   //krawędzie
   edge_definition : 'Edge ' IDENTIFIER '{' edge_properties '};';
   edge_inline: 'Edge ' IDENTIFIER '{' edge_properties '}';
+<<<<<<< HEAD
   edge_properties : ('Num_color ' (NUMBER))? ((', ' | ',')('lineWidth' POS_NUMBER))? ((', ' | ',') 'Color ' COLOR)? ((', ' | ',') 'lineType' LINE_TYPE);
+=======
+  edge_properties : ('Num_color ' (NUMBER|POS_NUMBER))? ((', ' | ',')('lineWidth' POS_NUMBER))? ((', ' | ',') 'Color ' COLOR)? ((', ' | ',') 'lineType' LINE_TYPE);
+>>>>>>> 898ed96869aaef56a49dc6379fd7993789be94b1
 
   //grafy i digrafy
   graph_definition : 'Graph ' IDENTIFIER (('{'  edge_list  ('};' |('}.' graph_function)';') )| '=' graph_add | '=' graph_substract);
@@ -77,6 +88,11 @@ NODE_SHAPE: '()'| '*' | '+' | '<>';
   digraph_substract: (IDENTIFIER | digraph_definition)'-'(IDENTIFIER | digraph_definition) ';';
 
 
+<<<<<<< HEAD
+=======
+  //w trakcie tworzenia, może nawet docelowo się całkowicie wyjebie
+
+>>>>>>> 898ed96869aaef56a49dc6379fd7993789be94b1
 
 /* że global atributes??
   digraph_attributes : '.' 'NodeOrderDown' '{' IDENTIFIER+ '}' ';'?

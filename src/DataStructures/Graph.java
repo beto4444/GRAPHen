@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
 
+
 public class Graph implements Variable {
+
     public List<Node> nodes;
     public List<Edge> edges;
     public HashMap<Node, List<Node>> relations;
