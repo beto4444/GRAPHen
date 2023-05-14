@@ -5,12 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class Graph {
+public class Graph implements Variable {
     public List<Node> nodes;
     public List<Edge> edges;
     public HashMap<Node, List<Node>> relations;
 
     public boolean is_digraph;
+
+    public Graph(){}
 
     public Graph(boolean is_d){
         is_digraph = is_d;

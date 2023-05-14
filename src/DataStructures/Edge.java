@@ -1,12 +1,14 @@
 package DataStructures;
 
-public class Edge {
+public class Edge implements Variable {
     int num_color;
     int line_width;
     String color;
-    String line_type;
+    LineType line_type;
 
-    public Edge(int num_color, int line_width, String color, String line_type) {
+    public Edge(){}
+
+    public Edge(int num_color, int line_width, String color, LineType line_type) {
         this.num_color = num_color;
         this.line_width = line_width;
         this.color = color;
@@ -37,11 +39,11 @@ public class Edge {
         this.color = color;
     }
 
-    public String getLineType() {
+    public LineType getLineType() {
         return line_type;
     }
 
-    public void setLineType(String line_type) {
+    public void setLineType(LineType line_type) {
         this.line_type = line_type;
     }
 }

@@ -4,6 +4,7 @@ WS : [ \n\t]+ -> skip;
 POS_NUMBER: ('1'..'9')('0'..'9')*;
 NUMBER: ('0'|POS_NUMBER);
 IDENTIFIER: (LETTER|'_')(LETTER|NUMBER)*;
+TEXT : ~[ \t\r\n]+ ;
 LETTER: ('a'..'z' | 'A'..'Z');
 NODE_KW: 'Node';
 EDGE_KW: 'Edge';
@@ -38,14 +39,14 @@ NODE_SHAPE: '()'| '*' | '+' | '<>';
   //wierzchołki
   node_definition : 'Node ' IDENTIFIER '{' node_properties '};';
   node_inline : 'Node ' IDENTIFIER '{' node_properties '}';
-  node_properties : ('Num_color ' (NUMBER|POS_NUMBER))? (', ' 'fillColor ' COLOR)? ((', ' | ',') 'borderColor ' COLOR)?
+  node_properties : ('nodeContents ' (TEXT))? (', ' 'fillColor ' COLOR)? ((', ' | ',') 'borderColor ' COLOR)?
                         ((', ' | ',') 'nodeShape ' NODE_SHAPE)? ((', ' | ',') 'nodeSize ' POS_NUMBER)?
                         ((', ' | ',') 'borderWidth ' POS_NUMBER)? ((', ' | ',') 'borderLineShape ' LINE_TYPE)?;
 
   //krawędzie
   edge_definition : 'Edge ' IDENTIFIER '{' edge_properties '};';
   edge_inline: 'Edge ' IDENTIFIER '{' edge_properties '}';
-  edge_properties : ('Num_color ' (NUMBER|POS_NUMBER))? ((', ' | ',')('lineWidth' POS_NUMBER))? ((', ' | ',') 'Color ' COLOR)? ((', ' | ',') 'lineType' LINE_TYPE);
+  edge_properties : ('Num_color ' (NUMBER))? ((', ' | ',')('lineWidth' POS_NUMBER))? ((', ' | ',') 'Color ' COLOR)? ((', ' | ',') 'lineType' LINE_TYPE);
 
   //grafy i digrafy
   graph_definition : 'Graph ' IDENTIFIER (('{'  edge_list  ('};' |('}.' graph_function)';') )| '=' graph_add | '=' graph_substract);
@@ -75,8 +76,6 @@ NODE_SHAPE: '()'| '*' | '+' | '<>';
   graph_substract: (IDENTIFIER | graph_definition)'-' (IDENTIFIER | graph_definition) ';';
   digraph_substract: (IDENTIFIER | digraph_definition)'-'(IDENTIFIER | digraph_definition) ';';
 
-
-  //w trakcie tworzenia, może nawet docelowo się całkowicie wyjebie
 
 
 /* że global atributes??
