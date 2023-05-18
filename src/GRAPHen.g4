@@ -59,7 +59,6 @@ NODE_SHAPE: '()'| '*' | '+' | '<>';
 
   //funkcje do grafów
   graph_function: (         exportToFileFunc
-                           |'NodeOrderDown({' IDENTIFIER ((', ' | ',')IDENTIFIER)* '})' //ustaw nodey w kolejnosći
                            | 'colorEdges()' //pokoloruj poprawnie krawędzie
                            | 'colorNodes()' //pokoloruj poprawnie nody
                            | 'clearEdges()') //usuń wszystkie krawędzie

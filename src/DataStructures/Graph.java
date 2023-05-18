@@ -45,4 +45,42 @@ public class Graph implements Variable {
         }
 
     }
+
+    public Graph Add(Graph other){
+        return this; //@TODO
+    }
+    public Graph Substract(Graph other){
+        return this; //@TODO
+    }
+
+    public Graph DiAdd(Graph other){ //@TODO: jakieś lepsze rozwiązanie??
+        return this; //@TODO
+    }
+    public Graph DiSubstract(Graph other){
+        return this; //@TODO
+    }
+
+    public void copy(Graph other){
+        //@TODO
+    }
+
+    public void Dicopy(Graph other){
+        //@TODO
+    }
+
+    public void exportToFile(){
+        //@TODO
+    }
+
+    public void colorEdges(){
+        //@TODO
+    }
+
+    public void colorNodes(){
+        //@TODO
+    }
+
+    public void clearEdges(){
+        edges.clear();
+    }
 }
