@@ -118,6 +118,18 @@ public interface GRAPHenVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExportToFileFunc(GRAPHenParser.ExportToFileFuncContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GRAPHenParser#colorNodesFunc}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitColorNodesFunc(GRAPHenParser.ColorNodesFuncContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GRAPHenParser#colorEdgesFunc}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitColorEdgesFunc(GRAPHenParser.ColorEdgesFuncContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GRAPHenParser#graph_add}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -141,4 +153,16 @@ public interface GRAPHenVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDigraph_substract(GRAPHenParser.Digraph_substractContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GRAPHenParser#graph_union}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGraph_union(GRAPHenParser.Graph_unionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GRAPHenParser#digraph_union}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDigraph_union(GRAPHenParser.Digraph_unionContext ctx);
 }

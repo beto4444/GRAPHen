@@ -48,8 +48,10 @@ NODE_SHAPE: '()'| '*' | '+' | '<>';
   edge_inline: 'Edge ' IDENTIFIER '{' edge_properties '}';
   edge_properties : ('Num_color ' (NUMBER))? ((', ' | ',')('lineWidth' POS_NUMBER))? ((', ' | ',') 'Color ' COLOR)? ((', ' | ',') 'lineType' LINE_TYPE);
   //grafy i digrafy
-  graph_definition : 'Graph ' IDENTIFIER (('{'  edge_list  ('};' |('}.' graph_function)';') )| '=' graph_add | '=' graph_substract);
-  digraph_definition : 'Digraph ' IDENTIFIER (('{'  dedge_list '}' ('.'graph_function)? ';') | '=' digraph_add | '=' digraph_substract);
+  graph_definition : 'Graph ' IDENTIFIER (('{'  edge_list  ('};' |('}.' graph_function)';') )| '=' graph_add | '=' graph_substract
+                                            | '=' graph_union);
+  digraph_definition : 'Digraph ' IDENTIFIER (('{'  dedge_list '}' ('.'graph_function)? ';') | '=' digraph_add | '=' digraph_substract
+                                            | '=' digraph_union);
 
   edge_list : edge_relation ((', ' | ',') edge_relation)*;
   edge_relation : ( IDENTIFIER| node_inline ) '(' ('<->' | '<-> ') (IDENTIFIER | edge_inline)')' ( IDENTIFIER| node_inline )+;
@@ -59,20 +61,25 @@ NODE_SHAPE: '()'| '*' | '+' | '<>';
 
   //funkcje do grafów
   graph_function: (         exportToFileFunc
-                           | 'colorEdges()' //pokoloruj poprawnie krawędzie
-                           | 'colorNodes()' //pokoloruj poprawnie nody
+                           | colorEdgesFunc //pokoloruj poprawnie krawędzie
+                           | colorNodesFunc //pokoloruj poprawnie nody
                            | 'clearEdges()') //usuń wszystkie krawędzie
                            ;
 
   graph_function_statement:  IDENTIFIER '.' graph_function ';';
   fileFormat: ('.png' | '.svg' | '.gren');
   exportToFileFunc: 'export(' 'format' fileFormat (', ' | ',') 'fileName' IDENTIFIER')'; //wyeksportuj do pliku
+  colorNodesFunc: 'colorNodes()';
+  colorEdgesFunc: 'colorEdges()';
 
   graph_add: (IDENTIFIER | graph_definition)'+' (IDENTIFIER | graph_definition);
   digraph_add: (IDENTIFIER | digraph_definition)'+' (IDENTIFIER | digraph_definition);
 
   graph_substract: (IDENTIFIER | graph_definition)'-' (IDENTIFIER | graph_definition) ';';
   digraph_substract: (IDENTIFIER | digraph_definition)'-'(IDENTIFIER | digraph_definition) ';';
+
+  graph_union: (IDENTIFIER | graph_definition)'&&' (IDENTIFIER | graph_definition) ';';
+  digraph_union: (IDENTIFIER | digraph_definition)'&&'(IDENTIFIER | digraph_definition) ';';
 
 
 /* że global atributes??

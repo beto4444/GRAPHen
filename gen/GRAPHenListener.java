@@ -187,6 +187,26 @@ public interface GRAPHenListener extends ParseTreeListener {
 	 */
 	void exitExportToFileFunc(GRAPHenParser.ExportToFileFuncContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GRAPHenParser#colorNodesFunc}.
+	 * @param ctx the parse tree
+	 */
+	void enterColorNodesFunc(GRAPHenParser.ColorNodesFuncContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GRAPHenParser#colorNodesFunc}.
+	 * @param ctx the parse tree
+	 */
+	void exitColorNodesFunc(GRAPHenParser.ColorNodesFuncContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GRAPHenParser#colorEdgesFunc}.
+	 * @param ctx the parse tree
+	 */
+	void enterColorEdgesFunc(GRAPHenParser.ColorEdgesFuncContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GRAPHenParser#colorEdgesFunc}.
+	 * @param ctx the parse tree
+	 */
+	void exitColorEdgesFunc(GRAPHenParser.ColorEdgesFuncContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GRAPHenParser#graph_add}.
 	 * @param ctx the parse tree
 	 */
@@ -226,4 +246,24 @@ public interface GRAPHenListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDigraph_substract(GRAPHenParser.Digraph_substractContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GRAPHenParser#graph_union}.
+	 * @param ctx the parse tree
+	 */
+	void enterGraph_union(GRAPHenParser.Graph_unionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GRAPHenParser#graph_union}.
+	 * @param ctx the parse tree
+	 */
+	void exitGraph_union(GRAPHenParser.Graph_unionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GRAPHenParser#digraph_union}.
+	 * @param ctx the parse tree
+	 */
+	void enterDigraph_union(GRAPHenParser.Digraph_unionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GRAPHenParser#digraph_union}.
+	 * @param ctx the parse tree
+	 */
+	void exitDigraph_union(GRAPHenParser.Digraph_unionContext ctx);
 }

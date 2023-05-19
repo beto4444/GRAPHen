@@ -232,6 +232,30 @@ public class GRAPHenBaseListener implements GRAPHenListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterColorNodesFunc(GRAPHenParser.ColorNodesFuncContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitColorNodesFunc(GRAPHenParser.ColorNodesFuncContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterColorEdgesFunc(GRAPHenParser.ColorEdgesFuncContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitColorEdgesFunc(GRAPHenParser.ColorEdgesFuncContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterGraph_add(GRAPHenParser.Graph_addContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -275,6 +299,30 @@ public class GRAPHenBaseListener implements GRAPHenListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDigraph_substract(GRAPHenParser.Digraph_substractContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterGraph_union(GRAPHenParser.Graph_unionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGraph_union(GRAPHenParser.Graph_unionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDigraph_union(GRAPHenParser.Digraph_unionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDigraph_union(GRAPHenParser.Digraph_unionContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

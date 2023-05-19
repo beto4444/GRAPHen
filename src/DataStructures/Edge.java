@@ -15,6 +15,13 @@ public class Edge implements Variable {
         this.line_type = line_type;
     }
 
+    public Edge(Edge other){
+        this.num_color =    other.num_color;
+        this.line_width =   other.line_width;
+        this.color =        other.color;
+        this.line_type =    other.line_type;
+    }
+
     public int getNumColor() {
         return num_color;
     }

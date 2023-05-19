@@ -25,6 +25,17 @@ public class Node implements Variable {
         this.border_line_shape = border_line_shape;
     }
 
+    public Node(Node other){
+        this.num_color = other.num_color;
+        this.fill_color = other.fill_color;
+        this.border_color = other.border_color;
+        this.node_shape = other.node_shape;
+        this.node_size = other.node_size;
+        this.border_width = other.border_width;
+        this.border_line_shape = other.border_line_shape;
+
+    }
+
     public int getNumColor() {
         return num_color;
     }

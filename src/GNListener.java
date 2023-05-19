@@ -143,6 +143,8 @@ public class GNListener extends GRAPHenBaseListener {
             enterGraph_add(ctx.graph_add());
         } else if (ctx.graph_substract() != null) {
             enterGraph_substract(ctx.graph_substract());
+        } else if (ctx.graph_union() != null){
+            enterGraph_union(ctx.graph_union());
         }
     }
 
@@ -241,7 +243,7 @@ public class GNListener extends GRAPHenBaseListener {
             //@TODO: graph does not exist
         }
         Graph second = graphs.get(secondId);
-        currentGraph.copy(first.Add(second));
+        currentGraph.copy(first.Add(second)); //@TODO: czy tu potrzebne copy?
     }
 
     @Override
@@ -256,7 +258,22 @@ public class GNListener extends GRAPHenBaseListener {
             //@TODO: graph does not exist
         }
         Graph second = graphs.get(secondId);
-        currentGraph.copy(first.Substract(second));
+        currentGraph.copy(first.Substract(second)); //@TODO: czy tu potrzebne copy?
+    }
+
+    @Override
+    public void enterGraph_union(GRAPHenParser.Graph_unionContext ctx) {
+        String firstId = ctx.IDENTIFIER(0).getText();
+        if (!graphs.containsKey(firstId)){
+            //@TODO: graph does not exist
+        }
+        Graph first = graphs.get(firstId);
+        String secondId = ctx.IDENTIFIER(0).getText();
+        if (!graphs.containsKey(secondId)){
+            //@TODO: graph does not exist
+        }
+        Graph second = graphs.get(secondId);
+        currentGraph.copy(first.Union(second)); //@TODO: czy tu potrzebne copy?
     }
 
     @Override
@@ -264,23 +281,35 @@ public class GNListener extends GRAPHenBaseListener {
         if (ctx.exportToFileFunc() != null){
             enterExportToFileFunc(ctx.exportToFileFunc());
         }
+        else if (ctx.colorEdgesFunc() != null){
+            enterColorEdgesFunc(ctx.colorEdgesFunc());
+        }
+        else if (ctx.colorNodesFunc() != null){
+            enterColorNodesFunc(ctx.colorNodesFunc());
+        }
         else {
             String foo = ctx.getText();
-            if (foo.equals("colorEdges()")){
-                currentGraph.colorEdges();
-            } else if(foo.equals("colorNodes()")){
-                currentGraph.colorNodes();
-            } else if (foo.equals("clearEdges()")) {
+            if (foo.equals("clearEdges()")) {
                 currentGraph.clearEdges();
             }
         }
     }
 
     @Override
+    public void enterColorEdgesFunc(GRAPHenParser.ColorEdgesFuncContext ctx) {
+        currentGraph.colorEdges();
+    }
+
+    @Override
+    public void enterColorNodesFunc(GRAPHenParser.ColorNodesFuncContext ctx) {
+        currentGraph.colorNodes();
+    }
+
+    @Override
     public void enterDigraph_definition(GRAPHenParser.Digraph_definitionContext ctx) {
         String graphName = ctx.IDENTIFIER().getText();
         Graph graph;
-        graph = new Graph(true);
+        graph = new Graph();
         graphs.put(graphName, graph);
         currentGraph = graph;
 
@@ -293,6 +322,8 @@ public class GNListener extends GRAPHenBaseListener {
             enterDigraph_add(ctx.digraph_add());
         } else if (ctx.digraph_substract() != null) {
             enterDigraph_substract(ctx.digraph_substract());
+        } else if (ctx.digraph_union() != null) {
+            enterDigraph_union(ctx.digraph_union());
         }
     }
 
@@ -391,7 +422,7 @@ public class GNListener extends GRAPHenBaseListener {
             //@TODO: graph does not exist
         }
         Graph second = graphs.get(secondId);
-        currentGraph.Dicopy(first.DiAdd(second));
+        currentGraph.copy(first.Add(second));
     }
 
     @Override
@@ -406,7 +437,22 @@ public class GNListener extends GRAPHenBaseListener {
             //@TODO: graph does not exist
         }
         Graph second = graphs.get(secondId);
-        currentGraph.Dicopy(first.DiSubstract(second));
+        currentGraph.copy(first.Substract(second));
+    }
+
+    @Override
+    public void enterDigraph_union(GRAPHenParser.Digraph_unionContext ctx) {
+        String firstId = ctx.IDENTIFIER(0).getText();
+        if (!graphs.containsKey(firstId)){
+            //@TODO: graph does not exist
+        }
+        Graph first = graphs.get(firstId);
+        String secondId = ctx.IDENTIFIER(0).getText();
+        if (!graphs.containsKey(secondId)){
+            //@TODO: graph does not exist
+        }
+        Graph second = graphs.get(secondId);
+        currentGraph.copy(first.Union(second));
     }
 
     @Override
