@@ -3,7 +3,7 @@ package DataStructures;
 public enum NodeShape {
     OVAL("()"),
     STAR("*"),
-    COSS("+"),
+    CROSS("+"),
     DIAMOND("<>");
 
     private final String value;

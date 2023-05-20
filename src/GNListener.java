@@ -40,8 +40,8 @@ public class GNListener extends GRAPHenBaseListener {
 
         TerminalNode numColorNode = ctx.TEXT();
         if (numColorNode != null) {
-            int numColor = Integer.parseInt(ctx.TEXT().getText());
-            node.setNumColor(numColor);
+            String contents = ctx.TEXT().getText();
+            node.setNodeContents(contents);
         }
         TerminalNode fillColor = ctx.COLOR(0);
         if (fillColor != null) {

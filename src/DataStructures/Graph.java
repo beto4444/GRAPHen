@@ -20,12 +20,14 @@ public class Graph {
         nodes = new ArrayList<>();
         edges = new ArrayList<>();
         relation_pairs = new HashMap<>();
+        relations = new HashMap<>();
     }
 
     public Graph(Graph other){
         nodes = new ArrayList<>();
         edges = new ArrayList<>();
         relation_pairs = new HashMap<>();
+        relations = new HashMap<>();
         this.copy(other);
     }
 
@@ -169,8 +171,8 @@ public class Graph {
      */
     public void copy(Graph other){
         if (this != other) {
-            Collections.copy(this.nodes, other.nodes);
-            Collections.copy(this.edges, other.edges);
+            this.nodes = new ArrayList<>(other.nodes);
+            this.edges = new ArrayList<>(other.edges);
             for (Map.Entry<Node, List<Node>> entry : other.relations.entrySet())
             {
                 this.relations.put(entry.getKey(), new ArrayList<>(entry.getValue()));
@@ -261,5 +263,44 @@ public class Graph {
      */
     public void clearEdges(){
         edges.clear();
+    }
+
+    public List<Node> getNodes() {
+        return nodes;
+    }
+
+    // Setter for nodes
+    public void setNodes(List<Node> nodes) {
+        this.nodes = nodes;
+    }
+
+    // Getter for edges
+    public List<Edge> getEdges() {
+        return edges;
+    }
+
+    // Setter for edges
+    public void setEdges(List<Edge> edges) {
+        this.edges = edges;
+    }
+
+    // Getter for relationPairs
+    public HashMap<Pair<Node, Node>, Edge> getRelationPairs() {
+        return this.relation_pairs;
+    }
+
+    // Setter for relationPairs
+    public void setRelationPairs(HashMap<Pair<Node, Node>, Edge> relationPairs) {
+        this.relation_pairs = relationPairs;
+    }
+
+    // Getter for relations
+    public HashMap<Node, List<Node>> getRelations() {
+        return relations;
+    }
+
+    // Setter for relations
+    public void setRelations(HashMap<Node, List<Node>> relations) {
+        this.relations = relations;
     }
 }
