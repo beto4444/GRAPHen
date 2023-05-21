@@ -72,6 +72,7 @@ public class Graph {
     /**
      * Function acting as + operator overload, returning a new graph being a sum of this and other.
      * Based on set operations
+     * @TODO: coś jest nie tak
      * @param other
      * @return
      */
@@ -100,6 +101,7 @@ public class Graph {
     /**
      * Function acting as - operator overload, returning a new graph being a difference of this and other.
      * Based on set operations
+     * @TODO co zrobić jeżeli edge są te same?
      * @param other
      * @return
      */
@@ -107,16 +109,40 @@ public class Graph {
         Graph difference = new Graph(this);
         difference.nodes.removeAll(other.nodes);
         difference.edges.removeAll(other.edges);
-        difference.relation_pairs = _remove_map(this.relation_pairs, other.relation_pairs);
-        difference.relations = _remove_map(this.relations, other.relations);
+        difference.relation_pairs = _remove_pairs(this.relation_pairs, other.nodes);
+        difference.relations = _remove_rels(this.relations, other.nodes);
 
         return difference;
     }
 
+    private static HashMap<Pair<Node, Node>, Edge> _remove_pairs(HashMap<Pair<Node, Node>, Edge> first, List<Node> second){
+        HashMap<Pair<Node, Node>, Edge> result = new HashMap<>(first);
+        for(Node n: second){
+            for(Map.Entry<Pair<Node, Node>, Edge> e: first.entrySet()){
+                if (e.getKey().getLeft() == n || e.getKey().getRight() == n){
+                    result.remove(e.getKey(), e.getValue());
+                }
+            }
+        }
+        return result;
+    }
+
+    private static HashMap<Node, List<Node>> _remove_rels(HashMap<Node, List<Node>> first, List<Node> second){
+        HashMap<Node, List<Node>> result = new HashMap<>(first);
+        for (Node n: second){
+            result.remove(n);
+            for (Map.Entry<Node, List<Node>> entry: result.entrySet()){
+                entry.getValue().remove(n);
+            }
+        }
+        return result;
+    }
+
+    //DEPRECATED
     private static <K, T> HashMap<K, T> _remove_map(HashMap<K, T> first, HashMap<K, T> second){
         HashMap<K, T> result = new HashMap<>(first);
         for (Map.Entry<K, T> entry : second.entrySet()){
-           first.remove(entry.getKey(), entry.getValue());
+           first.remove(entry.getKey());
         }
         return result;
     }
@@ -127,7 +153,7 @@ public class Graph {
      * @param other
      * @return
      */
-    public Graph Union(Graph other){
+    public Graph Union(Graph other){ //@TODO zamienić nazwę na intersect dlaczego union???
         Graph union = new Graph();
         union.nodes = _intersect_list(this.nodes, other.nodes);
         union.edges = _intersect_list(this.edges, other.edges);
@@ -158,6 +184,9 @@ public class Graph {
                 V value2 = map2.get(key);
                 if (value.equals(value2)) {
                     intersection.put(key, value);
+                }
+                else {
+                    intersection.put(key, null);
                 }
             }
         }
