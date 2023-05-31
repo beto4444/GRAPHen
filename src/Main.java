@@ -1,5 +1,9 @@
+import java.io.File;
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Scanner sourceCodeScanner = new Scanner(new File("test1.gr"));
+        String sourceCodeText = sourceCodeScanner.nextLine();
+        System.out.print(sourceCodeText);
     }
 }
