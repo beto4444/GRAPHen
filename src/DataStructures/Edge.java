@@ -8,10 +8,15 @@ public class Edge implements Variable {
     int line_width;
     String color;
     LineType line_type;
-    Node source = null;
-    List<Node> target = new ArrayList<>();
+    public Node source = null;
+    public List<Node> target = new ArrayList<>();
 
     public Edge(){}
+
+    public Edge(Node s, List<Node> t){
+        this.source = s;
+        this.target = t;
+    }
 
     public Edge(int num_color, int line_width, String color, LineType line_type, Node source, List<Node> target) {
         this.num_color = num_color;

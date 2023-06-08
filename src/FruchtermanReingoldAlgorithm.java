@@ -18,6 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+
+import DataStructures.*;
+
 public class FruchtermanReingoldAlgorithm extends Application {
 
     private static final int WIDTH = 800;
@@ -27,11 +34,10 @@ public class FruchtermanReingoldAlgorithm extends Application {
     private static final double EPSILON = 0.1;
     private static final int MIN_POSITION = 10;
 
-    private static final double REPULSION_MULTIPLIER = 0.44;
+    private static final double REPULSION_MULTIPLIER = .6;
 
     private List<Node> nodes;
     private List<Edge> edges;
-    private Random random;
 
     private Canvas canvas;
     private TextArea textArea;
@@ -51,60 +57,60 @@ public class FruchtermanReingoldAlgorithm extends Application {
         leftBox.setPadding(new Insets(10));
         leftBox.getChildren().add(canvas);
 
+        Button button = new Button("Generate");
+
+        // Create an event handler for the button
+        EventHandler<ActionEvent> buttonClickHandler = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                // Functionality to be executed when the button is clicked
+                String code = textArea.getText();
+                //@TODO tutaj puścić to do parsera i ustawić listy node'ów i edgy na te z listenera
+                System.out.println(code);
+                drawShapes();
+            }
+        };
+
+        // Bind the event handler to the button
+        button.setOnAction(buttonClickHandler);
+
+
         VBox rightBox = new VBox(10);
         rightBox.setPadding(new Insets(10));
         rightBox.getChildren().add(textArea);
+        rightBox.getChildren().add(button);
 
         HBox root = new HBox(10);
         root.setPadding(new Insets(10));
         root.getChildren().addAll(leftBox, rightBox);
 
         Scene scene = new Scene(root, 800, 400);
-        primaryStage.setTitle("Draw and Write");
+        primaryStage.setTitle("GRAPHen");
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        drawShapes();
+        //drawShapes();
         writeText("Sample text");
-
-       /* Group root = new Group();
-        Scene scene = new Scene(root, WIDTH, HEIGHT);
-
-        initializeGraph();
-
-        for (Edge edge : edges) {
-            Line line = new Line(edge.source.x, edge.source.y, edge.target.x, edge.target.y);
-            line.setStroke(Color.GRAY);
-            root.getChildren().add(line);
-        }
-
-        for (Node node : nodes) {
-            System.out.println(node.x + node.y);
-            Circle circle = new Circle(node.x, node.y, 5);
-            circle.setFill(Color.BLUE);
-            root.getChildren().add(circle);
-        }
-
-        primaryStage.setTitle("Fruchterman-Reingold Algorithm");
-        primaryStage.setScene(scene);
-        primaryStage.show();*/
     }
 
     private void drawShapes() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         initializeGraph();
 
         for (Edge edge : edges) {
+            for (Node t: edge.target){
+                gc.setStroke(Color.RED);
+                gc.setLineWidth(2);
+                gc.strokeLine(edge.source.x, edge.source.y, t.x, t.y);
+            }
 
-            gc.setStroke(Color.RED);
-            gc.setLineWidth(2);
-            gc.strokeLine(edge.source.x, edge.source.y, edge.target.x, edge.target.y);
         }
 
         for (Node node : nodes) {
             gc.setFill(Color.BLUE);
-            gc.fillOval(node.x, node.y, 5, 5);
+            gc.fillOval(node.x-7.5, node.y-7.5, 15, 15);
         }
 
     }
@@ -116,14 +122,16 @@ public class FruchtermanReingoldAlgorithm extends Application {
     private void initializeGraph() {
         nodes = new ArrayList<>();
         edges = new ArrayList<>();
-        random = new Random();
+        Random random = new Random();
+        int Max = 300;
+        int Min = 100;
 
         // Generate example graph
-        Node node1 = new Node(100, 100);
-        Node node2 = new Node(200, 100);
-        Node node3 = new Node(150, 200);
-        Node node4 = new Node(250, 200);
-        Node node5 = new Node(300, 100);
+        Node node1 = new Node(Math.random() * ( Max - Min ), Math.random() * ( Max - Min ));
+        Node node2 = new Node(Math.random() * ( Max - Min ), Math.random() * ( Max - Min ));
+        Node node3 = new Node(Math.random() * ( Max - Min ), Math.random() * ( Max - Min ));
+        Node node4 = new Node(Math.random() * ( Max - Min ), Math.random() * ( Max - Min ));
+        Node node5 = new Node(Math.random() * ( Max - Min ), Math.random() * ( Max - Min ));
 
         nodes.add(node1);
         nodes.add(node2);
@@ -131,11 +139,23 @@ public class FruchtermanReingoldAlgorithm extends Application {
         nodes.add(node4);
         nodes.add(node5);
 
-        edges.add(new Edge(node1, node2));
-        edges.add(new Edge(node1, node3));
-        edges.add(new Edge(node2, node3));
-        edges.add(new Edge(node3, node4));
-        edges.add(new Edge(node4, node5));
+        List<Node> t1 = new ArrayList<>();
+        List<Node> t2 = new ArrayList<>();
+        List<Node> t3 = new ArrayList<>();
+        List<Node> t4 = new ArrayList<>();
+        List<Node> t5 = new ArrayList<>();
+        t1.add(node2);
+        t2.add(node3);
+        t3.add(node3);
+        t4.add(node4);
+        t5.add(node5);
+
+
+        edges.add(new Edge(node1, t1));
+        edges.add(new Edge(node1, t2));
+        edges.add(new Edge(node2, t3));
+        edges.add(new Edge(node3, t4));
+        edges.add(new Edge(node4, t5));
 
         // Apply Fruchterman-Reingold algorithm
         fruchtermanReingold();
@@ -163,25 +183,19 @@ public class FruchtermanReingoldAlgorithm extends Application {
             }
 
             for (Edge edge : edges) {
-                double vx = edge.source.x - edge.target.x;
-                double vy = edge.source.y - edge.target.y;
-                double distance = Math.max(EPSILON, Math.sqrt(vx * vx + vy * vy));
-                double force = (distance * distance) / k;
-                edge.source.dx -= (vx / distance) * force * FORCE_MULTIPLIER;
-                edge.source.dy -= (vy / distance) * force * FORCE_MULTIPLIER;
-                edge.target.dx += (vx / distance) * force * FORCE_MULTIPLIER;
-                edge.target.dy += (vy / distance) * force * FORCE_MULTIPLIER;
+                for (Node t: edge.target) {
+                    double vx = edge.source.x - t.x;
+                    double vy = edge.source.y - t.y;
+                    double distance = Math.max(EPSILON, Math.sqrt(vx * vx + vy * vy));
+                    double force = (distance * distance) / k;
+                    edge.source.dx -= (vx / distance) * force * FORCE_MULTIPLIER;
+                    edge.source.dy -= (vy / distance) * force * FORCE_MULTIPLIER;
+                    t.dx += (vx / distance) * force * FORCE_MULTIPLIER;
+                    t.dy += (vy / distance) * force * FORCE_MULTIPLIER;
+                }
             }
 
             for (Node node : nodes) {
-               /* double dx = node.dx;
-                double dy = node.dy;
-                double distance = Math.max(EPSILON, Math.sqrt(dx * dx + dy * dy));
-                double displacement = Math.min(distance, k) / distance;
-                node.x += dx * displacement;
-                node.y += dy * displacement;
-                node.x = Math.max(MIN_POSITION, Math.min(WIDTH, node.x));
-                node.y = Math.max(MIN_POSITION, Math.min(HEIGHT, node.y));*/
                 for (Node otherNode : nodes) {
                     if (node != otherNode) {
                         double vx = node.x - otherNode.x;
@@ -196,25 +210,4 @@ public class FruchtermanReingoldAlgorithm extends Application {
         }
     }
 
-    private static class Node {
-        double x;
-        double y;
-        double dx;
-        double dy;
-
-        Node(double x, double y) {
-            this.x = x;
-            this.y = y;
-        }
-    }
-
-    private static class Edge {
-        Node source;
-        Node target;
-
-        Edge(Node source, Node target) {
-            this.source = source;
-            this.target = target;
-        }
-    }
 }

@@ -11,11 +11,18 @@ public class Node implements Variable {
     private int border_width;
     private LineType border_line_shape;
 
-    private double X = 0.0;
-    private double Y = 0.0;
+    public double x = 0.0;
+    public double y = 0.0;
+    public double dx = 0.0;
+    public double dy = 0.0;
 
     //@TODO: defaultowe wartości
     public Node(){}
+
+    public Node(double x, double y){
+        this.x = x;
+        this.y= y;
+    }
 
     public Node(String node_contents, String fill_color, String border_color, NodeShape node_shape, int size, int border_width, LineType border_line_shape) {
 
@@ -38,6 +45,7 @@ public class Node implements Variable {
         this.border_line_shape = other.border_line_shape;
 
     }
+
 
     public String getNodeContents() {
         return node_contents;
