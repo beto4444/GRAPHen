@@ -1,18 +1,25 @@
 package DataStructures;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Edge implements Variable {
     int num_color;
     int line_width;
     String color;
     LineType line_type;
+    Node source = null;
+    List<Node> target = new ArrayList<>();
 
     public Edge(){}
 
-    public Edge(int num_color, int line_width, String color, LineType line_type) {
+    public Edge(int num_color, int line_width, String color, LineType line_type, Node source, List<Node> target) {
         this.num_color = num_color;
         this.line_width = line_width;
         this.color = color;
         this.line_type = line_type;
+        this.source = source;
+        this.target = target;
     }
 
     public Edge(Edge other){
@@ -20,6 +27,8 @@ public class Edge implements Variable {
         this.line_width =   other.line_width;
         this.color =        other.color;
         this.line_type =    other.line_type;
+        this.source = other.source;
+        this.target = other.target;
     }
 
     public int getNumColor() {
@@ -53,5 +62,18 @@ public class Edge implements Variable {
     public void setLineType(LineType line_type) {
 
         this.line_type = line_type;
+    }
+
+    public void setRelations(Node parent, List<Node> children){
+        this.source = parent;
+        this.target = children;
+    }
+
+    public Node getSource(){
+        return this.source;
+    }
+
+    public List<Node> getTarget(){
+        return this.target;
     }
 }

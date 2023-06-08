@@ -11,6 +11,9 @@ public class Node implements Variable {
     private int border_width;
     private LineType border_line_shape;
 
+    private double X = 0.0;
+    private double Y = 0.0;
+
     //@TODO: defaultowe wartości
     public Node(){}
 

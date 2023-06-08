@@ -225,10 +225,9 @@ public class Graph {
     }
 
     /**
-     * Color the edges properly
+     * Color the edges properly @TODO
      */
     public void colorEdges(){
-       //@TODO
     }
 
     /**

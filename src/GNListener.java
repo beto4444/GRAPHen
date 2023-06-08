@@ -18,6 +18,8 @@ public class GNListener extends GRAPHenBaseListener {
     private Edge currentEdge;
     private Graph currentGraph;
 
+    private Digraph currentDigraph;
+
     @Override
     public void enterNode_definition(GRAPHenParser.Node_definitionContext ctx) {
         String id = ctx.IDENTIFIER().getText();
@@ -226,8 +228,9 @@ public class GNListener extends GRAPHenBaseListener {
             }
         }
         if (parent == null || edge == null || child.size() == 0){
-            return; //nie powinno się zdarzyć
+            return; //nie powinno się zdarzyć @TODO wyjątek
         }
+        edge.setRelations(parent, child); //@TODO zamienić child na children dlaczego nazwałam to child
         currentGraph.addRelation(parent, edge, child);
     }
 
