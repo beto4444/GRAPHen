@@ -12,6 +12,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.geometry.Insets;
 
+import java.awt.Desktop;
+import java.net.URI;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -75,17 +78,8 @@ public class GRAPHenApp extends Application {
         //toolbar
 
         Button button = new Button("Generate");
-
-        // Create an event handler for the button
-        EventHandler<ActionEvent> buttonClickHandler = new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                drawShapes();
-            }
-        };
-
         // Bind the event handler to the button
-        button.setOnAction(buttonClickHandler);
+        button.setOnAction(event -> drawShapes());
 
         Button compile_button = new Button("Compile");
 
@@ -114,8 +108,8 @@ public class GRAPHenApp extends Application {
         MenuBar menuBar = new MenuBar();
 
         Menu fileMenu = new Menu("File");
-        MenuItem openMenuItem = new MenuItem("Open"); //@TODO
-        MenuItem saveMenuItem = new MenuItem("Save"); //@TODO
+        MenuItem openMenuItem = new MenuItem("Open"); //@TODO opcjonalnie
+        MenuItem saveMenuItem = new MenuItem("Save"); //@TODO opcjonalnie
         MenuItem exportMenuItem = new MenuItem("Export");
         MenuItem exitMenuItem = new MenuItem("Exit");
         exitMenuItem.setOnAction( e -> {
@@ -128,6 +122,9 @@ public class GRAPHenApp extends Application {
         Menu optionsMenu = new Menu("Options");
         MenuItem settingsMenuItem = new MenuItem("Settings");
         MenuItem aboutMenuItem = new MenuItem("About...");
+        aboutMenuItem.setOnAction(e -> {
+            openHyperlink("https://github.com/beto4444/GRAPHen_Polnische_Graphcomputersprache");
+        });
         optionsMenu.getItems().addAll(settingsMenuItem, aboutMenuItem);
 
         menuBar.getMenus().add(optionsMenu);
@@ -147,6 +144,14 @@ public class GRAPHenApp extends Application {
 
     }
 
+    private void openHyperlink(String url) {
+        try {
+            Desktop.getDesktop().browse(new URI(url));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void drawShapes() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -159,8 +164,9 @@ public class GRAPHenApp extends Application {
                 gc.setLineWidth(edge.getLineWidth());
                 if (edge.getLineType() == LineType.DOTTED){
                     gc.setLineDashes(5, 5);
+                }else {
+                    gc.setLineDashes(0, 0);
                 }
-                //@TODO: LineType
                 gc.strokeLine(edge.source.x, edge.source.y, t.x, t.y);
             }
 
