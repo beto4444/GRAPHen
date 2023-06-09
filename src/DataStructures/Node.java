@@ -2,21 +2,20 @@ package DataStructures;
 
 public class Node implements Variable {
 
-    private String node_contents;
-    private String fill_color;
-    private String border_color;
-    private NodeShape node_shape;
+    private String node_contents = "";
+    private String fill_color = "0x0000FF";
+    private String border_color = "#ffbb00";
+    private NodeShape node_shape = NodeShape.STAR;
 
-    private int node_size;
-    private int border_width;
-    private LineType border_line_shape;
+    private int node_size = 15;
+    private int border_width = 3;
+    private LineType border_line_shape = LineType.STRAIGHT;
 
     public double x = 0.0;
     public double y = 0.0;
     public double dx = 0.0;
     public double dy = 0.0;
 
-    //@TODO: defaultowe wartości
     public Node(){}
 
     public Node(double x, double y){
@@ -71,8 +70,8 @@ public class Node implements Variable {
         this.border_color = border_color;
     }
 
-    public String getNodeShape() {
-        return node_shape.toString();
+    public NodeShape getNodeShape() {
+        return node_shape;
     }
 
     public void setNodeShape(NodeShape node_shape) {
@@ -95,8 +94,8 @@ public class Node implements Variable {
         this.border_width = border_width;
     }
 
-    public String getBorderLineShape() {
-        return border_line_shape.toString();
+    public LineType getBorderLineShape() {
+        return border_line_shape;
     }
 
     public void setBorderLineShape(LineType border_line_shape) {

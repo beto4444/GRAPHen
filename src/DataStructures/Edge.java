@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Edge implements Variable {
-    int num_color;
-    int line_width;
-    String color;
-    LineType line_type;
+    int num_color = 0;
+    int line_width = 3;
+    String color = "#ffbb00";
+    LineType line_type = LineType.DOTTED;
     public Node source = null;
     public List<Node> target = new ArrayList<>();
 
