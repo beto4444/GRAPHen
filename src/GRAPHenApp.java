@@ -6,23 +6,29 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.scene.shape.Polygon;
+import javafx.stage.FileChooser;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.geometry.Insets;
 
 import java.awt.Desktop;
+import java.io.*;
 import java.net.URI;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.*;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 import DataStructures.*;
+
+import javax.crypto.*;
+import javax.crypto.spec.DESKeySpec;
+import javax.crypto.spec.SecretKeySpec;
 
 public class GRAPHenApp extends Application {
 
@@ -38,8 +44,9 @@ public class GRAPHenApp extends Application {
     private List<Node> nodes;
     private List<Edge> edges;
 
+    private Graph graph; //@TODO zamienić to na listę i jakoś obsłużyć wiele grafów w jednym kodzie
+
     private Canvas canvas;
-    private TextArea textArea;
 
     public static void main(String[] args) {
         launch(args);
@@ -55,7 +62,7 @@ public class GRAPHenApp extends Application {
         leftBox.getChildren().add(canvas);
 
         //right box
-        textArea = new TextArea();
+        TextArea textArea = new TextArea();
         textArea.setWrapText(true);
         textArea.setPrefHeight(650);
         textArea.setPrefWidth(600);
@@ -84,7 +91,7 @@ public class GRAPHenApp extends Application {
         Button compile_button = new Button("Compile");
 
         // Create an event handler for the button
-        EventHandler<ActionEvent> compileButtonClickHandler = new EventHandler<ActionEvent>() {
+        EventHandler<ActionEvent> compileHandler = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 // Functionality to be executed when the button is clicked
@@ -95,7 +102,7 @@ public class GRAPHenApp extends Application {
         };
 
         // Bind the event handler to the button
-        compile_button.setOnAction(compileButtonClickHandler);
+        compile_button.setOnAction(compileHandler);
 
         ToolBar toolBar = new ToolBar(
                 compile_button, //@TODO - polepszyć
@@ -108,8 +115,16 @@ public class GRAPHenApp extends Application {
         MenuBar menuBar = new MenuBar();
 
         Menu fileMenu = new Menu("File");
-        MenuItem openMenuItem = new MenuItem("Open"); //@TODO opcjonalnie
-        MenuItem saveMenuItem = new MenuItem("Save"); //@TODO opcjonalnie
+        MenuItem openMenuItem = new MenuItem("Open"); //@TODO
+        openMenuItem.setOnAction(e-> {
+            try {
+                handleOpen(primaryStage, textArea);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        MenuItem saveMenuItem = new MenuItem("Save"); //@TODO
+        saveMenuItem.setOnAction(e -> handleSave(primaryStage, textArea.getText()));
         MenuItem exportMenuItem = new MenuItem("Export");
         MenuItem exitMenuItem = new MenuItem("Exit");
         exitMenuItem.setOnAction( e -> {
@@ -123,7 +138,7 @@ public class GRAPHenApp extends Application {
         MenuItem settingsMenuItem = new MenuItem("Settings");
         MenuItem aboutMenuItem = new MenuItem("About...");
         aboutMenuItem.setOnAction(e -> {
-            openHyperlink("https://github.com/beto4444/GRAPHen_Polnische_Graphcomputersprache");
+            openHyperlink();
         });
         optionsMenu.getItems().addAll(settingsMenuItem, aboutMenuItem);
 
@@ -144,14 +159,95 @@ public class GRAPHenApp extends Application {
 
     }
 
-    private void openHyperlink(String url) {
+    private void handleSave(Stage primaryStage, String code) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("GRAPHen save files", "*.ghen"));
+
+        File file = fileChooser.showSaveDialog(primaryStage);
+        if (file != null) {
+            writeEncrypt(file.getPath(), code);
+        }
+    }
+
+    private void handleOpen(Stage primaryStage, TextArea textArea) throws FileNotFoundException, NoSuchPaddingException,
+            IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open File");
+
+        // Set the extension filter (optional)
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("GRAPHen save files", "*.ghen");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        File file = fileChooser.showOpenDialog(primaryStage);
+
+        if (file != null) {
+            String code = readEnrcypt(file.getPath());
+            textArea.setText(code);
+        } else {
+            throw new FileNotFoundException();
+        }
+    }
+
+
+    private void openHyperlink() {
         try {
-            Desktop.getDesktop().browse(new URI(url));
+            Desktop.getDesktop().browse(new URI("https://github.com/beto4444/GRAPHen_Polnische_Graphcomputersprache"));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    private void writeEncrypt(String filename, String code){ //@TODO: przetestować
+        try{
+
+            byte[] decodedKey = Base64.getDecoder().decode(readKeyFromEnvFile());
+            SecretKey myDesKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "DES");
+
+            Cipher desCipher;
+            desCipher = Cipher.getInstance("DES");
+
+
+            byte[] text = code.getBytes("UTF8");
+
+            desCipher.init(Cipher.ENCRYPT_MODE, myDesKey);
+            byte[] textEncrypted = desCipher.doFinal(text);
+
+            try (OutputStream outputStream = new FileOutputStream(filename)) {
+                outputStream.write(textEncrypted);
+            }
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private String readEnrcypt(String filename) throws NoSuchPaddingException, NoSuchAlgorithmException,
+            FileNotFoundException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+
+        byte[] decodedKey = Base64.getDecoder().decode(readKeyFromEnvFile());
+        SecretKey myDesKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "DES");
+
+        Cipher desCipher;
+        desCipher = Cipher.getInstance("DES");
+        desCipher.init(Cipher.DECRYPT_MODE, myDesKey);
+
+        byte[] encryptedBytes;
+        try (InputStream inputStream = new FileInputStream(filename)) {
+            encryptedBytes = inputStream.readAllBytes();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        byte[] textDecrypted = desCipher.doFinal(encryptedBytes);
+
+        return new String(textDecrypted);
+    }
+
+    private static String readKeyFromEnvFile() throws FileNotFoundException {
+        File envFile = new File("src/.env");
+        Scanner scanner = new Scanner(envFile);
+        return scanner.nextLine().trim();
+    }
     private void drawShapes() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -166,6 +262,9 @@ public class GRAPHenApp extends Application {
                     gc.setLineDashes(5, 5);
                 }else {
                     gc.setLineDashes(0, 0);
+                }
+                if (graph.digraph){
+                    drawArrow(gc, edge.source.x, edge.source.y, t.x, t.y, edge.getLineWidth()*10);
                 }
                 gc.strokeLine(edge.source.x, edge.source.y, t.x, t.y);
             }
@@ -239,14 +338,39 @@ public class GRAPHenApp extends Application {
                 gc.strokePolygon(xPoints, yPoints, 10);
 
             }
+            if (node.getNodeContents().length() != 0) {
+                gc.setFill(Color.web(node.getContColor()));
+                gc.setFont(javafx.scene.text.Font.font("Arial", node.getContSize()));
+
+                // Write text on the canvas
+                gc.fillText(node.getNodeContents(), node.x + r + border + 5, node.y); //@TODO dodać wielkość i kolor zawartości do gramatyki
+            }
         }
 
+    }
+
+    private void drawArrow(GraphicsContext gc, double startX, double startY, double endX, double endY, double arrowSize) {
+        double angle = Math.atan2(endY - startY, endX - startX);
+        double arrowAngle = Math.toRadians(30);
+
+        // Draw the line
+        gc.strokeLine(startX, startY, endX, endY);
+
+        // Draw the arrowhead
+        double arrowX1 = endX - arrowSize * Math.cos(angle + arrowAngle);
+        double arrowY1 = endY - arrowSize * Math.sin(angle + arrowAngle);
+        double arrowX2 = endX - arrowSize * Math.cos(angle - arrowAngle);
+        double arrowY2 = endY - arrowSize * Math.sin(angle - arrowAngle);
+
+        gc.strokeLine(endX, endY, arrowX1, arrowY1);
+        gc.strokeLine(endX, endY, arrowX2, arrowY2);
     }
 
     private void initializeGraph() { //@TODO: przenieść w inne miejsce?
         nodes = new ArrayList<>();
         edges = new ArrayList<>();
         Random random = new Random();
+        graph = new Graph(true);
         int Max = 600;
         int Min = 100;
 

@@ -2,7 +2,10 @@ package DataStructures;
 
 public class Node implements Variable {
 
-    private String node_contents = "";
+    private String node_contents = "Node"; //@TODO: wip usunąć w produkcji
+
+    private String cont_color = "0x0000FF";
+    private int cont_size = 15;
     private String fill_color = "0x0000FF";
     private String border_color = "#ffbb00";
     private NodeShape node_shape = NodeShape.STAR;
@@ -23,9 +26,12 @@ public class Node implements Variable {
         this.y= y;
     }
 
-    public Node(String node_contents, String fill_color, String border_color, NodeShape node_shape, int size, int border_width, LineType border_line_shape) {
+    public Node(String node_contents, String cont_color, int cont_size, String fill_color, String border_color, NodeShape node_shape,
+                int size, int border_width, LineType border_line_shape) {
 
         this.node_contents = node_contents;
+        this.cont_color = cont_color;
+        this.cont_size = cont_size;
         this.fill_color = fill_color;
         this.border_color = border_color;
         this.node_shape = node_shape;
@@ -36,6 +42,8 @@ public class Node implements Variable {
 
     public Node(Node other){
         this.node_contents = other.node_contents;
+        this.cont_color = other.cont_color;
+        this.cont_size = other.cont_size;
         this.fill_color = other.fill_color;
         this.border_color = other.border_color;
         this.node_shape = other.node_shape;
@@ -101,4 +109,25 @@ public class Node implements Variable {
     public void setBorderLineShape(LineType border_line_shape) {
         this.border_line_shape = border_line_shape;
     }
+
+    // Getter for cont_color
+    public String getContColor() {
+        return cont_color;
+    }
+
+    // Setter for cont_color
+    public void setContColor(String cont_color) {
+        this.cont_color = cont_color;
+    }
+
+    // Getter for cont_size
+    public int getContSize() {
+        return cont_size;
+    }
+
+    // Setter for cont_size
+    public void setContSize(int cont_size) {
+        this.cont_size = cont_size;
+    }
+
 }

@@ -16,11 +16,21 @@ public class Graph {
     private HashMap<Pair<Node, Node>, Edge> relation_pairs;
     private HashMap<Node, List<Node>> relations;
 
+    public boolean digraph = false;
+
     public Graph(){
         nodes = new ArrayList<>();
         edges = new ArrayList<>();
         relation_pairs = new HashMap<>();
         relations = new HashMap<>();
+    }
+
+    public Graph(boolean digraph){
+        nodes = new ArrayList<>();
+        edges = new ArrayList<>();
+        relation_pairs = new HashMap<>();
+        relations = new HashMap<>();
+        this.digraph = digraph;
     }
 
     public Graph(Graph other){

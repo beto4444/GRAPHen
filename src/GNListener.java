@@ -13,7 +13,6 @@ public class GNListener extends GRAPHenBaseListener {
     private final HashMap<String, Edge> edges = new HashMap<>();
     private final HashMap<String, Graph> graphs = new HashMap<>();
     private final HashMap<String, Graph> digraphs = new HashMap<>();
-    private String current;
     private Node currentNode;
     private Edge currentEdge;
     private Graph currentGraph;
@@ -45,12 +44,25 @@ public class GNListener extends GRAPHenBaseListener {
             String contents = ctx.TEXT().getText();
             node.setNodeContents(contents);
         }
-        TerminalNode fillColor = ctx.COLOR(0);
+
+        TerminalNode contColor = ctx.COLOR(0);
+        if (contColor != null) {
+            String Color = contColor.getText();
+            node.setContColor(Color);
+        }
+
+        TerminalNode contSizeCtx = ctx.POS_NUMBER(0);
+        if (contSizeCtx != null) {
+            int Size = Integer.parseInt(contSizeCtx.getText());
+            node.setContSize(Size);
+        }
+
+        TerminalNode fillColor = ctx.COLOR(1);
         if (fillColor != null) {
             String Color = fillColor.getText();
             node.setFillColor(Color);
         }
-        TerminalNode borderColor = ctx.COLOR(1);
+        TerminalNode borderColor = ctx.COLOR(2);
         if (borderColor != null) {
             String Color = borderColor.getText();
             node.setBorderColor(Color);
@@ -62,14 +74,14 @@ public class GNListener extends GRAPHenBaseListener {
             node.setNodeShape(nodeShape);
         }
 
-        TerminalNode nodeSizeCtx = ctx.POS_NUMBER(0);
+        TerminalNode nodeSizeCtx = ctx.POS_NUMBER(1);
         if (nodeSizeCtx != null) {
             int nodeSize = Integer.parseInt(nodeSizeCtx.getText());
             node.setNodeSize(nodeSize);
         }
 
         // Get the optional 'borderWidth' property
-        TerminalNode borderWidthCtx = ctx.POS_NUMBER(1);
+        TerminalNode borderWidthCtx = ctx.POS_NUMBER(2);
         if (borderWidthCtx != null) {
             int borderWidth = Integer.parseInt(borderWidthCtx.getText());
             node.setBorderWidth(borderWidth);
@@ -312,7 +324,7 @@ public class GNListener extends GRAPHenBaseListener {
     public void enterDigraph_definition(GRAPHenParser.Digraph_definitionContext ctx) {
         String graphName = ctx.IDENTIFIER().getText();
         Graph graph;
-        graph = new Graph();
+        graph = new Graph(true);
         graphs.put(graphName, graph);
         currentGraph = graph;
 

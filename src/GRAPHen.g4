@@ -39,7 +39,8 @@ NODE_SHAPE: '()'| '*' | '+' | '<>';
   //wierzchołki
   node_definition : 'Node ' IDENTIFIER '{' node_properties '};';
   node_inline : 'Node ' IDENTIFIER '{' node_properties '}';
-  node_properties : ('nodeContents ' (TEXT))? (', ' 'fillColor ' COLOR)? ((', ' | ',') 'borderColor ' COLOR)?
+  node_properties : ('nodeContents ' (TEXT))? ('{' 'cColor ' COLOR 'cSize' POS_NUMBER '}')?
+                        (', ' 'fillColor ' COLOR)? ((', ' | ',') 'borderColor ' COLOR)?
                         ((', ' | ',') 'nodeShape ' NODE_SHAPE)? ((', ' | ',') 'nodeSize ' POS_NUMBER)?
                         ((', ' | ',') 'borderWidth ' POS_NUMBER)? ((', ' | ',') 'borderLineShape ' LINE_TYPE)?;
 
