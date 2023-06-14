@@ -37,19 +37,21 @@ NODE_SHAPE: '()'| '*' | '+' | '<>';
 
 
   //wierzchołki
-  node_definition : 'Node ' IDENTIFIER '{' node_properties '};';
-  node_inline : 'Node ' IDENTIFIER '{' node_properties '}';
+  node_definition : 'Node ' IDENTIFIER ('{' | ' {')  node_properties '};';
+  node_inline : 'Node ' IDENTIFIER ('{' | ' {')  node_properties '}';
   node_properties : ('nodeContents ' (TEXT))? ('{' 'cColor ' COLOR 'cSize' POS_NUMBER '}')?
                         (', ' 'fillColor ' COLOR)? ((', ' | ',') 'borderColor ' COLOR)?
                         ((', ' | ',') 'nodeShape ' NODE_SHAPE)? ((', ' | ',') 'nodeSize ' POS_NUMBER)?
                         ((', ' | ',') 'borderWidth ' POS_NUMBER)? ((', ' | ',') 'borderLineShape ' LINE_TYPE)?;
 
   //krawędzie
-  edge_definition : 'Edge ' IDENTIFIER '{' edge_properties '};';
-  edge_inline: 'Edge ' IDENTIFIER '{' edge_properties '}';
-  edge_properties : ('Num_color ' (NUMBER))? ((', ' | ',')('lineWidth' POS_NUMBER))? ((', ' | ',') 'Color ' COLOR)? ((', ' | ',') 'lineType' LINE_TYPE);
+  edge_definition : 'Edge ' IDENTIFIER ('{' | ' {') edge_properties '};';
+  edge_inline: 'Edge ' IDENTIFIER ('{' | ' {')  edge_properties '}';
+  edge_properties : ('Num_color ' (NUMBER))? ((', ' | ',')('lineWidth' POS_NUMBER))? ((', ' | ',') 'Color ' COLOR)? ((', ' | ',') 'lineType' LINE_TYPE)?;
   //grafy i digrafy
-  graph_definition : 'Graph ' IDENTIFIER (('{'  edge_list  ('};' |('}.' graph_function)';') )| '=' graph_add | '=' graph_substract
+  graph_definition : 'Graph ' IDENTIFIER ((('{' | ' {')   edge_list  ('};' |('}.' graph_function)';') )
+                                            | '=' graph_add
+                                            | '=' graph_substract
                                             | '=' graph_union);
   digraph_definition : 'Digraph ' IDENTIFIER (('{'  dedge_list '}' ('.'graph_function)? ';') | '=' digraph_add | '=' digraph_substract
                                             | '=' digraph_union);

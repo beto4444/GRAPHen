@@ -1,4 +1,4 @@
-// Generated from C:/Users/keste/IdeaProjects/GRAPHen_Polnische_Graphcomputersprache/src\GRAPHen.g4 by ANTLR 4.12.0
+// Generated from C:/Users/Admin/Documents/GitHub/GRAPHen_Polnische_Graphcomputersprache/src\GRAPHen.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
