@@ -28,6 +28,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 import DataStructures.*;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import javax.crypto.*;
 import javax.crypto.spec.DESKeySpec;
@@ -99,9 +103,27 @@ public class GRAPHenApp extends Application {
             @Override
             public void handle(ActionEvent event) {
                 // Functionality to be executed when the button is clicked
-                String code = textArea.getText();
+                String sourceCodeText = textArea.getText();
                 //@TODO tutaj puścić to do parsera i ustawić listy node'ów i edgy na te z listenera, użyć feedbackArea do wypluwania błędów
-                feedbackArea.setText(code);
+
+                GRAPHenLexer lexer = new GRAPHenLexer(CharStreams.fromString(sourceCodeText));
+                CommonTokenStream tokens = new CommonTokenStream(lexer);
+                GRAPHenParser parser = new GRAPHenParser(tokens);
+                ParseTree parseTree = parser.start();
+                ParseTreeWalker walker = new ParseTreeWalker();
+                GNListener listener = new GNListener();
+                walker.walk(listener, parseTree);
+                if (sourceCodeText.equals("#testgraph")) {
+                    initializeGraph();
+                    feedbackArea.setText("Test graphics");
+                }
+                else{
+                    nodes = listener.getNodes();
+                    edges = listener.getEdges();
+                    graph = listener.getGraphs().get(0);
+                    }
+
+                //feedbackArea.setText(sourceCodeText);
             }
         };
 
@@ -277,7 +299,6 @@ public class GRAPHenApp extends Application {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        initializeGraph();
 
         for (Edge edge : edges) {
             for (Node t: edge.target){

@@ -12,12 +12,42 @@ public class GNListener extends GRAPHenBaseListener {
     private final HashMap<String, Node> nodes = new HashMap<>();
     private final HashMap<String, Edge> edges = new HashMap<>();
     private final HashMap<String, Graph> graphs = new HashMap<>();
-    private final HashMap<String, Graph> digraphs = new HashMap<>();
     private Node currentNode;
     private Edge currentEdge;
     private Graph currentGraph;
 
     private Digraph currentDigraph;
+
+    public List<Edge> getEdges(){
+        return new ArrayList<Edge>(edges.values());
+    }
+    public List<Node> getNodes(){
+        return new ArrayList<Node>(nodes.values());
+    }
+    public List<Graph> getGraphs(){
+        return new ArrayList<Graph>(graphs.values());
+    }
+
+
+    public void describeData(){
+        System.out.println("Węzły: ");
+        if(!nodes.keySet().isEmpty()) {
+            for (String i : nodes.keySet()) {
+                System.out.print(i);
+                System.out.print(", ");
+            }
+        }
+        else{System.out.println("Brak");}
+
+        System.out.println("Krawędzie: ");
+        if(!edges.keySet().isEmpty()) {
+            for (String i : edges.keySet()) {
+                System.out.print(i);
+                System.out.print(", ");
+            }
+        }
+        else{System.out.println("Brak");}
+    }
 
     @Override
     public void enterNode_definition(GRAPHenParser.Node_definitionContext ctx) {

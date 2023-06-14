@@ -47,7 +47,7 @@ NODE_SHAPE: '()'| '*' | '+' | '<>';
   //krawędzie
   edge_definition : 'Edge ' IDENTIFIER '{' edge_properties '};';
   edge_inline: 'Edge ' IDENTIFIER '{' edge_properties '}';
-  edge_properties : ('Num_color ' (NUMBER))? ((', ' | ',')('lineWidth' POS_NUMBER))? ((', ' | ',') 'Color ' COLOR)? ((', ' | ',') 'lineType' LINE_TYPE);
+  edge_properties : ('Num_color ' (NUMBER))? ((', ' | ',')('lineWidth' POS_NUMBER))? ((', ' | ',') 'Color ' COLOR)? ((', ' | ',') 'lineType' LINE_TYPE)?;
   //grafy i digrafy
   graph_definition : 'Graph ' IDENTIFIER (('{'  edge_list  ('};' |('}.' graph_function)';') )| '=' graph_add | '=' graph_substract
                                             | '=' graph_union);
