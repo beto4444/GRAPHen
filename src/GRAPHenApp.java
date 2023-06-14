@@ -1,8 +1,10 @@
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -13,6 +15,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.geometry.Insets;
 
 import java.awt.Desktop;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URI;
 
@@ -29,6 +32,7 @@ import DataStructures.*;
 import javax.crypto.*;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.SecretKeySpec;
+import javax.imageio.ImageIO;
 
 public class GRAPHenApp extends Application {
 
@@ -115,7 +119,7 @@ public class GRAPHenApp extends Application {
         MenuBar menuBar = new MenuBar();
 
         Menu fileMenu = new Menu("File");
-        MenuItem openMenuItem = new MenuItem("Open"); //@TODO
+        MenuItem openMenuItem = new MenuItem("Open");
         openMenuItem.setOnAction(e-> {
             try {
                 handleOpen(primaryStage, textArea);
@@ -123,9 +127,10 @@ public class GRAPHenApp extends Application {
                 throw new RuntimeException(ex);
             }
         });
-        MenuItem saveMenuItem = new MenuItem("Save"); //@TODO
+        MenuItem saveMenuItem = new MenuItem("Save");
         saveMenuItem.setOnAction(e -> handleSave(primaryStage, textArea.getText()));
         MenuItem exportMenuItem = new MenuItem("Export");
+        exportMenuItem.setOnAction(e -> handleExport(primaryStage));
         MenuItem exitMenuItem = new MenuItem("Exit");
         exitMenuItem.setOnAction( e -> {
             Platform.exit();
@@ -186,6 +191,26 @@ public class GRAPHenApp extends Application {
             textArea.setText(code);
         } else {
             throw new FileNotFoundException();
+        }
+    }
+
+    private void handleExport(Stage primaryStage){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Export File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png", "*.png"));
+
+        File outputFile = fileChooser.showSaveDialog(primaryStage);
+        if (outputFile != null) {
+            WritableImage writableImage = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
+            canvas.snapshot(null, writableImage);
+
+            try {
+                BufferedImage bufferedImage = SwingFXUtils.fromFXImage(writableImage, null);
+                ImageIO.write(bufferedImage, "png", outputFile);
+                System.out.println("Canvas saved as PNG successfully.");
+            } catch (IOException e) {
+                System.out.println("Failed to save canvas as PNG: " + e.getMessage());
+            }
         }
     }
 
