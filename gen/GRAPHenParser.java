@@ -1,4 +1,4 @@
-// Generated from C:/Users/Admin/Documents/GitHub/GRAPHen_Polnische_Graphcomputersprache/src\GRAPHen.g4 by ANTLR 4.12.0
+// Generated from C:/Users/keste/IdeaProjects/GRAPHen_Polnische_Graphcomputersprache/src\GRAPHen.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -21,10 +21,10 @@ public class GRAPHenParser extends Parser {
 		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, T__22=23, T__23=24, 
 		T__24=25, T__25=26, T__26=27, T__27=28, T__28=29, T__29=30, T__30=31, 
 		T__31=32, T__32=33, T__33=34, T__34=35, T__35=36, T__36=37, T__37=38, 
-		T__38=39, T__39=40, T__40=41, T__41=42, WS=43, POS_NUMBER=44, NUMBER=45, 
-		IDENTIFIER=46, TEXT=47, LETTER=48, NODE_KW=49, EDGE_KW=50, VAL_KW=51, 
-		COL_KW=52, NODE_SPEC=53, EDGE_CPEC=54, GRAPH_KW=55, DIGHRAPH_KW=56, NODE_ORD=57, 
-		COL_G=58, GEN=59, COLOR=60, HEXDIGIT=61, LINE_TYPE=62, NODE_SHAPE=63;
+		T__38=39, T__39=40, T__40=41, T__41=42, T__42=43, T__43=44, WS=45, POS_NUMBER=46, 
+		GRAPH_KW=47, NUMBER=48, IDENTIFIER=49, TEXT=50, LETTER=51, NODE_KW=52, 
+		EDGE_KW=53, VAL_KW=54, COL_KW=55, NODE_SPEC=56, EDGE_CPEC=57, DIGHRAPH_KW=58, 
+		NODE_ORD=59, COL_G=60, GEN=61, COLOR=62, HEXDIGIT=63, LINE_TYPE=64, NODE_SHAPE=65;
 	public static final int
 		RULE_start = 0, RULE_statement = 1, RULE_node_definition = 2, RULE_node_inline = 3, 
 		RULE_node_properties = 4, RULE_edge_definition = 5, RULE_edge_inline = 6, 
@@ -48,15 +48,16 @@ public class GRAPHenParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'Node '", "'{'", "'};'", "'}'", "'nodeContents '", "', '", "'fillColor '", 
-			"','", "'borderColor '", "'nodeShape '", "'nodeSize '", "'borderWidth '", 
-			"'borderLineShape '", "'Edge '", "'Num_color '", "'lineWidth'", "'Color '", 
-			"'lineType'", "'Graph '", "'}.'", "';'", "'='", "'Digraph '", "'.'", 
-			"'('", "'<->'", "'<-> '", "')'", "'->'", "'-> '", "'clearEdges()'", "'.png'", 
-			"'.svg'", "'.gren'", "'export('", "'format'", "'fileName'", "'colorNodes()'", 
-			"'colorEdges()'", "'+'", "'-'", "'&&'", null, null, null, null, null, 
-			null, "'Node'", "'Edge'", "'Val'", "'Color'", "'Nodetype'", "'Edgetype'", 
-			"'Graph'", "'Digraph'", "'NodeOrderDown'", "'Graphcolor'", "'Generate'"
+			null, "'Node '", "'{'", "' {'", "'};'", "'}'", "'nodeContents '", "'cColor '", 
+			"'cSize'", "', '", "'fillColor '", "','", "'borderColor '", "'nodeShape '", 
+			"'nodeSize '", "'borderWidth '", "'borderLineShape '", "'Edge '", "'Num_color '", 
+			"'lineWidth'", "'Color '", "'lineType'", "'}.'", "';'", "'='", "'Digraph '", 
+			"'.'", "'('", "'<->'", "'<-> '", "')'", "'->'", "'-> '", "'clearEdges()'", 
+			"'.png'", "'.svg'", "'.gren'", "'export('", "'format'", "'fileName'", 
+			"'colorNodes()'", "'colorEdges()'", "'+'", "'-'", "'&&'", null, null, 
+			"'Graph'", null, null, null, null, "'Node'", "'Edge'", "'Val'", "'Color'", 
+			"'Nodetype'", "'Edgetype'", "'Digraph'", "'NodeOrderDown'", "'Graphcolor'", 
+			"'Generate'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -65,10 +66,10 @@ public class GRAPHenParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, null, "WS", "POS_NUMBER", "NUMBER", 
-			"IDENTIFIER", "TEXT", "LETTER", "NODE_KW", "EDGE_KW", "VAL_KW", "COL_KW", 
-			"NODE_SPEC", "EDGE_CPEC", "GRAPH_KW", "DIGHRAPH_KW", "NODE_ORD", "COL_G", 
-			"GEN", "COLOR", "HEXDIGIT", "LINE_TYPE", "NODE_SHAPE"
+			null, null, null, null, null, null, null, null, null, "WS", "POS_NUMBER", 
+			"GRAPH_KW", "NUMBER", "IDENTIFIER", "TEXT", "LETTER", "NODE_KW", "EDGE_KW", 
+			"VAL_KW", "COL_KW", "NODE_SPEC", "EDGE_CPEC", "DIGHRAPH_KW", "NODE_ORD", 
+			"COL_G", "GEN", "COLOR", "HEXDIGIT", "LINE_TYPE", "NODE_SHAPE"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -171,7 +172,7 @@ public class GRAPHenParser extends Parser {
 				setState(55); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 70368753106946L) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 703687475462146L) != 0) );
 			}
 			setState(57);
 			match(EOF);
@@ -347,6 +348,7 @@ public class GRAPHenParser extends Parser {
 	public final Node_definitionContext node_definition() throws RecognitionException {
 		Node_definitionContext _localctx = new Node_definitionContext(_ctx, getState());
 		enterRule(_localctx, 4, RULE_node_definition);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
@@ -355,11 +357,19 @@ public class GRAPHenParser extends Parser {
 			setState(71);
 			match(IDENTIFIER);
 			setState(72);
-			match(T__1);
+			_la = _input.LA(1);
+			if ( !(_la==T__1 || _la==T__2) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
 			setState(73);
 			node_properties();
 			setState(74);
-			match(T__2);
+			match(T__3);
 			}
 		}
 		catch (RecognitionException re) {
@@ -401,6 +411,7 @@ public class GRAPHenParser extends Parser {
 	public final Node_inlineContext node_inline() throws RecognitionException {
 		Node_inlineContext _localctx = new Node_inlineContext(_ctx, getState());
 		enterRule(_localctx, 6, RULE_node_inline);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
@@ -409,11 +420,19 @@ public class GRAPHenParser extends Parser {
 			setState(77);
 			match(IDENTIFIER);
 			setState(78);
-			match(T__1);
+			_la = _input.LA(1);
+			if ( !(_la==T__1 || _la==T__2) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
 			setState(79);
 			node_properties();
 			setState(80);
-			match(T__3);
+			match(T__4);
 			}
 		}
 		catch (RecognitionException re) {
@@ -433,11 +452,11 @@ public class GRAPHenParser extends Parser {
 		public TerminalNode COLOR(int i) {
 			return getToken(GRAPHenParser.COLOR, i);
 		}
-		public TerminalNode NODE_SHAPE() { return getToken(GRAPHenParser.NODE_SHAPE, 0); }
 		public List<TerminalNode> POS_NUMBER() { return getTokens(GRAPHenParser.POS_NUMBER); }
 		public TerminalNode POS_NUMBER(int i) {
 			return getToken(GRAPHenParser.POS_NUMBER, i);
 		}
+		public TerminalNode NODE_SHAPE() { return getToken(GRAPHenParser.NODE_SHAPE, 0); }
 		public TerminalNode LINE_TYPE() { return getToken(GRAPHenParser.LINE_TYPE, 0); }
 		public TerminalNode TEXT() { return getToken(GRAPHenParser.TEXT, 0); }
 		public Node_propertiesContext(ParserRuleContext parent, int invokingState) {
@@ -469,10 +488,10 @@ public class GRAPHenParser extends Parser {
 			setState(84);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==T__4) {
+			if (_la==T__5) {
 				{
 				setState(82);
-				match(T__4);
+				match(T__5);
 				{
 				setState(83);
 				match(TEXT);
@@ -480,50 +499,48 @@ public class GRAPHenParser extends Parser {
 				}
 			}
 
-			setState(89);
+			setState(92);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
-			case 1:
+			_la = _input.LA(1);
+			if (_la==T__1) {
 				{
 				setState(86);
-				match(T__5);
+				match(T__1);
 				setState(87);
 				match(T__6);
 				setState(88);
 				match(COLOR);
+				setState(89);
+				match(T__7);
+				setState(90);
+				match(POS_NUMBER);
+				setState(91);
+				match(T__4);
 				}
-				break;
 			}
-			setState(94);
+
+			setState(97);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 			case 1:
 				{
-				setState(91);
-				_la = _input.LA(1);
-				if ( !(_la==T__5 || _la==T__7) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				setState(92);
+				setState(94);
 				match(T__8);
-				setState(93);
+				setState(95);
+				match(T__9);
+				setState(96);
 				match(COLOR);
 				}
 				break;
 			}
-			setState(99);
+			setState(102);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 			case 1:
 				{
-				setState(96);
+				setState(99);
 				_la = _input.LA(1);
-				if ( !(_la==T__5 || _la==T__7) ) {
+				if ( !(_la==T__8 || _la==T__10) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -531,21 +548,21 @@ public class GRAPHenParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(97);
-				match(T__9);
-				setState(98);
-				match(NODE_SHAPE);
+				setState(100);
+				match(T__11);
+				setState(101);
+				match(COLOR);
 				}
 				break;
 			}
-			setState(104);
+			setState(107);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
 				{
-				setState(101);
+				setState(104);
 				_la = _input.LA(1);
-				if ( !(_la==T__5 || _la==T__7) ) {
+				if ( !(_la==T__8 || _la==T__10) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -553,21 +570,21 @@ public class GRAPHenParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(102);
-				match(T__10);
-				setState(103);
-				match(POS_NUMBER);
+				setState(105);
+				match(T__12);
+				setState(106);
+				match(NODE_SHAPE);
 				}
 				break;
 			}
-			setState(109);
+			setState(112);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
 				{
-				setState(106);
+				setState(109);
 				_la = _input.LA(1);
-				if ( !(_la==T__5 || _la==T__7) ) {
+				if ( !(_la==T__8 || _la==T__10) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -575,21 +592,21 @@ public class GRAPHenParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(107);
-				match(T__11);
-				setState(108);
+				setState(110);
+				match(T__13);
+				setState(111);
 				match(POS_NUMBER);
 				}
 				break;
 			}
-			setState(114);
+			setState(117);
 			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==T__5 || _la==T__7) {
+			switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
+			case 1:
 				{
-				setState(111);
+				setState(114);
 				_la = _input.LA(1);
-				if ( !(_la==T__5 || _la==T__7) ) {
+				if ( !(_la==T__8 || _la==T__10) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -597,9 +614,31 @@ public class GRAPHenParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(112);
-				match(T__12);
-				setState(113);
+				setState(115);
+				match(T__14);
+				setState(116);
+				match(POS_NUMBER);
+				}
+				break;
+			}
+			setState(122);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==T__8 || _la==T__10) {
+				{
+				setState(119);
+				_la = _input.LA(1);
+				if ( !(_la==T__8 || _la==T__10) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(120);
+				match(T__15);
+				setState(121);
 				match(LINE_TYPE);
 				}
 			}
@@ -645,19 +684,28 @@ public class GRAPHenParser extends Parser {
 	public final Edge_definitionContext edge_definition() throws RecognitionException {
 		Edge_definitionContext _localctx = new Edge_definitionContext(_ctx, getState());
 		enterRule(_localctx, 10, RULE_edge_definition);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(116);
-			match(T__13);
-			setState(117);
+			setState(124);
+			match(T__16);
+			setState(125);
 			match(IDENTIFIER);
-			setState(118);
-			match(T__1);
-			setState(119);
+			setState(126);
+			_la = _input.LA(1);
+			if ( !(_la==T__1 || _la==T__2) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			setState(127);
 			edge_properties();
-			setState(120);
-			match(T__2);
+			setState(128);
+			match(T__3);
 			}
 		}
 		catch (RecognitionException re) {
@@ -699,19 +747,28 @@ public class GRAPHenParser extends Parser {
 	public final Edge_inlineContext edge_inline() throws RecognitionException {
 		Edge_inlineContext _localctx = new Edge_inlineContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_edge_inline);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(122);
-			match(T__13);
-			setState(123);
+			setState(130);
+			match(T__16);
+			setState(131);
 			match(IDENTIFIER);
-			setState(124);
-			match(T__1);
-			setState(125);
+			setState(132);
+			_la = _input.LA(1);
+			if ( !(_la==T__1 || _la==T__2) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			setState(133);
 			edge_properties();
-			setState(126);
-			match(T__3);
+			setState(134);
+			match(T__4);
 			}
 		}
 		catch (RecognitionException re) {
@@ -729,8 +786,11 @@ public class GRAPHenParser extends Parser {
 	public static class Edge_propertiesContext extends ParserRuleContext {
 		public TerminalNode COLOR() { return getToken(GRAPHenParser.COLOR, 0); }
 		public TerminalNode LINE_TYPE() { return getToken(GRAPHenParser.LINE_TYPE, 0); }
+		public List<TerminalNode> POS_NUMBER() { return getTokens(GRAPHenParser.POS_NUMBER); }
+		public TerminalNode POS_NUMBER(int i) {
+			return getToken(GRAPHenParser.POS_NUMBER, i);
+		}
 		public TerminalNode NUMBER() { return getToken(GRAPHenParser.NUMBER, 0); }
-		public TerminalNode POS_NUMBER() { return getToken(GRAPHenParser.POS_NUMBER, 0); }
 		public Edge_propertiesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -757,28 +817,34 @@ public class GRAPHenParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(130);
+			setState(138);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==T__14) {
+			if (_la==T__17) {
 				{
-				setState(128);
-				match(T__14);
-				{
-				setState(129);
-				match(NUMBER);
+				setState(136);
+				match(T__17);
+				setState(137);
+				_la = _input.LA(1);
+				if ( !(_la==POS_NUMBER || _la==NUMBER) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
 				}
 				}
 			}
 
-			setState(135);
+			setState(143);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
 			case 1:
 				{
-				setState(132);
+				setState(140);
 				_la = _input.LA(1);
-				if ( !(_la==T__5 || _la==T__7) ) {
+				if ( !(_la==T__8 || _la==T__10) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -787,22 +853,22 @@ public class GRAPHenParser extends Parser {
 					consume();
 				}
 				{
-				setState(133);
-				match(T__15);
-				setState(134);
+				setState(141);
+				match(T__18);
+				setState(142);
 				match(POS_NUMBER);
 				}
 				}
 				break;
 			}
-			setState(140);
+			setState(148);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
 			case 1:
 				{
-				setState(137);
+				setState(145);
 				_la = _input.LA(1);
-				if ( !(_la==T__5 || _la==T__7) ) {
+				if ( !(_la==T__8 || _la==T__10) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -810,21 +876,21 @@ public class GRAPHenParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(138);
-				match(T__16);
-				setState(139);
+				setState(146);
+				match(T__19);
+				setState(147);
 				match(COLOR);
 				}
 				break;
 			}
-			setState(145);
+			setState(153);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==T__5 || _la==T__7) {
+			if (_la==T__8 || _la==T__10) {
 				{
-				setState(142);
+				setState(150);
 				_la = _input.LA(1);
-				if ( !(_la==T__5 || _la==T__7) ) {
+				if ( !(_la==T__8 || _la==T__10) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -832,9 +898,9 @@ public class GRAPHenParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(143);
-				match(T__17);
-				setState(144);
+				setState(151);
+				match(T__20);
+				setState(152);
 				match(LINE_TYPE);
 				}
 			}
@@ -854,6 +920,7 @@ public class GRAPHenParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Graph_definitionContext extends ParserRuleContext {
+		public TerminalNode GRAPH_KW() { return getToken(GRAPHenParser.GRAPH_KW, 0); }
 		public TerminalNode IDENTIFIER() { return getToken(GRAPHenParser.IDENTIFIER, 0); }
 		public Graph_addContext graph_add() {
 			return getRuleContext(Graph_addContext.class,0);
@@ -892,42 +959,51 @@ public class GRAPHenParser extends Parser {
 	public final Graph_definitionContext graph_definition() throws RecognitionException {
 		Graph_definitionContext _localctx = new Graph_definitionContext(_ctx, getState());
 		enterRule(_localctx, 16, RULE_graph_definition);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(147);
-			match(T__18);
-			setState(148);
+			setState(155);
+			match(GRAPH_KW);
+			setState(156);
 			match(IDENTIFIER);
-			setState(165);
+			setState(173);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,14,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,15,_ctx) ) {
 			case 1:
 				{
 				{
-				setState(149);
-				match(T__1);
-				setState(150);
-				edge_list();
 				setState(157);
+				_la = _input.LA(1);
+				if ( !(_la==T__1 || _la==T__2) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(158);
+				edge_list();
+				setState(165);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
-				case T__2:
+				case T__3:
 					{
-					setState(151);
-					match(T__2);
+					setState(159);
+					match(T__3);
 					}
 					break;
-				case T__19:
+				case T__21:
 					{
 					{
-					setState(152);
-					match(T__19);
-					setState(153);
+					setState(160);
+					match(T__21);
+					setState(161);
 					graph_function();
 					}
-					setState(155);
-					match(T__20);
+					setState(163);
+					match(T__22);
 					}
 					break;
 				default:
@@ -938,25 +1014,25 @@ public class GRAPHenParser extends Parser {
 				break;
 			case 2:
 				{
-				setState(159);
-				match(T__21);
-				setState(160);
+				setState(167);
+				match(T__23);
+				setState(168);
 				graph_add();
 				}
 				break;
 			case 3:
 				{
-				setState(161);
-				match(T__21);
-				setState(162);
+				setState(169);
+				match(T__23);
+				setState(170);
 				graph_substract();
 				}
 				break;
 			case 4:
 				{
-				setState(163);
-				match(T__21);
-				setState(164);
+				setState(171);
+				match(T__23);
+				setState(172);
 				graph_union();
 				}
 				break;
@@ -1018,60 +1094,60 @@ public class GRAPHenParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(167);
-			match(T__22);
-			setState(168);
+			setState(175);
+			match(T__24);
+			setState(176);
 			match(IDENTIFIER);
-			setState(184);
+			setState(192);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,16,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,17,_ctx) ) {
 			case 1:
 				{
 				{
-				setState(169);
+				setState(177);
 				match(T__1);
-				setState(170);
+				setState(178);
 				dedge_list();
-				setState(171);
-				match(T__3);
-				setState(174);
+				setState(179);
+				match(T__4);
+				setState(182);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if (_la==T__23) {
+				if (_la==T__25) {
 					{
-					setState(172);
-					match(T__23);
-					setState(173);
+					setState(180);
+					match(T__25);
+					setState(181);
 					graph_function();
 					}
 				}
 
-				setState(176);
-				match(T__20);
+				setState(184);
+				match(T__22);
 				}
 				}
 				break;
 			case 2:
 				{
-				setState(178);
-				match(T__21);
-				setState(179);
+				setState(186);
+				match(T__23);
+				setState(187);
 				digraph_add();
 				}
 				break;
 			case 3:
 				{
-				setState(180);
-				match(T__21);
-				setState(181);
+				setState(188);
+				match(T__23);
+				setState(189);
 				digraph_substract();
 				}
 				break;
 			case 4:
 				{
-				setState(182);
-				match(T__21);
-				setState(183);
+				setState(190);
+				match(T__23);
+				setState(191);
 				digraph_union();
 				}
 				break;
@@ -1123,17 +1199,17 @@ public class GRAPHenParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(186);
+			setState(194);
 			edge_relation();
-			setState(191);
+			setState(199);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T__5 || _la==T__7) {
+			while (_la==T__8 || _la==T__10) {
 				{
 				{
-				setState(187);
+				setState(195);
 				_la = _input.LA(1);
-				if ( !(_la==T__5 || _la==T__7) ) {
+				if ( !(_la==T__8 || _la==T__10) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1141,11 +1217,11 @@ public class GRAPHenParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(188);
+				setState(196);
 				edge_relation();
 				}
 				}
-				setState(193);
+				setState(201);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1203,29 +1279,29 @@ public class GRAPHenParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(196);
+			setState(204);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				{
-				setState(194);
+				setState(202);
 				match(IDENTIFIER);
 				}
 				break;
 			case T__0:
 				{
-				setState(195);
+				setState(203);
 				node_inline();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(198);
-			match(T__24);
-			setState(199);
+			setState(206);
+			match(T__26);
+			setState(207);
 			_la = _input.LA(1);
-			if ( !(_la==T__25 || _la==T__26) ) {
+			if ( !(_la==T__27 || _la==T__28) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -1233,43 +1309,43 @@ public class GRAPHenParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(202);
+			setState(210);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				{
-				setState(200);
+				setState(208);
 				match(IDENTIFIER);
 				}
 				break;
-			case T__13:
+			case T__16:
 				{
-				setState(201);
+				setState(209);
 				edge_inline();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(204);
-			match(T__27);
-			setState(207); 
+			setState(212);
+			match(T__29);
+			setState(215); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
-				setState(207);
+				setState(215);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case IDENTIFIER:
 					{
-					setState(205);
+					setState(213);
 					match(IDENTIFIER);
 					}
 					break;
 				case T__0:
 					{
-					setState(206);
+					setState(214);
 					node_inline();
 					}
 					break;
@@ -1277,7 +1353,7 @@ public class GRAPHenParser extends Parser {
 					throw new NoViableAltException(this);
 				}
 				}
-				setState(209); 
+				setState(217); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==T__0 || _la==IDENTIFIER );
@@ -1328,17 +1404,17 @@ public class GRAPHenParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(211);
+			setState(219);
 			dedge_relation();
-			setState(216);
+			setState(224);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T__5 || _la==T__7) {
+			while (_la==T__8 || _la==T__10) {
 				{
 				{
-				setState(212);
+				setState(220);
 				_la = _input.LA(1);
-				if ( !(_la==T__5 || _la==T__7) ) {
+				if ( !(_la==T__8 || _la==T__10) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1346,11 +1422,11 @@ public class GRAPHenParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(213);
+				setState(221);
 				dedge_relation();
 				}
 				}
-				setState(218);
+				setState(226);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1408,29 +1484,29 @@ public class GRAPHenParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(221);
+			setState(229);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				{
-				setState(219);
+				setState(227);
 				match(IDENTIFIER);
 				}
 				break;
 			case T__0:
 				{
-				setState(220);
+				setState(228);
 				node_inline();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(223);
-			match(T__24);
-			setState(224);
+			setState(231);
+			match(T__26);
+			setState(232);
 			_la = _input.LA(1);
-			if ( !(_la==T__28 || _la==T__29) ) {
+			if ( !(_la==T__30 || _la==T__31) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -1438,43 +1514,43 @@ public class GRAPHenParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(227);
+			setState(235);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				{
-				setState(225);
+				setState(233);
 				match(IDENTIFIER);
 				}
 				break;
-			case T__13:
+			case T__16:
 				{
-				setState(226);
+				setState(234);
 				edge_inline();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(229);
-			match(T__27);
-			setState(232); 
+			setState(237);
+			match(T__29);
+			setState(240); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
-				setState(232);
+				setState(240);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case IDENTIFIER:
 					{
-					setState(230);
+					setState(238);
 					match(IDENTIFIER);
 					}
 					break;
 				case T__0:
 					{
-					setState(231);
+					setState(239);
 					node_inline();
 					}
 					break;
@@ -1482,7 +1558,7 @@ public class GRAPHenParser extends Parser {
 					throw new NoViableAltException(this);
 				}
 				}
-				setState(234); 
+				setState(242); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==T__0 || _la==IDENTIFIER );
@@ -1535,31 +1611,31 @@ public class GRAPHenParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(240);
+			setState(248);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__34:
+			case T__36:
 				{
-				setState(236);
+				setState(244);
 				exportToFileFunc();
 				}
 				break;
-			case T__38:
+			case T__40:
 				{
-				setState(237);
+				setState(245);
 				colorEdgesFunc();
 				}
 				break;
-			case T__37:
+			case T__39:
 				{
-				setState(238);
+				setState(246);
 				colorNodesFunc();
 				}
 				break;
-			case T__30:
+			case T__32:
 				{
-				setState(239);
-				match(T__30);
+				setState(247);
+				match(T__32);
 				}
 				break;
 			default:
@@ -1609,14 +1685,14 @@ public class GRAPHenParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(242);
+			setState(250);
 			match(IDENTIFIER);
-			setState(243);
-			match(T__23);
-			setState(244);
+			setState(251);
+			match(T__25);
+			setState(252);
 			graph_function();
-			setState(245);
-			match(T__20);
+			setState(253);
+			match(T__22);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1658,9 +1734,9 @@ public class GRAPHenParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(247);
+			setState(255);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 30064771072L) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 120259084288L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -1713,15 +1789,15 @@ public class GRAPHenParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(249);
-			match(T__34);
-			setState(250);
-			match(T__35);
-			setState(251);
+			setState(257);
+			match(T__36);
+			setState(258);
+			match(T__37);
+			setState(259);
 			fileFormat();
-			setState(252);
+			setState(260);
 			_la = _input.LA(1);
-			if ( !(_la==T__5 || _la==T__7) ) {
+			if ( !(_la==T__8 || _la==T__10) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -1729,12 +1805,12 @@ public class GRAPHenParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(253);
-			match(T__36);
-			setState(254);
+			setState(261);
+			match(T__38);
+			setState(262);
 			match(IDENTIFIER);
-			setState(255);
-			match(T__27);
+			setState(263);
+			match(T__29);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1775,8 +1851,8 @@ public class GRAPHenParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(257);
-			match(T__37);
+			setState(265);
+			match(T__39);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1817,8 +1893,8 @@ public class GRAPHenParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(259);
-			match(T__38);
+			setState(267);
+			match(T__40);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1869,38 +1945,38 @@ public class GRAPHenParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(263);
+			setState(271);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				{
-				setState(261);
+				setState(269);
 				match(IDENTIFIER);
 				}
 				break;
-			case T__18:
+			case GRAPH_KW:
 				{
-				setState(262);
+				setState(270);
 				graph_definition();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(265);
-			match(T__39);
-			setState(268);
+			setState(273);
+			match(T__41);
+			setState(276);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				{
-				setState(266);
+				setState(274);
 				match(IDENTIFIER);
 				}
 				break;
-			case T__18:
+			case GRAPH_KW:
 				{
-				setState(267);
+				setState(275);
 				graph_definition();
 				}
 				break;
@@ -1957,38 +2033,38 @@ public class GRAPHenParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(272);
+			setState(280);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				{
-				setState(270);
+				setState(278);
 				match(IDENTIFIER);
 				}
 				break;
-			case T__22:
+			case T__24:
 				{
-				setState(271);
+				setState(279);
 				digraph_definition();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(274);
-			match(T__39);
-			setState(277);
+			setState(282);
+			match(T__41);
+			setState(285);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				{
-				setState(275);
+				setState(283);
 				match(IDENTIFIER);
 				}
 				break;
-			case T__22:
+			case T__24:
 				{
-				setState(276);
+				setState(284);
 				digraph_definition();
 				}
 				break;
@@ -2045,46 +2121,46 @@ public class GRAPHenParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(281);
+			setState(289);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				{
-				setState(279);
+				setState(287);
 				match(IDENTIFIER);
 				}
 				break;
-			case T__18:
+			case GRAPH_KW:
 				{
-				setState(280);
+				setState(288);
 				graph_definition();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(283);
-			match(T__40);
-			setState(286);
+			setState(291);
+			match(T__42);
+			setState(294);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				{
-				setState(284);
+				setState(292);
 				match(IDENTIFIER);
 				}
 				break;
-			case T__18:
+			case GRAPH_KW:
 				{
-				setState(285);
+				setState(293);
 				graph_definition();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(288);
-			match(T__20);
+			setState(296);
+			match(T__22);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2135,46 +2211,46 @@ public class GRAPHenParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(292);
+			setState(300);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				{
-				setState(290);
+				setState(298);
 				match(IDENTIFIER);
 				}
 				break;
-			case T__22:
+			case T__24:
 				{
-				setState(291);
+				setState(299);
 				digraph_definition();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(294);
-			match(T__40);
-			setState(297);
+			setState(302);
+			match(T__42);
+			setState(305);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				{
-				setState(295);
+				setState(303);
 				match(IDENTIFIER);
 				}
 				break;
-			case T__22:
+			case T__24:
 				{
-				setState(296);
+				setState(304);
 				digraph_definition();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(299);
-			match(T__20);
+			setState(307);
+			match(T__22);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2225,46 +2301,46 @@ public class GRAPHenParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(303);
+			setState(311);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				{
-				setState(301);
+				setState(309);
 				match(IDENTIFIER);
 				}
 				break;
-			case T__18:
+			case GRAPH_KW:
 				{
-				setState(302);
+				setState(310);
 				graph_definition();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(305);
-			match(T__41);
-			setState(308);
+			setState(313);
+			match(T__43);
+			setState(316);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				{
-				setState(306);
+				setState(314);
 				match(IDENTIFIER);
 				}
 				break;
-			case T__18:
+			case GRAPH_KW:
 				{
-				setState(307);
+				setState(315);
 				graph_definition();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(310);
-			match(T__20);
+			setState(318);
+			match(T__22);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2315,46 +2391,46 @@ public class GRAPHenParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(314);
+			setState(322);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				{
-				setState(312);
+				setState(320);
 				match(IDENTIFIER);
 				}
 				break;
-			case T__22:
+			case T__24:
 				{
-				setState(313);
+				setState(321);
 				digraph_definition();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(316);
-			match(T__41);
-			setState(319);
+			setState(324);
+			match(T__43);
+			setState(327);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				{
-				setState(317);
+				setState(325);
 				match(IDENTIFIER);
 				}
 				break;
-			case T__22:
+			case T__24:
 				{
-				setState(318);
+				setState(326);
 				digraph_definition();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(321);
-			match(T__20);
+			setState(329);
+			match(T__22);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2369,7 +2445,7 @@ public class GRAPHenParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001?\u0144\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001A\u014c\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
@@ -2383,57 +2459,59 @@ public class GRAPHenParser extends Parser {
 		"\u0003\u0001E\b\u0001\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002"+
 		"\u0001\u0002\u0001\u0002\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
 		"\u0001\u0003\u0001\u0003\u0001\u0004\u0001\u0004\u0003\u0004U\b\u0004"+
-		"\u0001\u0004\u0001\u0004\u0001\u0004\u0003\u0004Z\b\u0004\u0001\u0004"+
-		"\u0001\u0004\u0001\u0004\u0003\u0004_\b\u0004\u0001\u0004\u0001\u0004"+
-		"\u0001\u0004\u0003\u0004d\b\u0004\u0001\u0004\u0001\u0004\u0001\u0004"+
-		"\u0003\u0004i\b\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0003\u0004"+
-		"n\b\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0003\u0004s\b\u0004\u0001"+
-		"\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0001"+
-		"\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001"+
-		"\u0007\u0001\u0007\u0003\u0007\u0083\b\u0007\u0001\u0007\u0001\u0007\u0001"+
-		"\u0007\u0003\u0007\u0088\b\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0003"+
-		"\u0007\u008d\b\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0003\u0007\u0092"+
-		"\b\u0007\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001"+
-		"\b\u0001\b\u0001\b\u0003\b\u009e\b\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001"+
-		"\b\u0001\b\u0003\b\u00a6\b\b\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001"+
-		"\t\u0001\t\u0003\t\u00af\b\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001"+
-		"\t\u0001\t\u0001\t\u0003\t\u00b9\b\t\u0001\n\u0001\n\u0001\n\u0005\n\u00be"+
-		"\b\n\n\n\f\n\u00c1\t\n\u0001\u000b\u0001\u000b\u0003\u000b\u00c5\b\u000b"+
-		"\u0001\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0003\u000b\u00cb\b\u000b"+
-		"\u0001\u000b\u0001\u000b\u0001\u000b\u0004\u000b\u00d0\b\u000b\u000b\u000b"+
-		"\f\u000b\u00d1\u0001\f\u0001\f\u0001\f\u0005\f\u00d7\b\f\n\f\f\f\u00da"+
-		"\t\f\u0001\r\u0001\r\u0003\r\u00de\b\r\u0001\r\u0001\r\u0001\r\u0001\r"+
-		"\u0003\r\u00e4\b\r\u0001\r\u0001\r\u0001\r\u0004\r\u00e9\b\r\u000b\r\f"+
-		"\r\u00ea\u0001\u000e\u0001\u000e\u0001\u000e\u0001\u000e\u0003\u000e\u00f1"+
-		"\b\u000e\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0001"+
-		"\u0010\u0001\u0010\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001"+
-		"\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0012\u0001\u0012\u0001"+
-		"\u0013\u0001\u0013\u0001\u0014\u0001\u0014\u0003\u0014\u0108\b\u0014\u0001"+
-		"\u0014\u0001\u0014\u0001\u0014\u0003\u0014\u010d\b\u0014\u0001\u0015\u0001"+
-		"\u0015\u0003\u0015\u0111\b\u0015\u0001\u0015\u0001\u0015\u0001\u0015\u0003"+
-		"\u0015\u0116\b\u0015\u0001\u0016\u0001\u0016\u0003\u0016\u011a\b\u0016"+
-		"\u0001\u0016\u0001\u0016\u0001\u0016\u0003\u0016\u011f\b\u0016\u0001\u0016"+
-		"\u0001\u0016\u0001\u0017\u0001\u0017\u0003\u0017\u0125\b\u0017\u0001\u0017"+
-		"\u0001\u0017\u0001\u0017\u0003\u0017\u012a\b\u0017\u0001\u0017\u0001\u0017"+
-		"\u0001\u0018\u0001\u0018\u0003\u0018\u0130\b\u0018\u0001\u0018\u0001\u0018"+
-		"\u0001\u0018\u0003\u0018\u0135\b\u0018\u0001\u0018\u0001\u0018\u0001\u0019"+
-		"\u0001\u0019\u0003\u0019\u013b\b\u0019\u0001\u0019\u0001\u0019\u0001\u0019"+
-		"\u0003\u0019\u0140\b\u0019\u0001\u0019\u0001\u0019\u0001\u0019\u0000\u0000"+
-		"\u001a\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018"+
-		"\u001a\u001c\u001e \"$&(*,.02\u0000\u0004\u0002\u0000\u0006\u0006\b\b"+
-		"\u0001\u0000\u001a\u001b\u0001\u0000\u001d\u001e\u0001\u0000 \"\u015e"+
-		"\u00005\u0001\u0000\u0000\u0000\u0002D\u0001\u0000\u0000\u0000\u0004F"+
-		"\u0001\u0000\u0000\u0000\u0006L\u0001\u0000\u0000\u0000\bT\u0001\u0000"+
-		"\u0000\u0000\nt\u0001\u0000\u0000\u0000\fz\u0001\u0000\u0000\u0000\u000e"+
-		"\u0082\u0001\u0000\u0000\u0000\u0010\u0093\u0001\u0000\u0000\u0000\u0012"+
-		"\u00a7\u0001\u0000\u0000\u0000\u0014\u00ba\u0001\u0000\u0000\u0000\u0016"+
-		"\u00c4\u0001\u0000\u0000\u0000\u0018\u00d3\u0001\u0000\u0000\u0000\u001a"+
-		"\u00dd\u0001\u0000\u0000\u0000\u001c\u00f0\u0001\u0000\u0000\u0000\u001e"+
-		"\u00f2\u0001\u0000\u0000\u0000 \u00f7\u0001\u0000\u0000\u0000\"\u00f9"+
-		"\u0001\u0000\u0000\u0000$\u0101\u0001\u0000\u0000\u0000&\u0103\u0001\u0000"+
-		"\u0000\u0000(\u0107\u0001\u0000\u0000\u0000*\u0110\u0001\u0000\u0000\u0000"+
-		",\u0119\u0001\u0000\u0000\u0000.\u0124\u0001\u0000\u0000\u00000\u012f"+
-		"\u0001\u0000\u0000\u00002\u013a\u0001\u0000\u0000\u000046\u0003\u0002"+
+		"\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004"+
+		"\u0003\u0004]\b\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0003\u0004"+
+		"b\b\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0003\u0004g\b\u0004\u0001"+
+		"\u0004\u0001\u0004\u0001\u0004\u0003\u0004l\b\u0004\u0001\u0004\u0001"+
+		"\u0004\u0001\u0004\u0003\u0004q\b\u0004\u0001\u0004\u0001\u0004\u0001"+
+		"\u0004\u0003\u0004v\b\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0003"+
+		"\u0004{\b\u0004\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0001"+
+		"\u0005\u0001\u0005\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001"+
+		"\u0006\u0001\u0006\u0001\u0007\u0001\u0007\u0003\u0007\u008b\b\u0007\u0001"+
+		"\u0007\u0001\u0007\u0001\u0007\u0003\u0007\u0090\b\u0007\u0001\u0007\u0001"+
+		"\u0007\u0001\u0007\u0003\u0007\u0095\b\u0007\u0001\u0007\u0001\u0007\u0001"+
+		"\u0007\u0003\u0007\u009a\b\u0007\u0001\b\u0001\b\u0001\b\u0001\b\u0001"+
+		"\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0003\b\u00a6\b\b\u0001\b\u0001"+
+		"\b\u0001\b\u0001\b\u0001\b\u0001\b\u0003\b\u00ae\b\b\u0001\t\u0001\t\u0001"+
+		"\t\u0001\t\u0001\t\u0001\t\u0001\t\u0003\t\u00b7\b\t\u0001\t\u0001\t\u0001"+
+		"\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0003\t\u00c1\b\t\u0001\n\u0001"+
+		"\n\u0001\n\u0005\n\u00c6\b\n\n\n\f\n\u00c9\t\n\u0001\u000b\u0001\u000b"+
+		"\u0003\u000b\u00cd\b\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0001\u000b"+
+		"\u0003\u000b\u00d3\b\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0004\u000b"+
+		"\u00d8\b\u000b\u000b\u000b\f\u000b\u00d9\u0001\f\u0001\f\u0001\f\u0005"+
+		"\f\u00df\b\f\n\f\f\f\u00e2\t\f\u0001\r\u0001\r\u0003\r\u00e6\b\r\u0001"+
+		"\r\u0001\r\u0001\r\u0001\r\u0003\r\u00ec\b\r\u0001\r\u0001\r\u0001\r\u0004"+
+		"\r\u00f1\b\r\u000b\r\f\r\u00f2\u0001\u000e\u0001\u000e\u0001\u000e\u0001"+
+		"\u000e\u0003\u000e\u00f9\b\u000e\u0001\u000f\u0001\u000f\u0001\u000f\u0001"+
+		"\u000f\u0001\u000f\u0001\u0010\u0001\u0010\u0001\u0011\u0001\u0011\u0001"+
+		"\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001"+
+		"\u0012\u0001\u0012\u0001\u0013\u0001\u0013\u0001\u0014\u0001\u0014\u0003"+
+		"\u0014\u0110\b\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0003\u0014\u0115"+
+		"\b\u0014\u0001\u0015\u0001\u0015\u0003\u0015\u0119\b\u0015\u0001\u0015"+
+		"\u0001\u0015\u0001\u0015\u0003\u0015\u011e\b\u0015\u0001\u0016\u0001\u0016"+
+		"\u0003\u0016\u0122\b\u0016\u0001\u0016\u0001\u0016\u0001\u0016\u0003\u0016"+
+		"\u0127\b\u0016\u0001\u0016\u0001\u0016\u0001\u0017\u0001\u0017\u0003\u0017"+
+		"\u012d\b\u0017\u0001\u0017\u0001\u0017\u0001\u0017\u0003\u0017\u0132\b"+
+		"\u0017\u0001\u0017\u0001\u0017\u0001\u0018\u0001\u0018\u0003\u0018\u0138"+
+		"\b\u0018\u0001\u0018\u0001\u0018\u0001\u0018\u0003\u0018\u013d\b\u0018"+
+		"\u0001\u0018\u0001\u0018\u0001\u0019\u0001\u0019\u0003\u0019\u0143\b\u0019"+
+		"\u0001\u0019\u0001\u0019\u0001\u0019\u0003\u0019\u0148\b\u0019\u0001\u0019"+
+		"\u0001\u0019\u0001\u0019\u0000\u0000\u001a\u0000\u0002\u0004\u0006\b\n"+
+		"\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u001c\u001e \"$&(*,.02\u0000"+
+		"\u0006\u0001\u0000\u0002\u0003\u0002\u0000\t\t\u000b\u000b\u0002\u0000"+
+		"..00\u0001\u0000\u001c\u001d\u0001\u0000\u001f \u0001\u0000\"$\u0167\u0000"+
+		"5\u0001\u0000\u0000\u0000\u0002D\u0001\u0000\u0000\u0000\u0004F\u0001"+
+		"\u0000\u0000\u0000\u0006L\u0001\u0000\u0000\u0000\bT\u0001\u0000\u0000"+
+		"\u0000\n|\u0001\u0000\u0000\u0000\f\u0082\u0001\u0000\u0000\u0000\u000e"+
+		"\u008a\u0001\u0000\u0000\u0000\u0010\u009b\u0001\u0000\u0000\u0000\u0012"+
+		"\u00af\u0001\u0000\u0000\u0000\u0014\u00c2\u0001\u0000\u0000\u0000\u0016"+
+		"\u00cc\u0001\u0000\u0000\u0000\u0018\u00db\u0001\u0000\u0000\u0000\u001a"+
+		"\u00e5\u0001\u0000\u0000\u0000\u001c\u00f8\u0001\u0000\u0000\u0000\u001e"+
+		"\u00fa\u0001\u0000\u0000\u0000 \u00ff\u0001\u0000\u0000\u0000\"\u0101"+
+		"\u0001\u0000\u0000\u0000$\u0109\u0001\u0000\u0000\u0000&\u010b\u0001\u0000"+
+		"\u0000\u0000(\u010f\u0001\u0000\u0000\u0000*\u0118\u0001\u0000\u0000\u0000"+
+		",\u0121\u0001\u0000\u0000\u0000.\u012c\u0001\u0000\u0000\u00000\u0137"+
+		"\u0001\u0000\u0000\u00002\u0142\u0001\u0000\u0000\u000046\u0003\u0002"+
 		"\u0001\u000054\u0001\u0000\u0000\u000067\u0001\u0000\u0000\u000075\u0001"+
 		"\u0000\u0000\u000078\u0001\u0000\u0000\u000089\u0001\u0000\u0000\u0000"+
 		"9:\u0005\u0000\u0000\u0001:\u0001\u0001\u0000\u0000\u0000;E\u0003\u0004"+
@@ -2443,143 +2521,147 @@ public class GRAPHenParser extends Parser {
 		"D<\u0001\u0000\u0000\u0000D=\u0001\u0000\u0000\u0000D>\u0001\u0000\u0000"+
 		"\u0000D?\u0001\u0000\u0000\u0000D@\u0001\u0000\u0000\u0000DA\u0001\u0000"+
 		"\u0000\u0000DB\u0001\u0000\u0000\u0000DC\u0001\u0000\u0000\u0000E\u0003"+
-		"\u0001\u0000\u0000\u0000FG\u0005\u0001\u0000\u0000GH\u0005.\u0000\u0000"+
-		"HI\u0005\u0002\u0000\u0000IJ\u0003\b\u0004\u0000JK\u0005\u0003\u0000\u0000"+
-		"K\u0005\u0001\u0000\u0000\u0000LM\u0005\u0001\u0000\u0000MN\u0005.\u0000"+
-		"\u0000NO\u0005\u0002\u0000\u0000OP\u0003\b\u0004\u0000PQ\u0005\u0004\u0000"+
-		"\u0000Q\u0007\u0001\u0000\u0000\u0000RS\u0005\u0005\u0000\u0000SU\u0005"+
-		"/\u0000\u0000TR\u0001\u0000\u0000\u0000TU\u0001\u0000\u0000\u0000UY\u0001"+
-		"\u0000\u0000\u0000VW\u0005\u0006\u0000\u0000WX\u0005\u0007\u0000\u0000"+
-		"XZ\u0005<\u0000\u0000YV\u0001\u0000\u0000\u0000YZ\u0001\u0000\u0000\u0000"+
-		"Z^\u0001\u0000\u0000\u0000[\\\u0007\u0000\u0000\u0000\\]\u0005\t\u0000"+
-		"\u0000]_\u0005<\u0000\u0000^[\u0001\u0000\u0000\u0000^_\u0001\u0000\u0000"+
-		"\u0000_c\u0001\u0000\u0000\u0000`a\u0007\u0000\u0000\u0000ab\u0005\n\u0000"+
-		"\u0000bd\u0005?\u0000\u0000c`\u0001\u0000\u0000\u0000cd\u0001\u0000\u0000"+
-		"\u0000dh\u0001\u0000\u0000\u0000ef\u0007\u0000\u0000\u0000fg\u0005\u000b"+
-		"\u0000\u0000gi\u0005,\u0000\u0000he\u0001\u0000\u0000\u0000hi\u0001\u0000"+
-		"\u0000\u0000im\u0001\u0000\u0000\u0000jk\u0007\u0000\u0000\u0000kl\u0005"+
-		"\f\u0000\u0000ln\u0005,\u0000\u0000mj\u0001\u0000\u0000\u0000mn\u0001"+
-		"\u0000\u0000\u0000nr\u0001\u0000\u0000\u0000op\u0007\u0000\u0000\u0000"+
-		"pq\u0005\r\u0000\u0000qs\u0005>\u0000\u0000ro\u0001\u0000\u0000\u0000"+
-		"rs\u0001\u0000\u0000\u0000s\t\u0001\u0000\u0000\u0000tu\u0005\u000e\u0000"+
-		"\u0000uv\u0005.\u0000\u0000vw\u0005\u0002\u0000\u0000wx\u0003\u000e\u0007"+
-		"\u0000xy\u0005\u0003\u0000\u0000y\u000b\u0001\u0000\u0000\u0000z{\u0005"+
-		"\u000e\u0000\u0000{|\u0005.\u0000\u0000|}\u0005\u0002\u0000\u0000}~\u0003"+
-		"\u000e\u0007\u0000~\u007f\u0005\u0004\u0000\u0000\u007f\r\u0001\u0000"+
-		"\u0000\u0000\u0080\u0081\u0005\u000f\u0000\u0000\u0081\u0083\u0005-\u0000"+
-		"\u0000\u0082\u0080\u0001\u0000\u0000\u0000\u0082\u0083\u0001\u0000\u0000"+
-		"\u0000\u0083\u0087\u0001\u0000\u0000\u0000\u0084\u0085\u0007\u0000\u0000"+
-		"\u0000\u0085\u0086\u0005\u0010\u0000\u0000\u0086\u0088\u0005,\u0000\u0000"+
-		"\u0087\u0084\u0001\u0000\u0000\u0000\u0087\u0088\u0001\u0000\u0000\u0000"+
-		"\u0088\u008c\u0001\u0000\u0000\u0000\u0089\u008a\u0007\u0000\u0000\u0000"+
-		"\u008a\u008b\u0005\u0011\u0000\u0000\u008b\u008d\u0005<\u0000\u0000\u008c"+
-		"\u0089\u0001\u0000\u0000\u0000\u008c\u008d\u0001\u0000\u0000\u0000\u008d"+
-		"\u0091\u0001\u0000\u0000\u0000\u008e\u008f\u0007\u0000\u0000\u0000\u008f"+
-		"\u0090\u0005\u0012\u0000\u0000\u0090\u0092\u0005>\u0000\u0000\u0091\u008e"+
-		"\u0001\u0000\u0000\u0000\u0091\u0092\u0001\u0000\u0000\u0000\u0092\u000f"+
-		"\u0001\u0000\u0000\u0000\u0093\u0094\u0005\u0013\u0000\u0000\u0094\u00a5"+
-		"\u0005.\u0000\u0000\u0095\u0096\u0005\u0002\u0000\u0000\u0096\u009d\u0003"+
-		"\u0014\n\u0000\u0097\u009e\u0005\u0003\u0000\u0000\u0098\u0099\u0005\u0014"+
-		"\u0000\u0000\u0099\u009a\u0003\u001c\u000e\u0000\u009a\u009b\u0001\u0000"+
-		"\u0000\u0000\u009b\u009c\u0005\u0015\u0000\u0000\u009c\u009e\u0001\u0000"+
-		"\u0000\u0000\u009d\u0097\u0001\u0000\u0000\u0000\u009d\u0098\u0001\u0000"+
-		"\u0000\u0000\u009e\u00a6\u0001\u0000\u0000\u0000\u009f\u00a0\u0005\u0016"+
-		"\u0000\u0000\u00a0\u00a6\u0003(\u0014\u0000\u00a1\u00a2\u0005\u0016\u0000"+
-		"\u0000\u00a2\u00a6\u0003,\u0016\u0000\u00a3\u00a4\u0005\u0016\u0000\u0000"+
-		"\u00a4\u00a6\u00030\u0018\u0000\u00a5\u0095\u0001\u0000\u0000\u0000\u00a5"+
-		"\u009f\u0001\u0000\u0000\u0000\u00a5\u00a1\u0001\u0000\u0000\u0000\u00a5"+
-		"\u00a3\u0001\u0000\u0000\u0000\u00a6\u0011\u0001\u0000\u0000\u0000\u00a7"+
-		"\u00a8\u0005\u0017\u0000\u0000\u00a8\u00b8\u0005.\u0000\u0000\u00a9\u00aa"+
-		"\u0005\u0002\u0000\u0000\u00aa\u00ab\u0003\u0018\f\u0000\u00ab\u00ae\u0005"+
-		"\u0004\u0000\u0000\u00ac\u00ad\u0005\u0018\u0000\u0000\u00ad\u00af\u0003"+
-		"\u001c\u000e\u0000\u00ae\u00ac\u0001\u0000\u0000\u0000\u00ae\u00af\u0001"+
-		"\u0000\u0000\u0000\u00af\u00b0\u0001\u0000\u0000\u0000\u00b0\u00b1\u0005"+
-		"\u0015\u0000\u0000\u00b1\u00b9\u0001\u0000\u0000\u0000\u00b2\u00b3\u0005"+
-		"\u0016\u0000\u0000\u00b3\u00b9\u0003*\u0015\u0000\u00b4\u00b5\u0005\u0016"+
-		"\u0000\u0000\u00b5\u00b9\u0003.\u0017\u0000\u00b6\u00b7\u0005\u0016\u0000"+
-		"\u0000\u00b7\u00b9\u00032\u0019\u0000\u00b8\u00a9\u0001\u0000\u0000\u0000"+
-		"\u00b8\u00b2\u0001\u0000\u0000\u0000\u00b8\u00b4\u0001\u0000\u0000\u0000"+
-		"\u00b8\u00b6\u0001\u0000\u0000\u0000\u00b9\u0013\u0001\u0000\u0000\u0000"+
-		"\u00ba\u00bf\u0003\u0016\u000b\u0000\u00bb\u00bc\u0007\u0000\u0000\u0000"+
-		"\u00bc\u00be\u0003\u0016\u000b\u0000\u00bd\u00bb\u0001\u0000\u0000\u0000"+
-		"\u00be\u00c1\u0001\u0000\u0000\u0000\u00bf\u00bd\u0001\u0000\u0000\u0000"+
-		"\u00bf\u00c0\u0001\u0000\u0000\u0000\u00c0\u0015\u0001\u0000\u0000\u0000"+
-		"\u00c1\u00bf\u0001\u0000\u0000\u0000\u00c2\u00c5\u0005.\u0000\u0000\u00c3"+
-		"\u00c5\u0003\u0006\u0003\u0000\u00c4\u00c2\u0001\u0000\u0000\u0000\u00c4"+
-		"\u00c3\u0001\u0000\u0000\u0000\u00c5\u00c6\u0001\u0000\u0000\u0000\u00c6"+
-		"\u00c7\u0005\u0019\u0000\u0000\u00c7\u00ca\u0007\u0001\u0000\u0000\u00c8"+
-		"\u00cb\u0005.\u0000\u0000\u00c9\u00cb\u0003\f\u0006\u0000\u00ca\u00c8"+
-		"\u0001\u0000\u0000\u0000\u00ca\u00c9\u0001\u0000\u0000\u0000\u00cb\u00cc"+
-		"\u0001\u0000\u0000\u0000\u00cc\u00cf\u0005\u001c\u0000\u0000\u00cd\u00d0"+
-		"\u0005.\u0000\u0000\u00ce\u00d0\u0003\u0006\u0003\u0000\u00cf\u00cd\u0001"+
-		"\u0000\u0000\u0000\u00cf\u00ce\u0001\u0000\u0000\u0000\u00d0\u00d1\u0001"+
-		"\u0000\u0000\u0000\u00d1\u00cf\u0001\u0000\u0000\u0000\u00d1\u00d2\u0001"+
-		"\u0000\u0000\u0000\u00d2\u0017\u0001\u0000\u0000\u0000\u00d3\u00d8\u0003"+
-		"\u001a\r\u0000\u00d4\u00d5\u0007\u0000\u0000\u0000\u00d5\u00d7\u0003\u001a"+
-		"\r\u0000\u00d6\u00d4\u0001\u0000\u0000\u0000\u00d7\u00da\u0001\u0000\u0000"+
-		"\u0000\u00d8\u00d6\u0001\u0000\u0000\u0000\u00d8\u00d9\u0001\u0000\u0000"+
-		"\u0000\u00d9\u0019\u0001\u0000\u0000\u0000\u00da\u00d8\u0001\u0000\u0000"+
-		"\u0000\u00db\u00de\u0005.\u0000\u0000\u00dc\u00de\u0003\u0006\u0003\u0000"+
-		"\u00dd\u00db\u0001\u0000\u0000\u0000\u00dd\u00dc\u0001\u0000\u0000\u0000"+
-		"\u00de\u00df\u0001\u0000\u0000\u0000\u00df\u00e0\u0005\u0019\u0000\u0000"+
-		"\u00e0\u00e3\u0007\u0002\u0000\u0000\u00e1\u00e4\u0005.\u0000\u0000\u00e2"+
-		"\u00e4\u0003\f\u0006\u0000\u00e3\u00e1\u0001\u0000\u0000\u0000\u00e3\u00e2"+
-		"\u0001\u0000\u0000\u0000\u00e4\u00e5\u0001\u0000\u0000\u0000\u00e5\u00e8"+
-		"\u0005\u001c\u0000\u0000\u00e6\u00e9\u0005.\u0000\u0000\u00e7\u00e9\u0003"+
-		"\u0006\u0003\u0000\u00e8\u00e6\u0001\u0000\u0000\u0000\u00e8\u00e7\u0001"+
-		"\u0000\u0000\u0000\u00e9\u00ea\u0001\u0000\u0000\u0000\u00ea\u00e8\u0001"+
-		"\u0000\u0000\u0000\u00ea\u00eb\u0001\u0000\u0000\u0000\u00eb\u001b\u0001"+
-		"\u0000\u0000\u0000\u00ec\u00f1\u0003\"\u0011\u0000\u00ed\u00f1\u0003&"+
-		"\u0013\u0000\u00ee\u00f1\u0003$\u0012\u0000\u00ef\u00f1\u0005\u001f\u0000"+
-		"\u0000\u00f0\u00ec\u0001\u0000\u0000\u0000\u00f0\u00ed\u0001\u0000\u0000"+
-		"\u0000\u00f0\u00ee\u0001\u0000\u0000\u0000\u00f0\u00ef\u0001\u0000\u0000"+
-		"\u0000\u00f1\u001d\u0001\u0000\u0000\u0000\u00f2\u00f3\u0005.\u0000\u0000"+
-		"\u00f3\u00f4\u0005\u0018\u0000\u0000\u00f4\u00f5\u0003\u001c\u000e\u0000"+
-		"\u00f5\u00f6\u0005\u0015\u0000\u0000\u00f6\u001f\u0001\u0000\u0000\u0000"+
-		"\u00f7\u00f8\u0007\u0003\u0000\u0000\u00f8!\u0001\u0000\u0000\u0000\u00f9"+
-		"\u00fa\u0005#\u0000\u0000\u00fa\u00fb\u0005$\u0000\u0000\u00fb\u00fc\u0003"+
-		" \u0010\u0000\u00fc\u00fd\u0007\u0000\u0000\u0000\u00fd\u00fe\u0005%\u0000"+
-		"\u0000\u00fe\u00ff\u0005.\u0000\u0000\u00ff\u0100\u0005\u001c\u0000\u0000"+
-		"\u0100#\u0001\u0000\u0000\u0000\u0101\u0102\u0005&\u0000\u0000\u0102%"+
-		"\u0001\u0000\u0000\u0000\u0103\u0104\u0005\'\u0000\u0000\u0104\'\u0001"+
-		"\u0000\u0000\u0000\u0105\u0108\u0005.\u0000\u0000\u0106\u0108\u0003\u0010"+
-		"\b\u0000\u0107\u0105\u0001\u0000\u0000\u0000\u0107\u0106\u0001\u0000\u0000"+
-		"\u0000\u0108\u0109\u0001\u0000\u0000\u0000\u0109\u010c\u0005(\u0000\u0000"+
-		"\u010a\u010d\u0005.\u0000\u0000\u010b\u010d\u0003\u0010\b\u0000\u010c"+
-		"\u010a\u0001\u0000\u0000\u0000\u010c\u010b\u0001\u0000\u0000\u0000\u010d"+
-		")\u0001\u0000\u0000\u0000\u010e\u0111\u0005.\u0000\u0000\u010f\u0111\u0003"+
-		"\u0012\t\u0000\u0110\u010e\u0001\u0000\u0000\u0000\u0110\u010f\u0001\u0000"+
-		"\u0000\u0000\u0111\u0112\u0001\u0000\u0000\u0000\u0112\u0115\u0005(\u0000"+
-		"\u0000\u0113\u0116\u0005.\u0000\u0000\u0114\u0116\u0003\u0012\t\u0000"+
-		"\u0115\u0113\u0001\u0000\u0000\u0000\u0115\u0114\u0001\u0000\u0000\u0000"+
-		"\u0116+\u0001\u0000\u0000\u0000\u0117\u011a\u0005.\u0000\u0000\u0118\u011a"+
-		"\u0003\u0010\b\u0000\u0119\u0117\u0001\u0000\u0000\u0000\u0119\u0118\u0001"+
-		"\u0000\u0000\u0000\u011a\u011b\u0001\u0000\u0000\u0000\u011b\u011e\u0005"+
-		")\u0000\u0000\u011c\u011f\u0005.\u0000\u0000\u011d\u011f\u0003\u0010\b"+
-		"\u0000\u011e\u011c\u0001\u0000\u0000\u0000\u011e\u011d\u0001\u0000\u0000"+
-		"\u0000\u011f\u0120\u0001\u0000\u0000\u0000\u0120\u0121\u0005\u0015\u0000"+
-		"\u0000\u0121-\u0001\u0000\u0000\u0000\u0122\u0125\u0005.\u0000\u0000\u0123"+
-		"\u0125\u0003\u0012\t\u0000\u0124\u0122\u0001\u0000\u0000\u0000\u0124\u0123"+
-		"\u0001\u0000\u0000\u0000\u0125\u0126\u0001\u0000\u0000\u0000\u0126\u0129"+
-		"\u0005)\u0000\u0000\u0127\u012a\u0005.\u0000\u0000\u0128\u012a\u0003\u0012"+
-		"\t\u0000\u0129\u0127\u0001\u0000\u0000\u0000\u0129\u0128\u0001\u0000\u0000"+
-		"\u0000\u012a\u012b\u0001\u0000\u0000\u0000\u012b\u012c\u0005\u0015\u0000"+
-		"\u0000\u012c/\u0001\u0000\u0000\u0000\u012d\u0130\u0005.\u0000\u0000\u012e"+
-		"\u0130\u0003\u0010\b\u0000\u012f\u012d\u0001\u0000\u0000\u0000\u012f\u012e"+
-		"\u0001\u0000\u0000\u0000\u0130\u0131\u0001\u0000\u0000\u0000\u0131\u0134"+
-		"\u0005*\u0000\u0000\u0132\u0135\u0005.\u0000\u0000\u0133\u0135\u0003\u0010"+
-		"\b\u0000\u0134\u0132\u0001\u0000\u0000\u0000\u0134\u0133\u0001\u0000\u0000"+
-		"\u0000\u0135\u0136\u0001\u0000\u0000\u0000\u0136\u0137\u0005\u0015\u0000"+
-		"\u0000\u01371\u0001\u0000\u0000\u0000\u0138\u013b\u0005.\u0000\u0000\u0139"+
-		"\u013b\u0003\u0012\t\u0000\u013a\u0138\u0001\u0000\u0000\u0000\u013a\u0139"+
-		"\u0001\u0000\u0000\u0000\u013b\u013c\u0001\u0000\u0000\u0000\u013c\u013f"+
-		"\u0005*\u0000\u0000\u013d\u0140\u0005.\u0000\u0000\u013e\u0140\u0003\u0012"+
-		"\t\u0000\u013f\u013d\u0001\u0000\u0000\u0000\u013f\u013e\u0001\u0000\u0000"+
-		"\u0000\u0140\u0141\u0001\u0000\u0000\u0000\u0141\u0142\u0005\u0015\u0000"+
-		"\u0000\u01423\u0001\u0000\u0000\u0000(7DTY^chmr\u0082\u0087\u008c\u0091"+
-		"\u009d\u00a5\u00ae\u00b8\u00bf\u00c4\u00ca\u00cf\u00d1\u00d8\u00dd\u00e3"+
-		"\u00e8\u00ea\u00f0\u0107\u010c\u0110\u0115\u0119\u011e\u0124\u0129\u012f"+
-		"\u0134\u013a\u013f";
+		"\u0001\u0000\u0000\u0000FG\u0005\u0001\u0000\u0000GH\u00051\u0000\u0000"+
+		"HI\u0007\u0000\u0000\u0000IJ\u0003\b\u0004\u0000JK\u0005\u0004\u0000\u0000"+
+		"K\u0005\u0001\u0000\u0000\u0000LM\u0005\u0001\u0000\u0000MN\u00051\u0000"+
+		"\u0000NO\u0007\u0000\u0000\u0000OP\u0003\b\u0004\u0000PQ\u0005\u0005\u0000"+
+		"\u0000Q\u0007\u0001\u0000\u0000\u0000RS\u0005\u0006\u0000\u0000SU\u0005"+
+		"2\u0000\u0000TR\u0001\u0000\u0000\u0000TU\u0001\u0000\u0000\u0000U\\\u0001"+
+		"\u0000\u0000\u0000VW\u0005\u0002\u0000\u0000WX\u0005\u0007\u0000\u0000"+
+		"XY\u0005>\u0000\u0000YZ\u0005\b\u0000\u0000Z[\u0005.\u0000\u0000[]\u0005"+
+		"\u0005\u0000\u0000\\V\u0001\u0000\u0000\u0000\\]\u0001\u0000\u0000\u0000"+
+		"]a\u0001\u0000\u0000\u0000^_\u0005\t\u0000\u0000_`\u0005\n\u0000\u0000"+
+		"`b\u0005>\u0000\u0000a^\u0001\u0000\u0000\u0000ab\u0001\u0000\u0000\u0000"+
+		"bf\u0001\u0000\u0000\u0000cd\u0007\u0001\u0000\u0000de\u0005\f\u0000\u0000"+
+		"eg\u0005>\u0000\u0000fc\u0001\u0000\u0000\u0000fg\u0001\u0000\u0000\u0000"+
+		"gk\u0001\u0000\u0000\u0000hi\u0007\u0001\u0000\u0000ij\u0005\r\u0000\u0000"+
+		"jl\u0005A\u0000\u0000kh\u0001\u0000\u0000\u0000kl\u0001\u0000\u0000\u0000"+
+		"lp\u0001\u0000\u0000\u0000mn\u0007\u0001\u0000\u0000no\u0005\u000e\u0000"+
+		"\u0000oq\u0005.\u0000\u0000pm\u0001\u0000\u0000\u0000pq\u0001\u0000\u0000"+
+		"\u0000qu\u0001\u0000\u0000\u0000rs\u0007\u0001\u0000\u0000st\u0005\u000f"+
+		"\u0000\u0000tv\u0005.\u0000\u0000ur\u0001\u0000\u0000\u0000uv\u0001\u0000"+
+		"\u0000\u0000vz\u0001\u0000\u0000\u0000wx\u0007\u0001\u0000\u0000xy\u0005"+
+		"\u0010\u0000\u0000y{\u0005@\u0000\u0000zw\u0001\u0000\u0000\u0000z{\u0001"+
+		"\u0000\u0000\u0000{\t\u0001\u0000\u0000\u0000|}\u0005\u0011\u0000\u0000"+
+		"}~\u00051\u0000\u0000~\u007f\u0007\u0000\u0000\u0000\u007f\u0080\u0003"+
+		"\u000e\u0007\u0000\u0080\u0081\u0005\u0004\u0000\u0000\u0081\u000b\u0001"+
+		"\u0000\u0000\u0000\u0082\u0083\u0005\u0011\u0000\u0000\u0083\u0084\u0005"+
+		"1\u0000\u0000\u0084\u0085\u0007\u0000\u0000\u0000\u0085\u0086\u0003\u000e"+
+		"\u0007\u0000\u0086\u0087\u0005\u0005\u0000\u0000\u0087\r\u0001\u0000\u0000"+
+		"\u0000\u0088\u0089\u0005\u0012\u0000\u0000\u0089\u008b\u0007\u0002\u0000"+
+		"\u0000\u008a\u0088\u0001\u0000\u0000\u0000\u008a\u008b\u0001\u0000\u0000"+
+		"\u0000\u008b\u008f\u0001\u0000\u0000\u0000\u008c\u008d\u0007\u0001\u0000"+
+		"\u0000\u008d\u008e\u0005\u0013\u0000\u0000\u008e\u0090\u0005.\u0000\u0000"+
+		"\u008f\u008c\u0001\u0000\u0000\u0000\u008f\u0090\u0001\u0000\u0000\u0000"+
+		"\u0090\u0094\u0001\u0000\u0000\u0000\u0091\u0092\u0007\u0001\u0000\u0000"+
+		"\u0092\u0093\u0005\u0014\u0000\u0000\u0093\u0095\u0005>\u0000\u0000\u0094"+
+		"\u0091\u0001\u0000\u0000\u0000\u0094\u0095\u0001\u0000\u0000\u0000\u0095"+
+		"\u0099\u0001\u0000\u0000\u0000\u0096\u0097\u0007\u0001\u0000\u0000\u0097"+
+		"\u0098\u0005\u0015\u0000\u0000\u0098\u009a\u0005@\u0000\u0000\u0099\u0096"+
+		"\u0001\u0000\u0000\u0000\u0099\u009a\u0001\u0000\u0000\u0000\u009a\u000f"+
+		"\u0001\u0000\u0000\u0000\u009b\u009c\u0005/\u0000\u0000\u009c\u00ad\u0005"+
+		"1\u0000\u0000\u009d\u009e\u0007\u0000\u0000\u0000\u009e\u00a5\u0003\u0014"+
+		"\n\u0000\u009f\u00a6\u0005\u0004\u0000\u0000\u00a0\u00a1\u0005\u0016\u0000"+
+		"\u0000\u00a1\u00a2\u0003\u001c\u000e\u0000\u00a2\u00a3\u0001\u0000\u0000"+
+		"\u0000\u00a3\u00a4\u0005\u0017\u0000\u0000\u00a4\u00a6\u0001\u0000\u0000"+
+		"\u0000\u00a5\u009f\u0001\u0000\u0000\u0000\u00a5\u00a0\u0001\u0000\u0000"+
+		"\u0000\u00a6\u00ae\u0001\u0000\u0000\u0000\u00a7\u00a8\u0005\u0018\u0000"+
+		"\u0000\u00a8\u00ae\u0003(\u0014\u0000\u00a9\u00aa\u0005\u0018\u0000\u0000"+
+		"\u00aa\u00ae\u0003,\u0016\u0000\u00ab\u00ac\u0005\u0018\u0000\u0000\u00ac"+
+		"\u00ae\u00030\u0018\u0000\u00ad\u009d\u0001\u0000\u0000\u0000\u00ad\u00a7"+
+		"\u0001\u0000\u0000\u0000\u00ad\u00a9\u0001\u0000\u0000\u0000\u00ad\u00ab"+
+		"\u0001\u0000\u0000\u0000\u00ae\u0011\u0001\u0000\u0000\u0000\u00af\u00b0"+
+		"\u0005\u0019\u0000\u0000\u00b0\u00c0\u00051\u0000\u0000\u00b1\u00b2\u0005"+
+		"\u0002\u0000\u0000\u00b2\u00b3\u0003\u0018\f\u0000\u00b3\u00b6\u0005\u0005"+
+		"\u0000\u0000\u00b4\u00b5\u0005\u001a\u0000\u0000\u00b5\u00b7\u0003\u001c"+
+		"\u000e\u0000\u00b6\u00b4\u0001\u0000\u0000\u0000\u00b6\u00b7\u0001\u0000"+
+		"\u0000\u0000\u00b7\u00b8\u0001\u0000\u0000\u0000\u00b8\u00b9\u0005\u0017"+
+		"\u0000\u0000\u00b9\u00c1\u0001\u0000\u0000\u0000\u00ba\u00bb\u0005\u0018"+
+		"\u0000\u0000\u00bb\u00c1\u0003*\u0015\u0000\u00bc\u00bd\u0005\u0018\u0000"+
+		"\u0000\u00bd\u00c1\u0003.\u0017\u0000\u00be\u00bf\u0005\u0018\u0000\u0000"+
+		"\u00bf\u00c1\u00032\u0019\u0000\u00c0\u00b1\u0001\u0000\u0000\u0000\u00c0"+
+		"\u00ba\u0001\u0000\u0000\u0000\u00c0\u00bc\u0001\u0000\u0000\u0000\u00c0"+
+		"\u00be\u0001\u0000\u0000\u0000\u00c1\u0013\u0001\u0000\u0000\u0000\u00c2"+
+		"\u00c7\u0003\u0016\u000b\u0000\u00c3\u00c4\u0007\u0001\u0000\u0000\u00c4"+
+		"\u00c6\u0003\u0016\u000b\u0000\u00c5\u00c3\u0001\u0000\u0000\u0000\u00c6"+
+		"\u00c9\u0001\u0000\u0000\u0000\u00c7\u00c5\u0001\u0000\u0000\u0000\u00c7"+
+		"\u00c8\u0001\u0000\u0000\u0000\u00c8\u0015\u0001\u0000\u0000\u0000\u00c9"+
+		"\u00c7\u0001\u0000\u0000\u0000\u00ca\u00cd\u00051\u0000\u0000\u00cb\u00cd"+
+		"\u0003\u0006\u0003\u0000\u00cc\u00ca\u0001\u0000\u0000\u0000\u00cc\u00cb"+
+		"\u0001\u0000\u0000\u0000\u00cd\u00ce\u0001\u0000\u0000\u0000\u00ce\u00cf"+
+		"\u0005\u001b\u0000\u0000\u00cf\u00d2\u0007\u0003\u0000\u0000\u00d0\u00d3"+
+		"\u00051\u0000\u0000\u00d1\u00d3\u0003\f\u0006\u0000\u00d2\u00d0\u0001"+
+		"\u0000\u0000\u0000\u00d2\u00d1\u0001\u0000\u0000\u0000\u00d3\u00d4\u0001"+
+		"\u0000\u0000\u0000\u00d4\u00d7\u0005\u001e\u0000\u0000\u00d5\u00d8\u0005"+
+		"1\u0000\u0000\u00d6\u00d8\u0003\u0006\u0003\u0000\u00d7\u00d5\u0001\u0000"+
+		"\u0000\u0000\u00d7\u00d6\u0001\u0000\u0000\u0000\u00d8\u00d9\u0001\u0000"+
+		"\u0000\u0000\u00d9\u00d7\u0001\u0000\u0000\u0000\u00d9\u00da\u0001\u0000"+
+		"\u0000\u0000\u00da\u0017\u0001\u0000\u0000\u0000\u00db\u00e0\u0003\u001a"+
+		"\r\u0000\u00dc\u00dd\u0007\u0001\u0000\u0000\u00dd\u00df\u0003\u001a\r"+
+		"\u0000\u00de\u00dc\u0001\u0000\u0000\u0000\u00df\u00e2\u0001\u0000\u0000"+
+		"\u0000\u00e0\u00de\u0001\u0000\u0000\u0000\u00e0\u00e1\u0001\u0000\u0000"+
+		"\u0000\u00e1\u0019\u0001\u0000\u0000\u0000\u00e2\u00e0\u0001\u0000\u0000"+
+		"\u0000\u00e3\u00e6\u00051\u0000\u0000\u00e4\u00e6\u0003\u0006\u0003\u0000"+
+		"\u00e5\u00e3\u0001\u0000\u0000\u0000\u00e5\u00e4\u0001\u0000\u0000\u0000"+
+		"\u00e6\u00e7\u0001\u0000\u0000\u0000\u00e7\u00e8\u0005\u001b\u0000\u0000"+
+		"\u00e8\u00eb\u0007\u0004\u0000\u0000\u00e9\u00ec\u00051\u0000\u0000\u00ea"+
+		"\u00ec\u0003\f\u0006\u0000\u00eb\u00e9\u0001\u0000\u0000\u0000\u00eb\u00ea"+
+		"\u0001\u0000\u0000\u0000\u00ec\u00ed\u0001\u0000\u0000\u0000\u00ed\u00f0"+
+		"\u0005\u001e\u0000\u0000\u00ee\u00f1\u00051\u0000\u0000\u00ef\u00f1\u0003"+
+		"\u0006\u0003\u0000\u00f0\u00ee\u0001\u0000\u0000\u0000\u00f0\u00ef\u0001"+
+		"\u0000\u0000\u0000\u00f1\u00f2\u0001\u0000\u0000\u0000\u00f2\u00f0\u0001"+
+		"\u0000\u0000\u0000\u00f2\u00f3\u0001\u0000\u0000\u0000\u00f3\u001b\u0001"+
+		"\u0000\u0000\u0000\u00f4\u00f9\u0003\"\u0011\u0000\u00f5\u00f9\u0003&"+
+		"\u0013\u0000\u00f6\u00f9\u0003$\u0012\u0000\u00f7\u00f9\u0005!\u0000\u0000"+
+		"\u00f8\u00f4\u0001\u0000\u0000\u0000\u00f8\u00f5\u0001\u0000\u0000\u0000"+
+		"\u00f8\u00f6\u0001\u0000\u0000\u0000\u00f8\u00f7\u0001\u0000\u0000\u0000"+
+		"\u00f9\u001d\u0001\u0000\u0000\u0000\u00fa\u00fb\u00051\u0000\u0000\u00fb"+
+		"\u00fc\u0005\u001a\u0000\u0000\u00fc\u00fd\u0003\u001c\u000e\u0000\u00fd"+
+		"\u00fe\u0005\u0017\u0000\u0000\u00fe\u001f\u0001\u0000\u0000\u0000\u00ff"+
+		"\u0100\u0007\u0005\u0000\u0000\u0100!\u0001\u0000\u0000\u0000\u0101\u0102"+
+		"\u0005%\u0000\u0000\u0102\u0103\u0005&\u0000\u0000\u0103\u0104\u0003 "+
+		"\u0010\u0000\u0104\u0105\u0007\u0001\u0000\u0000\u0105\u0106\u0005\'\u0000"+
+		"\u0000\u0106\u0107\u00051\u0000\u0000\u0107\u0108\u0005\u001e\u0000\u0000"+
+		"\u0108#\u0001\u0000\u0000\u0000\u0109\u010a\u0005(\u0000\u0000\u010a%"+
+		"\u0001\u0000\u0000\u0000\u010b\u010c\u0005)\u0000\u0000\u010c\'\u0001"+
+		"\u0000\u0000\u0000\u010d\u0110\u00051\u0000\u0000\u010e\u0110\u0003\u0010"+
+		"\b\u0000\u010f\u010d\u0001\u0000\u0000\u0000\u010f\u010e\u0001\u0000\u0000"+
+		"\u0000\u0110\u0111\u0001\u0000\u0000\u0000\u0111\u0114\u0005*\u0000\u0000"+
+		"\u0112\u0115\u00051\u0000\u0000\u0113\u0115\u0003\u0010\b\u0000\u0114"+
+		"\u0112\u0001\u0000\u0000\u0000\u0114\u0113\u0001\u0000\u0000\u0000\u0115"+
+		")\u0001\u0000\u0000\u0000\u0116\u0119\u00051\u0000\u0000\u0117\u0119\u0003"+
+		"\u0012\t\u0000\u0118\u0116\u0001\u0000\u0000\u0000\u0118\u0117\u0001\u0000"+
+		"\u0000\u0000\u0119\u011a\u0001\u0000\u0000\u0000\u011a\u011d\u0005*\u0000"+
+		"\u0000\u011b\u011e\u00051\u0000\u0000\u011c\u011e\u0003\u0012\t\u0000"+
+		"\u011d\u011b\u0001\u0000\u0000\u0000\u011d\u011c\u0001\u0000\u0000\u0000"+
+		"\u011e+\u0001\u0000\u0000\u0000\u011f\u0122\u00051\u0000\u0000\u0120\u0122"+
+		"\u0003\u0010\b\u0000\u0121\u011f\u0001\u0000\u0000\u0000\u0121\u0120\u0001"+
+		"\u0000\u0000\u0000\u0122\u0123\u0001\u0000\u0000\u0000\u0123\u0126\u0005"+
+		"+\u0000\u0000\u0124\u0127\u00051\u0000\u0000\u0125\u0127\u0003\u0010\b"+
+		"\u0000\u0126\u0124\u0001\u0000\u0000\u0000\u0126\u0125\u0001\u0000\u0000"+
+		"\u0000\u0127\u0128\u0001\u0000\u0000\u0000\u0128\u0129\u0005\u0017\u0000"+
+		"\u0000\u0129-\u0001\u0000\u0000\u0000\u012a\u012d\u00051\u0000\u0000\u012b"+
+		"\u012d\u0003\u0012\t\u0000\u012c\u012a\u0001\u0000\u0000\u0000\u012c\u012b"+
+		"\u0001\u0000\u0000\u0000\u012d\u012e\u0001\u0000\u0000\u0000\u012e\u0131"+
+		"\u0005+\u0000\u0000\u012f\u0132\u00051\u0000\u0000\u0130\u0132\u0003\u0012"+
+		"\t\u0000\u0131\u012f\u0001\u0000\u0000\u0000\u0131\u0130\u0001\u0000\u0000"+
+		"\u0000\u0132\u0133\u0001\u0000\u0000\u0000\u0133\u0134\u0005\u0017\u0000"+
+		"\u0000\u0134/\u0001\u0000\u0000\u0000\u0135\u0138\u00051\u0000\u0000\u0136"+
+		"\u0138\u0003\u0010\b\u0000\u0137\u0135\u0001\u0000\u0000\u0000\u0137\u0136"+
+		"\u0001\u0000\u0000\u0000\u0138\u0139\u0001\u0000\u0000\u0000\u0139\u013c"+
+		"\u0005,\u0000\u0000\u013a\u013d\u00051\u0000\u0000\u013b\u013d\u0003\u0010"+
+		"\b\u0000\u013c\u013a\u0001\u0000\u0000\u0000\u013c\u013b\u0001\u0000\u0000"+
+		"\u0000\u013d\u013e\u0001\u0000\u0000\u0000\u013e\u013f\u0005\u0017\u0000"+
+		"\u0000\u013f1\u0001\u0000\u0000\u0000\u0140\u0143\u00051\u0000\u0000\u0141"+
+		"\u0143\u0003\u0012\t\u0000\u0142\u0140\u0001\u0000\u0000\u0000\u0142\u0141"+
+		"\u0001\u0000\u0000\u0000\u0143\u0144\u0001\u0000\u0000\u0000\u0144\u0147"+
+		"\u0005,\u0000\u0000\u0145\u0148\u00051\u0000\u0000\u0146\u0148\u0003\u0012"+
+		"\t\u0000\u0147\u0145\u0001\u0000\u0000\u0000\u0147\u0146\u0001\u0000\u0000"+
+		"\u0000\u0148\u0149\u0001\u0000\u0000\u0000\u0149\u014a\u0005\u0017\u0000"+
+		"\u0000\u014a3\u0001\u0000\u0000\u0000)7DT\\afkpuz\u008a\u008f\u0094\u0099"+
+		"\u00a5\u00ad\u00b6\u00c0\u00c7\u00cc\u00d2\u00d7\u00d9\u00e0\u00e5\u00eb"+
+		"\u00f0\u00f2\u00f8\u010f\u0114\u0118\u011d\u0121\u0126\u012c\u0131\u0137"+
+		"\u013c\u0142\u0147";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
