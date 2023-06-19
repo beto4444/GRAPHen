@@ -1,5 +1,7 @@
 package DataStructures;
 
+import java.util.Random;
+
 public class Node implements Variable {
 
     private String node_contents = "Node"; //@TODO: wip usunąć w produkcji
@@ -19,7 +21,13 @@ public class Node implements Variable {
     public double dx = 0.0;
     public double dy = 0.0;
 
-    public Node(){}
+    public Node(){
+        Random random = new Random();
+        int Max = 600;
+        int Min = 100;
+        this.x = Math.random() * ( Max - Min );
+        this.y = Math.random() * ( Max - Min );
+    }
 
     public Node(double x, double y){
         this.x = x;
@@ -38,6 +46,11 @@ public class Node implements Variable {
         this.node_size = size;
         this.border_width = border_width;
         this.border_line_shape = border_line_shape;
+        Random random = new Random();
+        int Max = 600;
+        int Min = 100;
+        this.x = Math.random() * ( Max - Min );
+        this.y = Math.random() * ( Max - Min );
     }
 
     public Node(Node other){

@@ -2,21 +2,10 @@ grammar GRAPHen;
 
 WS : [ \n\t]+ -> skip;
 POS_NUMBER: ('1'..'9')('0'..'9')*;
-NUMBER: ('0'|POS_NUMBER);
+NUMBER: ('-')?('0'|POS_NUMBER);
 IDENTIFIER: (LETTER|'_')(LETTER|NUMBER)*;
-TEXT : ~[ \t\r\n]+ ;
+TEXT : '"'(~[ \t\r\n])+'"' ;
 LETTER: ('a'..'z' | 'A'..'Z');
-NODE_KW: 'Node';
-EDGE_KW: 'Edge';
-VAL_KW: 'Val';
-COL_KW: 'Color';
-NODE_SPEC: 'Nodetype';
-EDGE_CPEC: 'Edgetype';
-GRAPH_KW: 'Graph';
-DIGHRAPH_KW: 'Digraph';
-NODE_ORD: 'NodeOrderDown';
-COL_G: 'Graphcolor';
-GEN: 'Generate';
 COLOR : '#' HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT;
 HEXDIGIT : '0'..'9' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'a' | 'b' | 'c' | 'd' | 'e' | 'f';
 LINE_TYPE: '--' | '.-';
@@ -32,26 +21,28 @@ NODE_SHAPE: '()'| '*' | '+' | '<>';
          | graph_add
          | graph_substract
          | digraph_add
-         | digraph_substract;
+         | digraph_substract
+         | edge_list;
 
 
 
   //wierzchołki
-  node_definition : 'Node ' IDENTIFIER '{' node_properties '};';
-  node_inline : 'Node ' IDENTIFIER '{' node_properties '}';
-  node_properties : ('nodeContents ' (TEXT))? ('{' 'cColor ' COLOR 'cSize' POS_NUMBER '}')?
+  node_definition : 'Node ' IDENTIFIER ('{' | ' {')  node_properties '};';
+  node_inline : 'Node ' IDENTIFIER ('{' | ' {')  node_properties '}';
+  node_properties : ('nodeContents ' TEXT)? ('{' 'cColor ' COLOR 'cSize' POS_NUMBER '}')?
                         (', ' 'fillColor ' COLOR)? ((', ' | ',') 'borderColor ' COLOR)?
                         ((', ' | ',') 'nodeShape ' NODE_SHAPE)? ((', ' | ',') 'nodeSize ' POS_NUMBER)?
                         ((', ' | ',') 'borderWidth ' POS_NUMBER)? ((', ' | ',') 'borderLineShape ' LINE_TYPE)?;
 
   //krawędzie
-  edge_definition : 'Edge ' IDENTIFIER '{' edge_properties '};';
-  edge_inline: 'Edge ' IDENTIFIER '{' edge_properties '}';
-  edge_properties : ('Num_color ' (NUMBER))? ((', ' | ',')('lineWidth' POS_NUMBER))? ((', ' | ',') 'Color ' COLOR)? ((', ' | ',') 'lineType' LINE_TYPE)?;
+  edge_definition : 'Edge ' IDENTIFIER ('{' | ' {') edge_properties '};';
+  edge_inline: 'Edge ' IDENTIFIER ('{' | ' {')  edge_properties '}';
+  edge_properties : ('Num_color ' (POS_NUMBER|NUMBER))? ((', ' | ',')('lineWidth' POS_NUMBER))? ((', ' | ',') 'Color ' COLOR)? ((', ' | ',') 'lineType' LINE_TYPE)?;
   //grafy i digrafy
-  graph_definition : 'Graph ' IDENTIFIER (('{'  edge_list  ('};' |('}.' graph_function)';') )| '=' graph_add | '=' graph_substract
-                                            | '=' graph_union);
-  digraph_definition : 'Digraph ' IDENTIFIER (('{'  dedge_list '}' ('.'graph_function)? ';') | '=' digraph_add | '=' digraph_substract
+  graph_definition : 'Graph ' IDENTIFIER (('{' | ' {') edge_list ('};' |('}.' graph_function)';'))| '=' graph_add| '=' graph_substract| '=' graph_union;
+
+
+  digraph_definition : 'Digraph ' IDENTIFIER (('{'  edge_list '}' ('.'graph_function)? ';') | '=' digraph_add | '=' digraph_substract
                                             | '=' digraph_union);
 
   edge_list : edge_relation ((', ' | ',') edge_relation)*;
@@ -81,14 +72,3 @@ NODE_SHAPE: '()'| '*' | '+' | '<>';
 
   graph_union: (IDENTIFIER | graph_definition)'&&' (IDENTIFIER | graph_definition) ';';
   digraph_union: (IDENTIFIER | digraph_definition)'&&'(IDENTIFIER | digraph_definition) ';';
-
-
-/* że global atributes??
-  digraph_attributes : '.' 'NodeOrderDown' '{' IDENTIFIER+ '}' ';'?
-         | '.' 'Graphcolor' '{' COLOR+ '}' ';'?
-         | '.' 'Generate' '{' FILENAME '}' ';'?;
-
-  graph_attributes : '.' 'NodeOrderDown' '{' IDENTIFIER+ '}' ';'?
-                | '.' 'Graphcolor' '{' COLOR+ '}' ';'?
-                | '.' 'Generate' '{' FILENAME '}' ';'?;
-  */

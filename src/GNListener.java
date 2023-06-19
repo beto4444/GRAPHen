@@ -151,7 +151,7 @@ public class GNListener extends GRAPHenBaseListener {
             edge.setNumColor(number);
         }
 
-        TerminalNode posNumberNode = ctx.POS_NUMBER();
+        TerminalNode posNumberNode = ctx.POS_NUMBER(0);
         if (posNumberNode != null) {
             int posNumber = Integer.parseInt(posNumberNode.getText());
             edge.setLineWidth(posNumber);

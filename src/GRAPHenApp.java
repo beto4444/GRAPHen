@@ -121,6 +121,7 @@ public class GRAPHenApp extends Application {
                     nodes = listener.getNodes();
                     edges = listener.getEdges();
                     graph = listener.getGraphs().get(0);
+                    listener.describeData();
                     }
 
                 //feedbackArea.setText(sourceCodeText);
