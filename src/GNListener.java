@@ -12,6 +12,7 @@ public class GNListener extends GRAPHenBaseListener {
     private final HashMap<String, Node> nodes = new HashMap<>();
     private final HashMap<String, Edge> edges = new HashMap<>();
     private final HashMap<String, Graph> graphs = new HashMap<>();
+    private final ArrayList<String> errorsList = new ArrayList<String>();
     private Node currentNode;
     private Edge currentEdge;
     private Graph currentGraph;
@@ -29,6 +30,19 @@ public class GNListener extends GRAPHenBaseListener {
     }
 
 
+    public String errorsToString(){
+        StringBuilder sb = new StringBuilder();
+        if(!errorsList.isEmpty()) {
+            for (String error : errorsList) {
+                sb.append(error);
+                sb.append('\n');
+            }
+        }
+        else{
+           sb.append("Everything ok!");
+        }
+        return sb.toString();
+    }
     public void describeData(){
         System.out.println("Węzły: ");
         if(!nodes.keySet().isEmpty()) {
@@ -214,7 +228,11 @@ public class GNListener extends GRAPHenBaseListener {
             // Handle identifier
             String identifier = firstNodeOrIdentifier.getText();
             if (!nodes.containsKey(identifier)){
-                //@TODO: throw node does not exist error
+                int Line = ctx.getStart().getLine();
+                String error = "LISTENER ERROR: Line " + Line + ": Node " + identifier + " not defined";
+                if(!errorsList.contains(error)) {
+                    errorsList.add(error);
+                }
             }else {
                 parent = nodes.get(identifier);
             }
@@ -228,7 +246,11 @@ public class GNListener extends GRAPHenBaseListener {
         if (edgeOrIdentifier instanceof TerminalNode) {
             String identifier = edgeOrIdentifier.getText();
             if (!edges.containsKey(identifier)){
-                //@TODO: throw edge does not exist error
+                int Line = ctx.getStart().getLine();
+                String error = "LISTENER ERROR: Line " + Line + ": Edge " + identifier + " not defined";
+                if(!errorsList.contains(error)) {
+                    errorsList.add(error);
+                }
             }
             else {
                 edge = edges.get(identifier);
@@ -243,7 +265,11 @@ public class GNListener extends GRAPHenBaseListener {
             // Handle identifier
             String identifier = secondNodeOrIdentifier.getText();
             if (!nodes.containsKey(identifier)){
-                //@TODO: throw node does not exist error
+                int Line = ctx.getStart().getLine();
+                String error = "LISTENER ERROR: Line " + Line + ": Node " + identifier + " not defined";
+                if(!errorsList.contains(error)) {
+                    errorsList.add(error);
+                }
             }else {
                 child.add(nodes.get(identifier));
             }
@@ -259,7 +285,11 @@ public class GNListener extends GRAPHenBaseListener {
                 // Handle identifier
                 String identifier = nodeOrIdentifier.getText();
                 if (!nodes.containsKey(identifier)){
-                    //@TODO: throw node does not exist error
+                    int Line = ctx.getStart().getLine();
+                    String error = "LISTENER ERROR: Line " + Line + ": Node " + identifier + " not defined";
+                    if(!errorsList.contains(error)) {
+                        errorsList.add(error);
+                    }
                 }else {
                     child.add(nodes.get(identifier));
                 }
