@@ -353,10 +353,7 @@ public class GNListener extends GRAPHenBaseListener {
 
     @Override
     public void enterGraph_function(GRAPHenParser.Graph_functionContext ctx) {
-        if (ctx.exportToFileFunc() != null){
-            enterExportToFileFunc(ctx.exportToFileFunc());
-        }
-        else if (ctx.colorEdgesFunc() != null){
+        if (ctx.colorEdgesFunc() != null){
             enterColorEdgesFunc(ctx.colorEdgesFunc());
         }
         else if (ctx.colorNodesFunc() != null){

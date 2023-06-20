@@ -7,7 +7,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.*;
 import java.util.stream.Stream;
 
-//@TODO: testy
 
 public class Graph {
 
@@ -228,15 +227,66 @@ public class Graph {
         }
     }
 
-    public void exportToFile(){
-        //@TODO
-
-    }
-
     /**
      * Color the edges properly @TODO
      */
     public void colorEdges(){
+        int maxColors = this.edges.size();
+
+        edges.sort(Comparator.comparingInt(edge -> edge.target.size()));
+
+        // Initialize a list to store the available colors for each edge
+        List<Set<String>> availableColors = new ArrayList<>();
+        for (int i = 0; i < edges.size(); i++) {
+            availableColors.add(new HashSet<>());
+        }
+
+        // Assign colors to each edge
+        for (Edge edge : edges) {
+            // Find the neighboring colors
+            Set<String> neighboringColors = new HashSet<>();
+            for (Node target : edge.target) {
+                String color = target.getFillColor();
+                if (color != null) {
+                    neighboringColors.add(color);
+                }
+            }
+
+            // Find the first available color
+            String color = findAvailableColor(availableColors.get(edge.num_color), neighboringColors, maxColors);
+            edge.assignColor(color);
+
+            // Update the available colors for the neighboring edges
+            for (Node target : edge.target) {
+                for (Edge neighbor : getNeighbors(target)) {
+                    if (neighbor != edge) {
+                        availableColors.get(neighbor.num_color).add(color);
+                    }
+                }
+            }
+        }
+    }
+
+    private List<Edge> getNeighbors(Node target){
+        return edges.stream()
+                .filter(edge -> edge.getSource()==target)
+                .toList();
+    }
+
+    private String findAvailableColor(Set<String> availableColors, Set<String> neighboringColors, int maxColors) {
+        for (int i = 0; i < maxColors; i++) {
+            String color = getRandomColor();
+            if (!availableColors.contains(color) && !neighboringColors.contains(color)) {
+                return color;
+            }
+        }
+        return null; // No available color found
+    }
+
+    private String getRandomColor() {
+        // Generate and return a random color
+        // You can implement your own logic to generate colors
+        return "#" + String.format("%06x", new Random().nextInt(0xFFFFFF + 1));
     }
 
     /**

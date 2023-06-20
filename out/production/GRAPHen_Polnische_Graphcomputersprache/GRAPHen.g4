@@ -21,8 +21,7 @@ NODE_SHAPE: '()'| '*' | '+' | '<>';
          | graph_add
          | graph_substract
          | digraph_add
-         | digraph_substract
-         | edge_list;
+         | digraph_substract;
 
 
 
@@ -42,7 +41,7 @@ NODE_SHAPE: '()'| '*' | '+' | '<>';
   graph_definition : 'Graph ' IDENTIFIER (('{' | ' {') edge_list ('};' |('}.' graph_function)';'))| '=' graph_add| '=' graph_substract| '=' graph_union;
 
 
-  digraph_definition : 'Digraph ' IDENTIFIER (('{'  edge_list '}' ('.'graph_function)? ';') | '=' digraph_add | '=' digraph_substract
+  digraph_definition : 'Digraph ' IDENTIFIER (('{'  dedge_list '}' ('.'graph_function)? ';') | '=' digraph_add | '=' digraph_substract
                                             | '=' digraph_union);
 
   edge_list : edge_relation ((', ' | ',') edge_relation)*;
@@ -52,15 +51,14 @@ NODE_SHAPE: '()'| '*' | '+' | '<>';
   dedge_relation : ( IDENTIFIER| node_inline ) '(' ('->' | '-> ') (IDENTIFIER | edge_inline)')' ( IDENTIFIER| node_inline )+;
 
   //funkcje do grafów
-  graph_function: (         exportToFileFunc
-                           | colorEdgesFunc //pokoloruj poprawnie krawędzie
+  graph_function: (         colorEdgesFunc //pokoloruj poprawnie krawędzie
                            | colorNodesFunc //pokoloruj poprawnie nody
                            | 'clearEdges()') //usuń wszystkie krawędzie
                            ;
 
   graph_function_statement:  IDENTIFIER '.' graph_function ';';
   fileFormat: ('.png' | '.svg' | '.gren');
-  exportToFileFunc: 'export(' 'format' fileFormat (', ' | ',') 'fileName' IDENTIFIER')'; //wyeksportuj do pliku
+  //exportToFileFunc: 'export(' 'format' fileFormat (', ' | ',') 'fileName' IDENTIFIER')'; //wyeksportuj do pliku
   colorNodesFunc: 'colorNodes()';
   colorEdgesFunc: 'colorEdges()';
 

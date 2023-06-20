@@ -11,6 +11,7 @@ public class Edge implements Variable {
     public Node source = null;
     public List<Node> target = new ArrayList<>();
 
+    private String assignedColor = null;
     public Edge(){}
 
     public Edge(Node s, List<Node> t){
@@ -80,5 +81,13 @@ public class Edge implements Variable {
 
     public List<Node> getTarget(){
         return this.target;
+    }
+
+    public void assignColor(String color) {
+        this.assignedColor = color;
+    }
+
+    public String getAssignedColor() {
+        return assignedColor;
     }
 }

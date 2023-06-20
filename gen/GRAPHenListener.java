@@ -177,16 +177,6 @@ public interface GRAPHenListener extends ParseTreeListener {
 	 */
 	void exitFileFormat(GRAPHenParser.FileFormatContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GRAPHenParser#exportToFileFunc}.
-	 * @param ctx the parse tree
-	 */
-	void enterExportToFileFunc(GRAPHenParser.ExportToFileFuncContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GRAPHenParser#exportToFileFunc}.
-	 * @param ctx the parse tree
-	 */
-	void exitExportToFileFunc(GRAPHenParser.ExportToFileFuncContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link GRAPHenParser#colorNodesFunc}.
 	 * @param ctx the parse tree
 	 */

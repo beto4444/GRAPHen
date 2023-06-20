@@ -112,12 +112,6 @@ public interface GRAPHenVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFileFormat(GRAPHenParser.FileFormatContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GRAPHenParser#exportToFileFunc}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExportToFileFunc(GRAPHenParser.ExportToFileFuncContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link GRAPHenParser#colorNodesFunc}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

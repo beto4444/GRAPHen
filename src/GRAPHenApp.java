@@ -4,6 +4,8 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -38,7 +40,7 @@ import javax.imageio.ImageIO;
 
 public class GRAPHenApp extends Application {
 
-    private static final int WIDTH = 800;
+    private static final int WIDTH = 600;
     private static final int HEIGHT = 700;
     private static final double AREA_MULTIPLIER = 10000.0;
     private static final double FORCE_MULTIPLIER = 0.75;
@@ -47,12 +49,10 @@ public class GRAPHenApp extends Application {
 
     private static final double REPULSION_MULTIPLIER = .6;
 
-    private static double scale = 1.0;
-
     private List<Node> nodes;
     private List<Edge> edges;
 
-    private List<Graph> graphs; //@TODO zamienić to na listę i jakoś obsłużyć wiele grafów w jednym kodzie
+    private List<Graph> graphs;
 
     private Canvas canvas;
 
@@ -71,6 +71,7 @@ public class GRAPHenApp extends Application {
 
         ScrollPane scrollPane = new ScrollPane(canvasContainer);
         scrollPane.setPrefSize(600, 700);
+        scrollPane.getStyleClass().add("scroll-pane");
 
         VBox leftBox = new VBox(10);
         leftBox.setPadding(new Insets(10));
@@ -92,7 +93,6 @@ public class GRAPHenApp extends Application {
         feedbackArea.setPrefHeight(100);
         feedbackArea.setPrefWidth(600);
         feedbackArea.getStyleClass().add("feedback-area");
-        //@TODO: css
 
         // Set initial feedback text
         feedbackArea.setText("Welcome! This is the feedback area.");
@@ -104,12 +104,22 @@ public class GRAPHenApp extends Application {
 
         //toolbar
 
-        Button button = new Button("Generate");
+        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Images/show.png")));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(18);
+        imageView.setFitHeight(20);
+        Button button = new Button();
+        button.setGraphic(imageView);
         button.getStyleClass().add("button");
         // Bind the event handler to the button
         button.setOnAction(event -> drawShapes());
 
-        Button compile_button = new Button("Compile");
+        image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Images/compile.png")));
+        imageView = new ImageView(image);
+        imageView.setFitWidth(18);
+        imageView.setFitHeight(20);
+        Button compile_button = new Button();
+        compile_button.setGraphic(imageView);
         compile_button.getStyleClass().add("button");
 
         // Create an event handler for the button
@@ -118,7 +128,6 @@ public class GRAPHenApp extends Application {
             public void handle(ActionEvent event) {
                 // Functionality to be executed when the button is clicked
                 String sourceCodeText = textArea.getText();
-                //@TODO tutaj puścić to do parsera i ustawić listy node'ów i edgy na te z listenera, użyć feedbackArea do wypluwania błędów
 
                 GRAPHenLexer lexer = new GRAPHenLexer(CharStreams.fromString(sourceCodeText));
                 CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -147,7 +156,7 @@ public class GRAPHenApp extends Application {
         compile_button.setOnAction(compileHandler);
 
         ToolBar toolBar = new ToolBar(
-                compile_button, //@TODO - polepszyć
+                compile_button,
                 button
         );
 
@@ -222,7 +231,7 @@ public class GRAPHenApp extends Application {
     private void handleSave(Stage primaryStage, String code) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save File");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("GRAPHen save files", "*.ghen"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("GRAPHen files", "*.ghen"));
 
         File file = fileChooser.showSaveDialog(primaryStage);
         if (file != null) {
@@ -236,7 +245,7 @@ public class GRAPHenApp extends Application {
         fileChooser.setTitle("Open File");
 
         // Set the extension filter (optional)
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("GRAPHen save files", "*.ghen");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("GRAPHen files", "*.ghen");
         fileChooser.getExtensionFilters().add(extFilter);
 
         File file = fileChooser.showOpenDialog(primaryStage);
@@ -253,18 +262,29 @@ public class GRAPHenApp extends Application {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Export File");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png", "*.png"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("jpg", "*.jpg"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("bmp", "*.bmp"));
 
         File outputFile = fileChooser.showSaveDialog(primaryStage);
         if (outputFile != null) {
+            String fileName = outputFile.getName();
+            String fileExtension = "";
+
+            int dotIndex = fileName.lastIndexOf('.');
+            if (dotIndex > 0 && dotIndex < fileName.length() - 1) {
+                fileExtension = fileName.substring(dotIndex + 1);
+            }
+
             WritableImage writableImage = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
             canvas.snapshot(null, writableImage);
 
             try {
-                BufferedImage bufferedImage = SwingFXUtils.fromFXImage(writableImage, null);
-                ImageIO.write(bufferedImage, "png", outputFile);
-                System.out.println("Canvas saved as PNG successfully.");
+                BufferedImage bufferedImage = SwingFXUtils.fromFXImage(writableImage,
+                        new BufferedImage((int)writableImage.getWidth(), (int)writableImage.getHeight(), BufferedImage.TYPE_INT_RGB));
+                ImageIO.write(bufferedImage, fileExtension, outputFile);
+                System.out.println("Canvas saved successfully.");
             } catch (IOException e) {
-                System.out.println("Failed to save canvas as PNG: " + e.getMessage());
+                System.out.println("Failed to save canvas " + e.getMessage());
             }
         }
     }
@@ -278,7 +298,7 @@ public class GRAPHenApp extends Application {
         }
     }
 
-    private void writeEncrypt(String filename, String code){ //@TODO: przetestować
+    private void writeEncrypt(String filename, String code){
         try{
 
             byte[] decodedKey = Base64.getDecoder().decode(readKeyFromEnvFile());
@@ -330,18 +350,15 @@ public class GRAPHenApp extends Application {
     }
     private void drawShapes() {
         if (this.graphs == null){
-            System.out.println("null");
             return;
         }
         GraphicsContext gc = canvas.getGraphicsContext2D();
         //gc.setFill(Color.TRANSPARENT);
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        scale = 1.0/this.graphs.size();
         canvas.setHeight(HEIGHT*graphs.size());
         int index=0;
 
         for (Graph graph: graphs){
-            System.out.println("Graph");
             this.edges = graph.getEdges();
             this.nodes = graph.getNodes();
             fruchtermanReingold();
@@ -419,7 +436,7 @@ public class GRAPHenApp extends Application {
                     gc.setFont(javafx.scene.text.Font.font("Arial", node.getContSize()));
 
                     // Write text on the canvas
-                    gc.fillText(node.getNodeContents(), node.x + r + border + 5, node.y); //@TODO dodać wielkość i kolor zawartości do gramatyki
+                    gc.fillText(node.getNodeContents(), node.x + r + border + 5, node.y);
                 }
             }
 
@@ -442,9 +459,6 @@ public class GRAPHenApp extends Application {
 
             index++;
         }
-        System.out.println("Done");
-
-
     }
 
     private void drawArrow(GraphicsContext gc, double startX, double startY, double endX, double endY, double arrowSize) {
@@ -469,15 +483,12 @@ public class GRAPHenApp extends Application {
         edges = new ArrayList<>();
         graphs = new ArrayList<>();
         Graph graph = new Graph(true);
-        int Max = 600;
-        int Min = 100;
-
         // Generate example graph
-        Node node1 = new Node(Math.random() * ( Max - Min ), Math.random() * ( Max - Min ));
-        Node node2 = new Node(Math.random() * ( Max - Min ), Math.random() * ( Max - Min ));
-        Node node3 = new Node(Math.random() * ( Max - Min ), Math.random() * ( Max - Min ));
-        Node node4 = new Node(Math.random() * ( Max - Min ), Math.random() * ( Max - Min ));
-        Node node5 = new Node(Math.random() * ( Max - Min ), Math.random() * ( Max - Min ));
+        Node node1 = new Node();
+        Node node2 = new Node();
+        Node node3 = new Node();
+        Node node4 = new Node();
+        Node node5 = new Node();
 
         List<Node> t1 = new ArrayList<>();
         List<Node> t2 = new ArrayList<>();
@@ -506,9 +517,9 @@ public class GRAPHenApp extends Application {
 
     }
 
-    private void initialiseNodes(double minx, double maxx, double miny, double maxy){
+    private void initialiseNodes(){
         for (Node node: nodes){
-              node.setCoords(Math.random() * ( maxx - minx ), Math.random() * ( maxy - miny ));
+              node.setCoords(Math.random() * ( 420.0 - (double) GRAPHenApp.MIN_POSITION), Math.random() * ( (double) 640 - (double) GRAPHenApp.MIN_POSITION));
         }
 
     }
@@ -516,8 +527,7 @@ public class GRAPHenApp extends Application {
     private void fruchtermanReingold() { //@TODO: przenieść w inne miejsce?
         double area = (HEIGHT -MIN_POSITION) * (WIDTH - MIN_POSITION) * AREA_MULTIPLIER;
         double k = Math.sqrt(area / nodes.size());
-        initialiseNodes(GRAPHenApp.MIN_POSITION, (double) GRAPHenApp.WIDTH - (double) GRAPHenApp.MIN_POSITION *3,
-                MIN_POSITION, HEIGHT- MIN_POSITION);
+        initialiseNodes( );
 
 
         for (int i = 0; i < 100; i++) {

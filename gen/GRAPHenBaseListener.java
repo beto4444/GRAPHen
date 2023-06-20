@@ -220,18 +220,6 @@ public class GRAPHenBaseListener implements GRAPHenListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExportToFileFunc(GRAPHenParser.ExportToFileFuncContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitExportToFileFunc(GRAPHenParser.ExportToFileFuncContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterColorNodesFunc(GRAPHenParser.ColorNodesFuncContext ctx) { }
 	/**
 	 * {@inheritDoc}
