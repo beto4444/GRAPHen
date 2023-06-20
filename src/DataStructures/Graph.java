@@ -48,10 +48,9 @@ public class Graph {
         else{
             relations.put(parent, children);
         }
-
-        if (!edges.contains(edge)){
-            edges.add(edge);
-        }
+        Edge e = new Edge(edge);
+        e.setRelations(parent, children);
+        edges.add(e);
 
         children.add(parent);
         for (Node n: children) {

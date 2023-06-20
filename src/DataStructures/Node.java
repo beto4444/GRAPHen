@@ -143,4 +143,9 @@ public class Node implements Variable {
         this.cont_size = cont_size;
     }
 
+    public void setCoords(double x, double y){
+        this.x=x;
+        this.y=y;
+    }
+
 }

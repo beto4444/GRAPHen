@@ -21,7 +21,6 @@ import java.net.URI;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.util.*;
 
 import javafx.event.ActionEvent;
@@ -34,14 +33,13 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import javax.crypto.*;
-import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.imageio.ImageIO;
 
 public class GRAPHenApp extends Application {
 
     private static final int WIDTH = 800;
-    private static final int HEIGHT = 600;
+    private static final int HEIGHT = 700;
     private static final double AREA_MULTIPLIER = 10000.0;
     private static final double FORCE_MULTIPLIER = 0.75;
     private static final double EPSILON = 0.1;
@@ -49,12 +47,16 @@ public class GRAPHenApp extends Application {
 
     private static final double REPULSION_MULTIPLIER = .6;
 
+    private static double scale = 1.0;
+
     private List<Node> nodes;
     private List<Edge> edges;
 
-    private Graph graph; //@TODO zamienić to na listę i jakoś obsłużyć wiele grafów w jednym kodzie
+    private List<Graph> graphs; //@TODO zamienić to na listę i jakoś obsłużyć wiele grafów w jednym kodzie
 
     private Canvas canvas;
+
+    private String style = "default.css";
 
     public static void main(String[] args) {
         launch(args);
@@ -62,25 +64,34 @@ public class GRAPHenApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         //Left box
-        canvas = new Canvas(600, 700);
+        canvas = new Canvas(WIDTH, HEIGHT);
+        StackPane canvasContainer = new StackPane(canvas);
+
+        ScrollPane scrollPane = new ScrollPane(canvasContainer);
+        scrollPane.setPrefSize(600, 700);
 
         VBox leftBox = new VBox(10);
         leftBox.setPadding(new Insets(10));
-        leftBox.getChildren().add(canvas);
+        leftBox.getChildren().add(scrollPane);
+        leftBox.getStyleClass().add("canvas");
+
 
         //right box
         TextArea textArea = new TextArea();
         textArea.setWrapText(true);
         textArea.setPrefHeight(650);
         textArea.setPrefWidth(600);
-        textArea.setText("Sample text");
+        textArea.getStyleClass().add("text-area");
+        textArea.setText("#testgraph");
 
 
         TextArea feedbackArea = new TextArea();
         feedbackArea.setEditable(false);
         feedbackArea.setPrefHeight(100);
         feedbackArea.setPrefWidth(600);
+        feedbackArea.getStyleClass().add("feedback-area");
         //@TODO: css
 
         // Set initial feedback text
@@ -89,14 +100,17 @@ public class GRAPHenApp extends Application {
         VBox rightBox = new VBox(10);
         rightBox.setPadding(new Insets(10));
         rightBox.getChildren().addAll(textArea, feedbackArea);
+        rightBox.getStyleClass().add("canvas");
 
         //toolbar
 
         Button button = new Button("Generate");
+        button.getStyleClass().add("button");
         // Bind the event handler to the button
         button.setOnAction(event -> drawShapes());
 
         Button compile_button = new Button("Compile");
+        compile_button.getStyleClass().add("button");
 
         // Create an event handler for the button
         EventHandler<ActionEvent> compileHandler = new EventHandler<ActionEvent>() {
@@ -115,12 +129,13 @@ public class GRAPHenApp extends Application {
                 walker.walk(listener, parseTree);
                 if (sourceCodeText.equals("#testgraph")) {
                     initializeGraph();
+                    //drawShapes();
                     feedbackArea.setText("Test graphics");
                 }
                 else{
                     nodes = listener.getNodes();
                     edges = listener.getEdges();
-                    graph = listener.getGraphs().get(0);
+                    graphs = listener.getGraphs();
                     feedbackArea.setText(listener.errorsToString());
                     }
 
@@ -137,11 +152,14 @@ public class GRAPHenApp extends Application {
         );
 
         toolBar.setOrientation(Orientation.VERTICAL);
+        toolBar.getStyleClass().add("menu");
 
         //Menu
         MenuBar menuBar = new MenuBar();
+        menuBar.getStyleClass().add("menu");
 
         Menu fileMenu = new Menu("File");
+        fileMenu.getStyleClass().add("menu");
         MenuItem openMenuItem = new MenuItem("Open");
         openMenuItem.setOnAction(e-> {
             try {
@@ -163,12 +181,15 @@ public class GRAPHenApp extends Application {
         menuBar.getMenus().add(fileMenu);
 
         Menu optionsMenu = new Menu("Options");
-        MenuItem settingsMenuItem = new MenuItem("Settings");
+        MenuItem dmodeMenuItem = new MenuItem("Dark mode");
+        dmodeMenuItem.setOnAction(e -> changeStyle(primaryStage, "dracula.css") );
+        MenuItem lmodeMenuItem = new MenuItem("Light mode");
+        lmodeMenuItem.setOnAction(e -> changeStyle(primaryStage, "default.css"));
         MenuItem aboutMenuItem = new MenuItem("About...");
         aboutMenuItem.setOnAction(e -> {
             openHyperlink();
         });
-        optionsMenu.getItems().addAll(settingsMenuItem, aboutMenuItem);
+        optionsMenu.getItems().addAll(dmodeMenuItem, lmodeMenuItem,aboutMenuItem);
 
         menuBar.getMenus().add(optionsMenu);
 
@@ -181,10 +202,21 @@ public class GRAPHenApp extends Application {
         root.setRight(toolBar);
 
         Scene scene = new Scene(root, 1366, 768);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(this.style)).toExternalForm());
         primaryStage.setTitle("GRAPHen");
         primaryStage.setScene(scene);
         primaryStage.show();
 
+    }
+
+    private void changeStyle(Stage primaryStage, String style) {
+        // Clear current stylesheets
+        Scene scene = primaryStage.getScene();
+        scene.getStylesheets().clear();
+
+        // Set new stylesheet
+        this.style = style;
+        scene.getStylesheets().add(style);
     }
 
     private void handleSave(Stage primaryStage, String code) {
@@ -297,102 +329,121 @@ public class GRAPHenApp extends Application {
         return scanner.nextLine().trim();
     }
     private void drawShapes() {
+        if (this.graphs == null){
+            System.out.println("null");
+            return;
+        }
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        //gc.setFill(Color.TRANSPARENT);
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        scale = 1.0/this.graphs.size();
+        canvas.setHeight(HEIGHT*graphs.size());
+        int index=0;
 
+        for (Graph graph: graphs){
+            System.out.println("Graph");
+            this.edges = graph.getEdges();
+            this.nodes = graph.getNodes();
+            fruchtermanReingold();
 
-        for (Edge edge : edges) {
-            for (Node t: edge.target){
-                gc.setStroke(Color.web(edge.getColor()));
-                gc.setLineWidth(edge.getLineWidth());
-                if (edge.getLineType() == LineType.DOTTED){
-                    gc.setLineDashes(5, 5);
-                }else {
-                    gc.setLineDashes(0, 0);
+            for (Node node : nodes) {
+                node.y += index*HEIGHT;
+                double r = node.getNodeSize();
+                double border = node.getBorderWidth();
+                gc.setFill(Color.web(node.getFillColor()));
+                if (node.getNodeShape() == NodeShape.OVAL) {
+                    gc.fillOval(node.x - r / 2, node.y - r / 2, r, r);
+                    gc.setStroke(Color.web(node.getBorderColor()));
+                    gc.setLineWidth(border);
+                    if (node.getBorderLineShape() == LineType.DOTTED) {
+                        gc.setLineDashes(3, 3);
+                    } else {
+                        gc.setLineDashes(0, 0);
+                    }
+                    gc.strokeOval(node.x - r / 2, node.y - r / 2, r, r);
+                } else if (node.getNodeShape() == NodeShape.DIAMOND){
+                    double [] xPoints = {node.x-r, node.x, node.x+r, node.x};
+                    double [] yPoints = {node.y, node.y+r, node.y, node.y-r};
+                    gc.fillPolygon(xPoints, yPoints, 4);
+                    gc.setStroke(Color.web(node.getBorderColor()));
+                    gc.setLineWidth(border);
+                    if (node.getBorderLineShape() == LineType.DOTTED) {
+                        gc.setLineDashes(3, 3);
+                    } else {
+                        gc.setLineDashes(0, 0);
+                    }
+                    gc.strokePolygon(xPoints, yPoints, 4);
+                } else if (node.getNodeShape() == NodeShape.CROSS){
+                    double [] xPoints = {node.x-r, node.x-r/2, node.x-r/2, node.x+r/2, node.x+r/2, node.x+r,
+                            node.x+r,node.x+r/2, node.x+r/2, node.x-r/2,node.x-r/2, node.x-r};
+                    double [] yPoints = {node.y+r/2,node.y+r/2, node.y+r,node.y+r, node.y+r/2,node.y+r/2,
+                            node.y-r/2,node.y-r/2, node.y-r, node.y-r, node.y-r/2,node.y-r/2,};
+                    gc.fillPolygon(xPoints, yPoints, 12);
+                    gc.setStroke(Color.web(node.getBorderColor()));
+                    gc.setLineWidth(border);
+                    if (node.getBorderLineShape() == LineType.DOTTED) {
+                        gc.setLineDashes(3, 3);
+                    } else {
+                        gc.setLineDashes(0, 0);
+                    }
+                    gc.strokePolygon(xPoints, yPoints, 12);
+                } else if (node.getNodeShape() == NodeShape.STAR){
+                    double angle = 2 * Math.PI / 5;
+
+                    double[] xPoints = new double[10];
+                    double[] yPoints = new double[10];
+
+                    for (int i = 0; i < 10; i++) {
+                        double currentRadius = i % 2 == 0 ? r : r / 2; // alternate between outer and inner radius
+                        double currentAngle = i * angle - Math.PI / 2; // start at the top
+
+                        double x = node.x + currentRadius * Math.cos(currentAngle);
+                        double y = node.y + currentRadius * Math.sin(currentAngle);
+
+                        xPoints[i] = x;
+                        yPoints[i] = y;
+                    }
+                    gc.fillPolygon(xPoints, yPoints, 10);
+                    gc.setStroke(Color.web(node.getBorderColor()));
+                    gc.setLineWidth(border);
+                    if (node.getBorderLineShape() == LineType.DOTTED) {
+                        gc.setLineDashes(3, 3);
+                    } else {
+                        gc.setLineDashes(0, 0);
+                    }
+                    gc.strokePolygon(xPoints, yPoints, 10);
+
                 }
-                if (graph.digraph){
-                    drawArrow(gc, edge.source.x, edge.source.y, t.x, t.y, edge.getLineWidth()*10);
+                if (node.getNodeContents().length() != 0) {
+                    gc.setFill(Color.web(node.getContColor()));
+                    gc.setFont(javafx.scene.text.Font.font("Arial", node.getContSize()));
+
+                    // Write text on the canvas
+                    gc.fillText(node.getNodeContents(), node.x + r + border + 5, node.y); //@TODO dodać wielkość i kolor zawartości do gramatyki
                 }
-                gc.strokeLine(edge.source.x, edge.source.y, t.x, t.y);
             }
 
+            for (Edge edge : edges) {
+                for (Node t: edge.target){
+                    gc.setStroke(Color.web(edge.getColor()));
+                    gc.setLineWidth(edge.getLineWidth());
+                    if (edge.getLineType() == LineType.DOTTED){
+                        gc.setLineDashes(5, 5);
+                    }else {
+                        gc.setLineDashes(0, 0);
+                    }
+                    if (graph.digraph){
+                        drawArrow(gc, edge.source.x, edge.source.y, t.x, t.y, edge.getLineWidth()*10);
+                    }
+                    gc.strokeLine(edge.source.x, edge.source.y, t.x, t.y);
+                }
+
+            }
+
+            index++;
         }
+        System.out.println("Done");
 
-        for (Node node : nodes) {
-            double r = node.getNodeSize();
-            double border = node.getBorderWidth();
-            gc.setFill(Color.web(node.getFillColor()));
-            if (node.getNodeShape() == NodeShape.OVAL) {
-                gc.fillOval(node.x - r / 2, node.y - r / 2, r, r);
-                gc.setStroke(Color.web(node.getBorderColor()));
-                gc.setLineWidth(border);
-                if (node.getBorderLineShape() == LineType.DOTTED) {
-                    gc.setLineDashes(3, 3);
-                } else {
-                    gc.setLineDashes(0, 0);
-                }
-                gc.strokeOval(node.x - r / 2, node.y - r / 2, r, r);
-            } else if (node.getNodeShape() == NodeShape.DIAMOND){
-                double [] xPoints = {node.x-r, node.x, node.x+r, node.x};
-                double [] yPoints = {node.y, node.y+r, node.y, node.y-r};
-                gc.fillPolygon(xPoints, yPoints, 4);
-                gc.setStroke(Color.web(node.getBorderColor()));
-                gc.setLineWidth(border);
-                if (node.getBorderLineShape() == LineType.DOTTED) {
-                    gc.setLineDashes(3, 3);
-                } else {
-                    gc.setLineDashes(0, 0);
-                }
-                gc.strokePolygon(xPoints, yPoints, 4);
-            } else if (node.getNodeShape() == NodeShape.CROSS){
-                double [] xPoints = {node.x-r, node.x-r/2, node.x-r/2, node.x+r/2, node.x+r/2, node.x+r,
-                        node.x+r,node.x+r/2, node.x+r/2, node.x-r/2,node.x-r/2, node.x-r};
-                double [] yPoints = {node.y+r/2,node.y+r/2, node.y+r,node.y+r, node.y+r/2,node.y+r/2,
-                        node.y-r/2,node.y-r/2, node.y-r, node.y-r, node.y-r/2,node.y-r/2,};
-                gc.fillPolygon(xPoints, yPoints, 12);
-                gc.setStroke(Color.web(node.getBorderColor()));
-                gc.setLineWidth(border);
-                if (node.getBorderLineShape() == LineType.DOTTED) {
-                    gc.setLineDashes(3, 3);
-                } else {
-                    gc.setLineDashes(0, 0);
-                }
-                gc.strokePolygon(xPoints, yPoints, 12);
-            } else if (node.getNodeShape() == NodeShape.STAR){
-                double angle = 2 * Math.PI / 5;
-
-                double[] xPoints = new double[10];
-                double[] yPoints = new double[10];
-
-                for (int i = 0; i < 10; i++) {
-                    double currentRadius = i % 2 == 0 ? r : r / 2; // alternate between outer and inner radius
-                    double currentAngle = i * angle - Math.PI / 2; // start at the top
-
-                    double x = node.x + currentRadius * Math.cos(currentAngle);
-                    double y = node.y + currentRadius * Math.sin(currentAngle);
-
-                    xPoints[i] = x;
-                    yPoints[i] = y;
-                }
-                gc.fillPolygon(xPoints, yPoints, 10);
-                gc.setStroke(Color.web(node.getBorderColor()));
-                gc.setLineWidth(border);
-                if (node.getBorderLineShape() == LineType.DOTTED) {
-                    gc.setLineDashes(3, 3);
-                } else {
-                    gc.setLineDashes(0, 0);
-                }
-                gc.strokePolygon(xPoints, yPoints, 10);
-
-            }
-            if (node.getNodeContents().length() != 0) {
-                gc.setFill(Color.web(node.getContColor()));
-                gc.setFont(javafx.scene.text.Font.font("Arial", node.getContSize()));
-
-                // Write text on the canvas
-                gc.fillText(node.getNodeContents(), node.x + r + border + 5, node.y); //@TODO dodać wielkość i kolor zawartości do gramatyki
-            }
-        }
 
     }
 
@@ -416,8 +467,8 @@ public class GRAPHenApp extends Application {
     private void initializeGraph() { //@TODO: przenieść w inne miejsce?
         nodes = new ArrayList<>();
         edges = new ArrayList<>();
-        Random random = new Random();
-        graph = new Graph(true);
+        graphs = new ArrayList<>();
+        Graph graph = new Graph(true);
         int Max = 600;
         int Min = 100;
 
@@ -427,12 +478,6 @@ public class GRAPHenApp extends Application {
         Node node3 = new Node(Math.random() * ( Max - Min ), Math.random() * ( Max - Min ));
         Node node4 = new Node(Math.random() * ( Max - Min ), Math.random() * ( Max - Min ));
         Node node5 = new Node(Math.random() * ( Max - Min ), Math.random() * ( Max - Min ));
-
-        nodes.add(node1);
-        nodes.add(node2);
-        nodes.add(node3);
-        nodes.add(node4);
-        nodes.add(node5);
 
         List<Node> t1 = new ArrayList<>();
         List<Node> t2 = new ArrayList<>();
@@ -444,21 +489,35 @@ public class GRAPHenApp extends Application {
         t3.add(node3);
         t4.add(node4);
         t5.add(node5);
+        
+        Edge e = new Edge();
 
+        graph.addRelation(node1, e, t1);
+        graph.addRelation(node1, e, t2);
+        graph.addRelation(node2, e, t3);
+        graph.addRelation(node3, e, t4);
+        graph.addRelation(node4, e, t5);
 
-        edges.add(new Edge(node1, t1));
-        edges.add(new Edge(node1, t2));
-        edges.add(new Edge(node2, t3));
-        edges.add(new Edge(node3, t4));
-        edges.add(new Edge(node4, t5));
+        graphs.add(graph);
+        graphs.add(new Graph(graph));
 
-        // Apply Fruchterman-Reingold algorithm
-        fruchtermanReingold();
+        nodes = graph.getNodes();
+        edges = graph.getEdges();
+
+    }
+
+    private void initialiseNodes(double minx, double maxx, double miny, double maxy){
+        for (Node node: nodes){
+              node.setCoords(Math.random() * ( maxx - minx ), Math.random() * ( maxy - miny ));
+        }
+
     }
 
     private void fruchtermanReingold() { //@TODO: przenieść w inne miejsce?
-        double area = (WIDTH - MIN_POSITION) * (HEIGHT - MIN_POSITION) * AREA_MULTIPLIER;
+        double area = (HEIGHT -MIN_POSITION) * (WIDTH - MIN_POSITION) * AREA_MULTIPLIER;
         double k = Math.sqrt(area / nodes.size());
+        initialiseNodes(GRAPHenApp.MIN_POSITION, (double) GRAPHenApp.WIDTH - (double) GRAPHenApp.MIN_POSITION *3,
+                MIN_POSITION, HEIGHT- MIN_POSITION);
 
 
         for (int i = 0; i < 100; i++) {

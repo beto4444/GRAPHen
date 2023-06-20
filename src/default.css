@@ -1,0 +1,32 @@
+.text-area {
+    -fx-font-family: "JetBrains Mono";
+    -fx-font-size: 14px;
+    -fx-text-fill: #544f44;
+    -fx-background-color: #ffffff;
+    -fx-control-inner-background: #dad3cc;
+}
+
+.feedback-area {
+    -fx-font-family: "JetBrains Mono";
+    -fx-font-size: 14px;
+    -fx-text-fill: #4d1b14;
+    -fx-background-color: #ffffff;
+    -fx-control-inner-background: #807566;
+}
+
+.scene {
+    -fx-background-color: #eeeae5;
+}
+
+.canvas {
+    -fx-border-color: #eeeae5;
+    -fx-border-width: 2px;
+}
+
+.button {
+    -fx-background-color: #dad3cc;
+}
+
+.menu {
+    -fx-background-color: #e0dbd5;
+}
