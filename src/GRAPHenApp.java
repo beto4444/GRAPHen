@@ -55,7 +55,8 @@ public class GRAPHenApp extends Application {
     private List<Graph> graphs;
 
     private Canvas canvas;
-
+    private GRAPHenApp INSTANCE = this;
+    public StringBuilder feedbackAreaSB = new StringBuilder();
     private String style = "default.css";
 
     public static void main(String[] args) {
@@ -126,12 +127,19 @@ public class GRAPHenApp extends Application {
         EventHandler<ActionEvent> compileHandler = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                feedbackAreaSB = new StringBuilder();
                 // Functionality to be executed when the button is clicked
                 String sourceCodeText = textArea.getText();
 
                 GRAPHenLexer lexer = new GRAPHenLexer(CharStreams.fromString(sourceCodeText));
+                GNErrorHandler ErrorHandlerLexer = new GNErrorHandler(INSTANCE);
+                lexer.removeErrorListeners();
+                lexer.addErrorListener(ErrorHandlerLexer);
                 CommonTokenStream tokens = new CommonTokenStream(lexer);
                 GRAPHenParser parser = new GRAPHenParser(tokens);
+                GNErrorHandler ErrorHandlerParser = new GNErrorHandler(INSTANCE);
+                parser.removeErrorListeners();
+                parser.addErrorListener(ErrorHandlerParser);
                 ParseTree parseTree = parser.start();
                 ParseTreeWalker walker = new ParseTreeWalker();
                 GNListener listener = new GNListener();
@@ -145,10 +153,17 @@ public class GRAPHenApp extends Application {
                     nodes = listener.getNodes();
                     edges = listener.getEdges();
                     graphs = listener.getGraphs();
-                    feedbackArea.setText(listener.errorsToString());
+                    if(!listener.errorsToString().equals("Everything ok!")) {
+                        feedbackAreaSB.append(listener.errorsToString());
+                    }
+                    if (feedbackAreaSB.isEmpty()){
+                        feedbackArea.setText("Everything ok!");
+                    }
+                    else {
+                        feedbackArea.setText(feedbackAreaSB.toString());
+                    }
                     }
 
-                //feedbackArea.setText(sourceCodeText);
             }
         };
 
@@ -362,6 +377,45 @@ public class GRAPHenApp extends Application {
             this.edges = graph.getEdges();
             this.nodes = graph.getNodes();
             fruchtermanReingold();
+            int nodesNumber = nodes.size();
+
+            //X Y coords array
+            double[][] nodesCoords = new double[nodesNumber][2];
+            Random rand = new Random();
+            int Max = 600;
+            int Min = 100;
+            double minDist = (Max-Min)*Math.sqrt(2)/nodesNumber;
+            int drawNumber = 25;
+
+            double tempX = Math.random() * ( Max - Min );
+            double tempY = Math.random() * ( Max - Min );
+            nodesCoords[0][0] = tempX;
+            nodesCoords[0][1] = tempY;
+            nodes.get(0).x = tempX;
+            nodes.get(0).y = tempY;
+            if(nodesNumber>1) {
+                for (int i = 1; i < nodesNumber; i++) {
+                    for (int j = 0; j < drawNumber; j++) {
+                        int isproper = 0;
+                        tempX = Math.random() * (Max - Min);
+                        tempY = Math.random() * (Max - Min);
+                        for(int k = 0; k<nodesNumber-1; k++){
+                            double distance = Math.sqrt(Math.pow((tempX - nodesCoords[k][0]), 2) + Math.pow((tempY - nodesCoords[k][1]), 2));
+                            if(distance<minDist){break;}
+                            else if(k==(nodesNumber-2)){
+                                isproper = 1;
+                            }
+                        }
+                        if(isproper == 1){
+                            break;
+                        }
+                    }
+                    nodesCoords[i][0] = tempX;
+                    nodesCoords[i][1] = tempY;
+                    nodes.get(i).x = tempX;
+                    nodes.get(i).y = tempY;
+                }
+            }
 
             for (Node node : nodes) {
                 node.y += index*HEIGHT;

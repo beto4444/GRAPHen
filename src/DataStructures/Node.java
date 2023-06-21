@@ -22,11 +22,13 @@ public class Node implements Variable {
     public double dy = 0.0;
 
     public Node(){
+        /*
         Random random = new Random();
         int Max = 600;
         int Min = 100;
         this.x = Math.random() * ( Max - Min );
         this.y = Math.random() * ( Max - Min );
+        */
     }
 
     public Node(double x, double y){

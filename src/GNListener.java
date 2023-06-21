@@ -229,7 +229,7 @@ public class GNListener extends GRAPHenBaseListener {
             String identifier = firstNodeOrIdentifier.getText();
             if (!nodes.containsKey(identifier)){
                 int Line = ctx.getStart().getLine();
-                String error = "LISTENER ERROR: Line " + Line + ": Node " + identifier + " not defined";
+                String error = "LISTENER ERROR: Line " + Line + ": 1Node " + identifier + " not defined";
                 if(!errorsList.contains(error)) {
                     errorsList.add(error);
                 }
@@ -267,7 +267,7 @@ public class GNListener extends GRAPHenBaseListener {
             if (!nodes.containsKey(identifier)){
                 int Line = ctx.getStart().getLine();
                 String error = "LISTENER ERROR: Line " + Line + ": Node " + identifier + " not defined";
-                if(!errorsList.contains(error)) {
+                if(!errorsList.contains(error)&&!identifier.equals(")")) {
                     errorsList.add(error);
                 }
             }else {
