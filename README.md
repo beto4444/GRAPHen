@@ -12,7 +12,7 @@ GRAPHen is the programming language to define, create and visualize graphs. Proj
 * Bartłomiej Stępniewski<br>
 * Katarzyna Stępień
 
-<br><br>
+<br>
 Final project in the subject of Compilation Theory and Compilers 2023.
 
 ## PL
@@ -20,16 +20,11 @@ GRAPHen to język programowania służący do definiowania, tworzenia i wizualiz
 1. języka samego w sobie(stworzony przy użyciu ANTLR4),
 2. Prostego IDE
 
-1) Wbudowany konwerter do plików .png i .svg, względnie do własnego typu pliku służącego do zapisywania zmiennych
-2) IDE które:
-   - potrafi wyświetlać opisywane grafy oraz eksportować tenże podgląd;
-   - obsługiwać błędy.
-
 ### Autorzy
 * Katarzyna Stępień
 * Bartłomiej Stępniewski
 
-<br><br>
+<br>
 Projekt zaliczeniowy z przedmiotu Teoria Kompilacji i Kompilatory 2023.
 
 
