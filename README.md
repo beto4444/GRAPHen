@@ -1,8 +1,7 @@
-### The GRAPHen project
---- 
+# The GRAPHen project
+
 ## ENG
 
----
 ## PL
 Język programowania służący do opisu grafów. Oprócz samego języka jako podstawy planowane są:
 
