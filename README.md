@@ -2,10 +2,11 @@
 
 ## ENG
 
-GRAPHen is the programming language to define, create and visualize graphs. It comprises:
+GRAPHen is the programming language to define, create and visualize graphs. Project comprises of:
 1. language itself(created with ANTLR4),
-2. simple IDE which can export generated graphs to graphics format.
-   - The IDE also have some basic error handling.
+2. simple IDE which can:
+   - show and export generated graphs to graphics format,
+   - handle errors.
 
 ### Contributors
 * Bartłomiej Stępniewski<br>
@@ -15,11 +16,20 @@ GRAPHen is the programming language to define, create and visualize graphs. It c
 Final project in the subject of Compilation Theory and Compilers 2023.
 
 ## PL
-Język programowania służący do opisu grafów. Oprócz samego języka jako podstawy planowane są:
+GRAPHen to język programowania służący do definiowania, tworzenia i wizualizacji grafów. Projekt składa się z:
+1. języka samego w sobie(stworzony przy użyciu ANTLR4),
+2. Prostego IDE
 
 1) Wbudowany konwerter do plików .png i .svg, względnie do własnego typu pliku służącego do zapisywania zmiennych
-2) IDE generujące bieżący podgląd wpisywanego grafu.
+2) IDE które:
+   - potrafi wyświetlać opisywane grafy oraz eksportować tenże podgląd;
+   - obsługiwać błędy.
 
+### Autorzy
+* Katarzyna Stępień
+* Bartłomiej Stępniewski
+
+<br><br>
 Projekt zaliczeniowy z przedmiotu Teoria Kompilacji i Kompilatory 2023.
 
 
