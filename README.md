@@ -2,7 +2,10 @@
 
 ## ENG
 
-GRAPHen is the programming language to define, create and visualize graphs. It comprises language itself(created with ANTLR4), and simple IDE which can export generated graphs to graphics format. The IDE also have some basic error handling.
+GRAPHen is the programming language to define, create and visualize graphs. It comprises:
+1. language itself(created with ANTLR4),
+2. simple IDE which can export generated graphs to graphics format.
+   - The IDE also have some basic error handling.
 
 ### Contributors
 * Bartłomiej Stępniewski<br>
