@@ -7,6 +7,7 @@ GRAPHen is the programming language to define, create and visualize graphs. It c
 ### Contributors
 * Bartłomiej Stępniewski<br>
 * Katarzyna Stępień
+
 <br><br>
 Final project in the subject of Compilation Theory and Compilers 2023.
 
